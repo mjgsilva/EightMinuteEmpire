@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package logicaJogo;
+package gameLogic.states;
 
 /**
  *
- * @author mj
+ * @author danilo
  */
-public interface IEstados {
+public class BuildCity {
     
 }

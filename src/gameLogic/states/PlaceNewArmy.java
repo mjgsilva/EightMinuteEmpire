@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package iu.texto;
+package gameLogic.states;
 
 /**
  *
- * @author mj
+ * @author danilo
  */
-public class run {
+public class PlaceNewArmy extends StateAdapter {
     
 }
