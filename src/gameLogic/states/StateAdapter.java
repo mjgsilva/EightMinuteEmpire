@@ -1,6 +1,8 @@
 package gameLogic.states;
 
 public abstract class StateAdapter implements StateInterface {
+    
+    
     @Override
     public StateInterface defineGame() {
         return this;
@@ -46,16 +48,22 @@ public abstract class StateAdapter implements StateInterface {
     public StateInterface neutralize() {
         return this;
     }
+    @Override
+    public StateInterface reDo() {
+        return this;
+    }
+    @Override
+    public StateInterface newArmyThenNeutralize() {
+        return this;
+    }
+    
     
     @Override
     public StateInterface saveToFile() {
         return this;
     }
-
     @Override
     public StateInterface loadFromFile() {
         return this;
     }
-    
-    
 }
