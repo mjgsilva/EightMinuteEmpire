@@ -4,11 +4,11 @@ import gameLogic.*;
 import gameLogic.states.*;
 
 public class UIText {   
-    Game game;
+    Game game = new Game();
     StateAdapter state;
-    
     public void run() {
-        while (state instanceof EndGame) {
+        
+        while (!((state = game.getState()) instanceof EndGame)) {
             
         }
     }
