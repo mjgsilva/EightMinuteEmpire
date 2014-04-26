@@ -1,9 +1,12 @@
 package gameLogic.states;
 
 // Os argumentos podem não ser os mais correctos
+
+import java.util.ArrayList;
+
 public interface StateInterface {
-    public StateInterface defineGame();
-    public StateInterface defineWinner();
+    public StateInterface defineGame(int n);
+    public StateInterface defineWinner(ArrayList<Integer> bets);
     public StateInterface defineCard();
     public StateInterface defineArmy();
     public StateInterface defineMoveByLand();

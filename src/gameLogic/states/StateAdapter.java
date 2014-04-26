@@ -1,14 +1,25 @@
 package gameLogic.states;
 
+import gameLogic.*;
+import java.util.ArrayList;
+
 public abstract class StateAdapter implements StateInterface {
+    private Game game;
     
+    public StateAdapter (Game game) {
+        this.game = game;
+    }
+    
+    protected Game getGame() {
+        return this.game;
+    }
     
     @Override
-    public StateInterface defineGame() {
+    public StateInterface defineGame(int n) {
         return this;
     }
     @Override
-    public StateInterface defineWinner() {
+    public StateInterface defineWinner(ArrayList<Integer> bets) {
         return this;
     }
     @Override
@@ -55,8 +66,7 @@ public abstract class StateAdapter implements StateInterface {
     @Override
     public StateInterface newArmyThenNeutralize() {
         return this;
-    }
-    
+    }    
     
     @Override
     public StateInterface saveToFile() {

@@ -1,4 +1,3 @@
-<!-- On adjacent: 0 is by land and 1 is by sea -->
 <?xml version="1.0"?>
 <Map>
 	<Continent id="1">
@@ -114,8 +113,23 @@
 			<adjacent key="22" value="0"/>
 		</Region>
 		<Region id="22">
-			<adjacent key="7" value="1"/>
-			<adjacent key="22" value="0"/>
+			<adjacent key="15" value="1"/>
+			<adjacent key="21" value="0"/>
+		</Region>
+	</Continent>
+	<Continent id="4">
+		<Region id="23">
+			<adjacent key="17" value="1"/>
+			<adjacent key="25" value="0"/>
+		</Region>
+		<Region id="24">
+			<adjacent key="18" value="1"/>
+			<adjacent key="25" value="0"/>
+		</Region>
+		<Region id="25">
+			<adjacent key="23" value="0"/>
+			<adjacent key="24" value="0"/>
 		</Region>
 	</Continent>
 <Map>
+<!-- On adjacent: 0 is by land and 1 is by sea -->
