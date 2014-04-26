@@ -11,5 +11,4 @@ public class Game {
     public StateAdapter getState() {
         return state;
     }
-    
 }
