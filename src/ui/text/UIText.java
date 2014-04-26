@@ -7,7 +7,6 @@ public class UIText {
     Game game = new Game(); // Provisório. Não esquecer que depois é preciso ter opção de carregar de um ficheiro
     StateAdapter state;
     public void run() {
-        
         while (!((state = game.getState()) instanceof EndGame)) {
             if (state instanceof PrepareGame)
                 PrepareGame();

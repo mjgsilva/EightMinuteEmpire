@@ -1,0 +1,121 @@
+<!-- On adjacent: 0 is by land and 1 is by sea -->
+<?xml version="1.0"?>
+<Map>
+	<Continent id="1">
+		<Region id="1">
+			<adjacent key="2" value="0"/>
+			<adjacent key="3" value="0"/>
+			<adjacent key="4" value="0"/>
+		</Region>
+		<Region id="2">
+			<adjacent key="1" value="0"/>
+			<adjacent key="3" value="0"/>
+			<adjacent key="5" value="0"/>
+			<adjacent key="6" value="0"/>
+		</Region>
+		<Region id="3">
+			<adjacent key="1" value="0"/>
+			<adjacent key="2" value="0"/>
+			<adjacent key="4" value="0"/>
+			<adjacent key="5" value="0"/>
+		</Region>
+		<Region id="4">
+			<adjacent key="1" value="0"/>
+			<adjacent key="3" value="0"/>
+			<adjacent key="8" value="1"/>
+		</Region>
+		<Region id="5">
+			<adjacent key="2" value="0"/>
+			<adjacent key="3" value="0"/>
+			<adjacent key="11" value="1"/>
+		</Region>
+		<Region id="6">
+			<adjacent key="2" value="0"/>
+			<adjacent key="7" value="0"/>
+		</Region>
+		<Region id="7">
+			<adjacent key="6" value="0"/>
+			<adjacent key="21" value="1"/>
+		</Region>
+	</Continent>
+	<Continent id="2">
+		<Region id="8">
+			<adjacent key="4" value="1"/>
+			<adjacent key="9" value="0"/>
+			<adjacent key="10" value="1"/>
+		</Region>
+		<Region id="9">
+			<adjacent key="8" value="0"/>
+			<adjacent key="12" value="0"/>
+			<adjacent key="13" value="0"/>
+		</Region>
+		<Region id="10">
+			<adjacent key="8" value="1"/>
+			<adjacent key="14" value="0"/>
+		</Region>
+		<Region id="11">
+			<adjacent key="5" value="1"/>
+			<adjacent key="12" value="0"/>
+			<adjacent key="15" value="0"/>
+		</Region>
+		<Region id="12">
+			<adjacent key="9" value="0"/>
+			<adjacent key="11" value="0"/>
+			<adjacent key="13" value="0"/>
+			<adjacent key="15" value="0"/>
+			<adjacent key="16" value="0"/>
+			<adjacent key="19" value="0"/>
+		</Region>
+		<Region id="13">
+			<adjacent key="9" value="0"/>
+			<adjacent key="12" value="0"/>
+			<adjacent key="16" value="0"/>
+		</Region>
+		<Region id="14">
+			<adjacent key="10" value="0"/>
+			<adjacent key="17" value="0"/>
+		</Region>
+		<Region id="15">
+			<adjacent key="11" value="0"/>
+			<adjacent key="12" value="0"/>
+			<adjacent key="18" value="0"/>
+			<adjacent key="19" value="0"/>
+			<adjacent key="22" value="1"/>
+		</Region>
+		<Region id="16">
+			<adjacent key="12" value="0"/>
+			<adjacent key="13" value="0"/>
+			<adjacent key="17" value="0"/>
+			<adjacent key="19" value="0"/>
+		</Region>
+		<Region id="17">
+			<adjacent key="14" value="0"/>
+			<adjacent key="16" value="0"/>
+			<adjacent key="23" value="1"/>
+		</Region>
+		<Region id="18">
+			<adjacent key="15" value="0"/>
+			<adjacent key="19" value="0"/>
+			<adjacent key="24" value="1"/>
+		</Region>
+		<Region id="19">
+			<adjacent key="12" value="0"/>
+			<adjacent key="15" value="0"/>
+			<adjacent key="16" value="0"/>
+			<adjacent key="20" value="0"/>
+		</Region>
+		<Region id="20">
+			<adjacent key="20" value="0"/>
+		</Region>
+	</Continent>
+	<Continent id="3">
+		<Region id="21">
+			<adjacent key="7" value="1"/>
+			<adjacent key="22" value="0"/>
+		</Region>
+		<Region id="22">
+			<adjacent key="7" value="1"/>
+			<adjacent key="22" value="0"/>
+		</Region>
+	</Continent>
+<Map>
