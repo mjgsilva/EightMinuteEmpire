@@ -1,277 +1,397 @@
-<!-- 
-Type:
-        1 - Jewelry
-        2 - Food
-        3 - Wood
-        4 - Iron
-        5 - Tools
-        6 - Joker
-
-ActionType:
-        1 - Place Army
-        2 - Move Army By Land
-        3 - Move Army By Sea (Crossover between Sea and Land)
-        4 - Build City
-        5 - Neutralize Army
-
--->
 <?xml version="1.0"?>
-<DeckOfCards>
+<Deck>
         <Card id="1">
                 <typeOfResource>1</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="1"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>1</howMany>
+                </action>
         </Card>
         <Card id="2">
                 <typeOfResource>1</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="2"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
         <Card id="3">
                 <typeOfResource>1</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="2"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
         <Card id="4">
                 <typeOfResource>1</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="2"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
         <Card id="5">
                 <typeOfResource>1</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>1</fivePlayersCard>
-                <action type="2" howMany="2"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
         <Card id="6">
                 <typeOfResource>2</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="4" howMany="1"/>
+                <action> 
+                        <type>4</type>
+                        <howMany>1</howMany>
+                </action>
         </Card>
         <Card id="7">
                 <typeOfResource>2</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="4" howMany="1"/>
+                <action> 
+                        <type>4</type>
+                        <howMany>1</howMany>
+                </action>
         </Card>
         <Card id="8">
                 <typeOfResource>2</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="3"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="9">
                 <typeOfResource>2</typeOfResource>
                 <numberOfResources>2</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="3"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="10">
                 <typeOfResource>2</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="4"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>4</howMany>
+                </action>
         </Card>
         <Card id="11">
                 <typeOfResource>2</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="4"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>4</howMany>
+                </action>
         </Card>
         <Card id="12">
                 <typeOfResource>2</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="5"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>5</howMany>
+                </action>
         </Card>
         <Card id="13">
                 <typeOfResource>2</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="3" howMany="3"/>
+                <action> 
+                        <type>3</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="14">
                 <typeOfResource>2</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>1</fivePlayersCard>
-                <action type="1" howMany="4"/>
-                <action type="2" howMany="2"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>4</howMany>
+                </action>
+                <action> 
+                        <type>2</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
         <Card id="15">
                 <typeOfResource>2</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="1"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>1</howMany>
+                </action>
         </Card>
         <Card id="16">
                 <typeOfResource>3</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="4" howMany="1"/>
+                <action> 
+                        <type>4</type>
+                        <howMany>1</howMany>
+                </action>
         </Card>
         <Card id="17">
                 <typeOfResource>3</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="3"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="18">
                 <typeOfResource>3</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="3"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="19">
                 <typeOfResource>3</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="3"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="20">
                 <typeOfResource>3</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="3" howMany="3"/>
+                <action> 
+                        <type>3</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="21">
                 <typeOfResource>3</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="3" howMany="4"/>
+                <action> 
+                        <type>3</type>
+                        <howMany>4</howMany>
+                </action>
         </Card>
         <Card id="22">
                 <typeOfResource>3</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="6"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>6</howMany>
+                </action>
         </Card>
         <Card id="23">
                 <typeOfResource>3</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="4" howMany="1"/>
-                <action type="5" howMany="1"/>
+                <action> 
+                        <type>4</type>
+                        <howMany>1</howMany>
+                </action>
+                <action> 
+                        <type>5</type>
+                        <howMany>1</howMany>
+                </action>
         </Card>
         <Card id="24">
                 <typeOfResource>4</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="2"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
         <Card id="25">
                 <typeOfResource>4</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="3"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="26">
                 <typeOfResource>4</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="3"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="27">
                 <typeOfResource>4</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="2"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
         <Card id="28">
                 <typeOfResource>4</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="3" howMany="2"/>
+                <action> 
+                        <type>3</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
         <Card id="29">
                 <typeOfResource>4</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>1</fivePlayersCard>
-                <action type="3" howMany="2"/>
+                <action> 
+                        <type>3</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
         <Card id="30">
                 <typeOfResource>4</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="3" howMany="3"/>
+                <action> 
+                        <type>3</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="31">
                 <typeOfResource>5</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="4" howMany="3"/>
+                <action> 
+                        <type>4</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="32">
                 <typeOfResource>5</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="3"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="33">
                 <typeOfResource>5</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="3"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="34">
                 <typeOfResource>5</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="3" howMany="3"/>
+                <action> 
+                        <type>3</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
         <Card id="35">
                 <typeOfResource>5</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="4"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>4</howMany>
+                </action>
         </Card>
         <Card id="36">
                 <typeOfResource>5</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="3"/>
-                <action type="2" howMany="3"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>3</howMany>
+                </action>
+                <action> 
+                        <type>2</type>
+                        <howMany>3</howMany>
+                </action>
         </Card>
-                <Card id="37">
+        <Card id="37">
                 <typeOfResource>5</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="3"/>
-                <action type="2" howMany="4"/>
-        </Card>
+                <action> 
+                        <type>1</type>
+                        <howMany>3</howMany>
+                </action>
+                <action> 
+                        <type>2</type>
+                        <howMany>4</howMany>
+                </action>
         </Card>
         <Card id="38">
                 <typeOfResource>5</typeOfResource>
                 <numberOfResources>2</numberOfResources>
                 <fivePlayersCard>1</fivePlayersCard>
-                <action type="2" howMany="4"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>4</howMany>
+                </action>
         </Card>
         <Card id="39">
                 <typeOfResource>5</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="2" howMany="5"/>
+                <action> 
+                        <type>2</type>
+                        <howMany>5</howMany>
+                </action>
         </Card>
         <Card id="40">
                 <typeOfResource>6</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="1" howMany="2"/>
+                <action> 
+                        <type>1</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
         <Card id="41">
                 <typeOfResource>6</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="3" howMany="2"/>
+                <action> 
+                        <type>3</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
                 <Card id="42">
                 <typeOfResource>6</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action type="3" howMany="2"/>
+                <action> 
+                        <type>3</type>
+                        <howMany>2</howMany>
+                </action>
         </Card>
-</DeckOfCards>
+</Deck>
