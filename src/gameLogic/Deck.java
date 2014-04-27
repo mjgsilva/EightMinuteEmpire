@@ -11,6 +11,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Deck {
     private final ArrayList<Card> cards = new ArrayList<>();
@@ -20,7 +22,7 @@ public class Deck {
         readXML();
     }
 
-    public void addCard(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, int[][] actions)
+    public void addCard(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer,Integer> actions)
     {
         Card c = new Card(id, typeOfResource, numberOfResource, fivePlayersCard, actions);
 
@@ -52,15 +54,17 @@ public class Deck {
 
             for(int i=0; i < totalCards; i++)
             {
+                int cardId;
                 int typeOfResource;
                 int numberOfResource;
                 int fivePlayersCard;
                 int howManyActions;
-                int[][] actions;
+                Map<Integer,Integer> actions;
 
 
                 Node cardNode = listOfCards.item(i);
                 Element cardElement = (Element)cardNode;
+                cardId = Integer.parseInt(cardElement.getAttribute("id"));
 
                     /* Type of Resource */
                 NodeList cardTypeOfResouceList = cardElement.getElementsByTagName("typeOfResource");
@@ -88,7 +92,7 @@ public class Deck {
                 NodeList listOfActions = cardElement.getElementsByTagName("action");
                 howManyActions = listOfActions.getLength();
 
-                actions = new int[howManyActions][2];
+                actions = new HashMap<>();
 
                     /* Fill actions array */
 
@@ -113,10 +117,9 @@ public class Deck {
                     NodeList textHowMany = cardHowMany.getChildNodes();
                     howManyCard = Integer.parseInt(((Node)textHowMany.item(0)).getNodeValue().trim());
 
-                    actions[j][0] = typeActionCard;
-                    actions[j][1] = howManyCard;
+                    actions.put(typeActionCard, howManyCard);
                 }
-                addCard((i+1),typeOfResource,numberOfResource,fivePlayersCard,actions);
+                addCard(cardId,typeOfResource,numberOfResource,fivePlayersCard,actions);
             }
         } catch (SAXParseException err) {
             System.out.println(" " + err.getMessage ());

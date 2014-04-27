@@ -34,6 +34,7 @@ public class Region {
             Map.Entry pairs = (Map.Entry)it.next();
             adjacentText += ("\t\t" + pairs.getKey() + " / " + pairs.getValue() + "\n");
         }
+        it.remove();
         return adjacentText;
     }
 }
