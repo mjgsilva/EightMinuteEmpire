@@ -3,30 +3,36 @@ package gameLogic.map;
 import java.util.ArrayList;
 
 public class Continent {
-    int id;
-    private ArrayList<Region> regions = new ArrayList<>();
+    private final int id;
+    private final ArrayList<Region> regions;
 
+    public Continent(int id, ArrayList<Region>regions)
+    {
+        this.id = id;
+        this.regions = regions;
+    }
+    
     public ArrayList<Region> getRegions() {
         return regions;
-    }
-
-    public void addRegion(Region r) {
-        this.regions.add(r);
-    }
-
-    public void setRegions(ArrayList<Region> regions) {
-        this.regions = regions;
     }
 
     public int getId() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
+    
+    public String toString()
+    {
+        return "Cont " + id + "\n" + getRegionsExtended();
     }
     
-    public void addAdjacentToRegion(Region r, Integer id, Integer byLandOrSea) {
-        regions.get(regions.indexOf(r)).addAdjacent(id, byLandOrSea);
+    public String getRegionsExtended()
+    {
+        String textRegions = new String();
+        
+        for(Region temp : regions)
+            textRegions += temp.toString();
+        
+        return textRegions;
     }
+
 }
