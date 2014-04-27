@@ -39,7 +39,7 @@ public class UIText {
         System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
         System.out.println("-------- World Map --------\n" + game.getMapAsString());
     }
-
+    
     private void Auction() {
         // Input offers to determine first player to play
         ArrayList<Player> list = game.getPlayers();
@@ -77,6 +77,7 @@ public class UIText {
         System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
         System.out.println("Player " + game.getCurrentPlayer().getIdAsString() + " turn" +
                 "\nCoins: " + game.getCurrentPlayer().getCoins());
+        System.out.println("Score: " + game.getCurrentPlayer().getScore());
         System.out.print("Pick card number to buy (According to displayed order): ");
         game.defineCard(sc.nextInt()-1);
         
@@ -87,6 +88,7 @@ public class UIText {
         // Show players information
         System.out.println("\nBought card: " + game.getCurrentPlayer().getLastCard());
         System.out.println("Remaining coins: " + game.getCurrentPlayer().getCoins());
+        System.out.println("Score: " + game.getCurrentPlayer().getScore());
     }
 
     private void DefineAction() {

@@ -48,6 +48,10 @@ public class Player {
             armies.add(new Army(id, color));
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public int getCoins() {
         return coins;
     }
