@@ -29,4 +29,8 @@ public class Player {
     public int getId() {
         return id;
     }
+
+    public void useCoins(int cost) {
+        this.coins = this.coins - cost;
+    }
 }

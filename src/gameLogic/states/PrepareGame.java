@@ -11,7 +11,7 @@ public class PrepareGame extends StateAdapter {
     
     @Override
     public StateInterface defineGame(int n) {
-        int value;
+        int value = 0;
         
         // Number of players must be between 2 and 5
         if (n<=5 && n>=2) {
@@ -37,7 +37,7 @@ public class PrepareGame extends StateAdapter {
             }
             // Distribute coins
             for (Player aux : temporaryList)
-                aux.setCoins(n);
+                aux.setCoins(value);
             // Update Players list in Game
             getGame().setPlayers(temporaryList);
             
