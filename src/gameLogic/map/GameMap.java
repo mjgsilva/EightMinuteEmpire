@@ -1,16 +1,17 @@
 package gameLogic.map;
 
+import gameLogic.Army;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 import org.xml.sax.SAXParseException;
 
 public class GameMap {
@@ -19,6 +20,13 @@ public class GameMap {
     public GameMap()
     {
         readMapXML();
+    }
+    
+    public void placeArmy(int toRegion, Army army) {
+        for (Continent aux : continents) {
+            if (aux.placeArmy(toRegion, army))
+                break;
+        }
     }
     
     private void addContinent(int id, ArrayList<Region> regions)
@@ -33,7 +41,7 @@ public class GameMap {
         return getContinentsExtended();
     }
     
-    public String getContinentsExtended()
+    private String getContinentsExtended()
     {
         String textContinents = new String();
         
@@ -42,7 +50,7 @@ public class GameMap {
         
         return textContinents;
     }
-        
+    
     private void readMapXML()
     {
         try {

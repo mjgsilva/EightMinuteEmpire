@@ -1,5 +1,6 @@
 package gameLogic.map;
 
+import gameLogic.Army;
 import java.util.ArrayList;
 
 public class Continent {
@@ -20,9 +21,10 @@ public class Continent {
         return id;
     }
     
+    @Override
     public String toString()
     {
-        return "Cont " + id + "\n" + getRegionsExtended();
+        return "Continent " + id + "\n" + getRegionsExtended();
     }
     
     public String getRegionsExtended()
@@ -34,5 +36,14 @@ public class Continent {
         
         return textRegions;
     }
-
+    
+    public Boolean placeArmy(int toRegion, Army army) {
+        for (Region aux : regions) {
+            if (aux.getId() == toRegion) {
+                aux.addArmy(army);
+                return true;
+            }
+        }
+        return false;
+    }
 }

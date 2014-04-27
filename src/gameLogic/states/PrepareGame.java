@@ -1,9 +1,9 @@
 package gameLogic.states;
 
-import gameLogic.Card;
 import gameLogic.Deck;
 import gameLogic.Game;
 import gameLogic.Player;
+import gameLogic.map.GameMap;
 import java.util.ArrayList;
 
 public class PrepareGame extends StateAdapter {
@@ -14,6 +14,8 @@ public class PrepareGame extends StateAdapter {
     @Override
     public StateInterface defineGame(int n) {
         int value = 0;
+        // Preparation of map
+        // Being made by default on Game class
         
         // Number of players must be between 2 and 5
         if (n<=5 && n>=2) {
@@ -42,6 +44,8 @@ public class PrepareGame extends StateAdapter {
                 aux.setCoins(value);
             // Update Players list in Game
             getGame().setPlayers(temporaryList);
+            // Place 3 armies for all players at initial region (id: 12)
+            getGame().setMap(placeInitialArmies());
             // Update deck according to number of players
             if (n < 5) {
                 Deck deck = getGame().getDeck();
@@ -55,5 +59,17 @@ public class PrepareGame extends StateAdapter {
             return new Auction(getGame());
         } else
             return this;
+    }
+
+    private GameMap placeInitialArmies() {
+        GameMap map = getGame().getMap();
+        for (Player aux : getGame().getPlayers()){
+            for (int i = 0; i < 3; i++) {
+                if(aux.getArmies().size() > 0)
+                    map.placeArmy(12, aux.getArmy());
+            }
+        }
+            
+        return map;
     }
 }

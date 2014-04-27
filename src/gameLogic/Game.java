@@ -1,5 +1,6 @@
 package gameLogic;
 
+import gameLogic.map.*;
 import gameLogic.states.*;
 import java.util.ArrayList;
 
@@ -8,19 +9,34 @@ public class Game {
     private ArrayList<Player> players = new ArrayList<>();
     
     private Player currentPlayer;
-
-    
-    // Deck of cards
-    private Deck deck = new Deck();
-
-   
-    // Cards turned up in the table - maximum of 6 cards
-    private ArrayList <Card> tableCards = new ArrayList<>();
     
     // Contructor
     public Game() {
         state = new PrepareGame(this);
     }
+
+    // Map
+    private GameMap map = new GameMap(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
+
+    public void setMap(GameMap map) {
+        this.map = map;
+    }
+    
+    public GameMap getMap() {
+        return map;
+    }
+
+    public String getMapAsString() {
+        return map.toString();
+    }
+    
+    // Deck of cards
+    private Deck deck = new Deck(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
+
+   
+    // Cards turned up in the table - maximum of 6 cards
+    private ArrayList <Card> tableCards = new ArrayList<>();
+    
 
     public StateInterface getState() {
         return state;
@@ -115,7 +131,5 @@ public class Game {
                 str += i+1 + " " + tableCards.get(i).toString() + "\tCost: 3\n";
         }
         return str;
-    }
-
-    
+    }    
 }

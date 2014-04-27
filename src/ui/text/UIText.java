@@ -37,6 +37,7 @@ public class UIText {
         }
         // Show 6 cards
         System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
+        System.out.println("-------- World Map --------\n" + game.getMapAsString());
     }
 
     private void Auction() {

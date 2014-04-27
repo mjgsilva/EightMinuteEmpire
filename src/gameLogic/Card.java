@@ -27,7 +27,7 @@ public class Card {
 
     private String getTypeOfResource()
     {
-        String type = "";
+        String type = new String();
 
         switch(typeOfResource) {
             case 1 : type = "Jewelry"; break;

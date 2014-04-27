@@ -19,9 +19,7 @@ public class Player {
     
     public Player(int id) {
         this.id = id;
-        // Add 14 Army man to player
-        for (int i = 0; i < 14; i++)
-            armies.add(new Army(id));
+        
         
         objCounter++;
         // Determine Player color
@@ -45,6 +43,9 @@ public class Player {
                 color = "";
                 break;
         }
+        // Add 14 Army man to player
+        for (int i = 0; i < 14; i++)
+            armies.add(new Army(id, color));
     }
 
     public int getCoins() {
@@ -77,5 +78,15 @@ public class Player {
 
     public String getLastCard() {
         return cards.get(cards.size()-1).toString();
+    }
+
+    public Army getArmy() {
+        Army aux = armies.get(armies.size()-1);
+        armies.remove(aux);
+        return aux;
+    }
+
+    public ArrayList<Army> getArmies() {
+        return armies;
     }
 }
