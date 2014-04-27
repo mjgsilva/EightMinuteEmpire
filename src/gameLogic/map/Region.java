@@ -1,13 +1,15 @@
 package gameLogic.map;
 
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
-public class Region {
-    private int id;
-    private Map <Integer, Integer> adjacent = new HashMap<>();
 
-    public Region(int id) {
+public class Region {
+    private final int id;
+    private final Map <Integer, Integer> adjacent;
+
+    public Region(int id, Map<Integer, Integer>adjacent) {
         this.id = id;
+        this.adjacent = adjacent;
     }
     
     public int getId() {
@@ -17,12 +19,21 @@ public class Region {
     public Map<Integer, Integer> getAdjacent() {
         return adjacent;
     }
-
-    public void setId(int id) {
-        this.id = id;
+    
+    public String toString()
+    {
+        return "\tReg: " + id + "\n" + getAdjacentExtended();
     }
-
-    public void addAdjacent(Integer regionId, Integer byLandOrSea) {
-        this.adjacent.put(regionId, byLandOrSea);
+    
+    public String getAdjacentExtended()
+    {
+        String adjacentText = new String();
+        Iterator it = adjacent.entrySet().iterator();
+        while(it.hasNext())
+        {
+            Map.Entry pairs = (Map.Entry)it.next();
+            adjacentText += ("\t\t" + pairs.getKey() + " / " + pairs.getValue() + "\n");
+        }
+        return adjacentText;
     }
 }

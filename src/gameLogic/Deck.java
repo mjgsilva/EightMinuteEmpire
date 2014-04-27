@@ -118,16 +118,11 @@ public class Deck {
                 }
                 addCard((i+1),typeOfResource,numberOfResource,fivePlayersCard,actions);
             }
-
-
         } catch (SAXParseException err) {
-            System.out.println ("** Parsing error" + ", line " + err.getLineNumber () + ", uri " + err.getSystemId ());
             System.out.println(" " + err.getMessage ());
-
         } catch (SAXException e) {
             Exception x = e.getException ();
-            ((x == null) ? e : x).printStackTrace ();
-
+                ((x == null) ? e : x).printStackTrace ();
         } catch (Throwable t) {
             t.printStackTrace ();
         }

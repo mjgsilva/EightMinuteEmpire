@@ -395,3 +395,20 @@
                 </action>
         </Card>
 </Deck>
+<!-- DeckOfCards XML Explanation
+
+Type:
+        1 - Jewelry
+        2 - Food
+        3 - Wood
+        4 - Iron
+        5 - Tools
+        6 - Joker
+
+ActionType:
+        1 - Place Army
+        2 - Move Army By Land
+        3 - Move Army By Sea (Crossover between Sea and Land)
+        4 - Build City
+        5 - Neutralize Army
+-->

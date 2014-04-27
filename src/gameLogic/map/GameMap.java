@@ -1,0 +1,117 @@
+package gameLogic.map;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import org.xml.sax.SAXParseException;
+
+public class GameMap {
+    private ArrayList<Continent> continents = new ArrayList<>();
+    
+    public GameMap()
+    {
+        readMapXML();
+    }
+    
+    private void addContinent(int id, ArrayList<Region> regions)
+    {
+        Continent c = new Continent(id, regions);
+        continents.add(c);
+    }
+    
+    public String toString()
+    {
+        return getContinentsExtended();
+    }
+    
+    public String getContinentsExtended()
+    {
+        String textContinents = new String();
+        
+        for(Continent temp : continents)
+            textContinents += temp.toString();
+        
+        return textContinents;
+    }
+        
+    private void readMapXML()
+    {
+        try {
+            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse(new File("src/gameLogic/map/GameMap.xml"));
+
+            doc.getDocumentElement().normalize();
+
+            NodeList listOfContinents = doc.getElementsByTagName("Continent");
+            int totalContinents = listOfContinents.getLength();
+
+            for (int i = 0; i < totalContinents; i++) {
+                int continentId;
+                int totalRegions;
+                ArrayList<Region> regions = new ArrayList<>();
+
+                Node continentNode = listOfContinents.item(i);
+                Element continentElement = (Element) continentNode;
+
+                continentId = Integer.parseInt(continentElement.getAttribute("id"));
+
+                NodeList listOfRegionsByContinent = continentElement.getElementsByTagName("Region");
+                totalRegions = listOfRegionsByContinent.getLength();
+
+                for (int j = 0; j < totalRegions; j++) {
+                    int regionId;
+                    int totalAdjacents;
+                    Map<Integer, Integer> adjacent = new HashMap<>();
+
+                    Node regionNode = listOfRegionsByContinent.item(j);
+                    Element regionElement = (Element) regionNode;
+
+                    regionId = Integer.parseInt(regionElement.getAttribute("id"));
+
+                    NodeList listOfAdjacentsByRegion = regionElement.getElementsByTagName("adjacent");
+                    totalAdjacents = listOfAdjacentsByRegion.getLength();
+
+                    for (int k = 0; k < totalAdjacents; k++) {
+                        int adjacentId;
+                        int adjacentConn;
+
+                        Node adjacentNode = listOfAdjacentsByRegion.item(k);
+                        Element adjacentElement = (Element) adjacentNode;
+
+                        NodeList adjacentRegionList = adjacentElement.getElementsByTagName("reg");
+                        Element adjacentRegion = (Element) adjacentRegionList.item(0);
+
+                        NodeList textAdjacentRegion = adjacentRegion.getChildNodes();
+                        adjacentId = Integer.parseInt(((Node) textAdjacentRegion.item(0)).getNodeValue().trim());
+
+                        NodeList adjacentConnectionList = adjacentElement.getElementsByTagName("connection");
+                        Element adjacentConnection = (Element) adjacentConnectionList.item(0);
+
+                        NodeList textAdjacentConnection = adjacentConnection.getChildNodes();
+                        adjacentConn = Integer.parseInt(((Node) textAdjacentConnection.item(0)).getNodeValue().trim());
+
+                        adjacent.put(adjacentId, adjacentConn);
+                    }
+                    regions.add(new Region(regionId,adjacent));
+                }
+                addContinent(continentId, regions);
+             }
+        } catch (SAXParseException err) {
+            System.out.println(" " + err.getMessage ());
+        } catch (SAXException e) {
+            Exception x = e.getException ();
+                ((x == null) ? e : x).printStackTrace ();
+        } catch (Throwable t) {
+            t.printStackTrace ();
+        }
+    }
+}

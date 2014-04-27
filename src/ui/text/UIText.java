@@ -1,6 +1,7 @@
 package ui.text;
 
 import gameLogic.*;
+import gameLogic.map.GameMap;
 import gameLogic.states.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 public class UIText {
     Game game = new Game(); // Provisório. Não esquecer que depois é preciso ter opção de carregar de um ficheiro
     StateInterface state;
-    Deck d = new Deck();
+    Deck d = new Deck();        
     Scanner sc = new Scanner(System.in);
     
     public void run() {
@@ -21,9 +22,9 @@ public class UIText {
                 PickCard();
             else if (state instanceof DefineAction)
                 DefineAction();
-        }
+            }
     }
-
+    
     private void PrepareGame() {
         // Implementar inputs
         System.out.print("\u001B[32mNumber of players: ");
