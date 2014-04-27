@@ -19,6 +19,10 @@ public class Card {
         this.actions = actions;
     }
 
+    public Map<Integer, Integer> getActions() {
+        return actions;
+    }
+    
     @Override
     public String toString() {
         return "ID: " + id + " \t" + getTypeOfResource() + " Qty:" + numberOfResource
