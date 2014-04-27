@@ -9,6 +9,9 @@ public class Game {
     
     private Player currentPlayer;
 
+    // Cards turned up on the table - maximum of 6 cards
+    private final ArrayList <Card> tableCards = new ArrayList<>();
+    
     public Game() {
         state = new PrepareGame(this);
     }
