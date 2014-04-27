@@ -11,17 +11,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-
-<<<<<<< HEAD
-=======
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
->>>>>>> 6074478438f51f3106c4837309b72d324a2ef1fc
 public class Deck {
     private final ArrayList<Card> cards = new ArrayList<>();
 

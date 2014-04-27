@@ -1,13 +1,16 @@
 package gameLogic;
 
-public class Card {
-    private int id;
-    private int typeOfResource;
-    private int numberOfResource;
-    private int fivePlayersCard;
-    private int[][] actions;
+import java.util.Iterator;
+import java.util.Map;
 
-    Card(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, int[][] actions)
+public class Card {
+    private final int id;
+    private final int typeOfResource;
+    private final int numberOfResource;
+    private final int fivePlayersCard;
+    private final Map <Integer, Integer> actions;
+
+    Card(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer,Integer>actions)
     {
         this.id = id;
         this.typeOfResource = typeOfResource;
@@ -19,7 +22,7 @@ public class Card {
     @Override
     public String toString() {
         return "ID: " + id + " \t" + getTypeOfResource() + " Qty:" + numberOfResource
-                + "\tAct: " + getActions() + "\t\t" + getFivePlayersCardToString();
+                + "\tAct: " + getActionsExtended() + "\t\t" + getFivePlayersCardToString();
     }
 
     private String getTypeOfResource()
@@ -50,32 +53,40 @@ public class Card {
         return fivePlayers;
     }
 
-    private String getActions()
+    private String getActionsExtended()
     {
-        String actionsList = new String();
-        int length = actions.length;
-
-        for(int i = 0; i < length; i++)
-        {
-            String tempAction = new String();
-
-            switch(actions[i][0])
-            {
-                case 1 : tempAction = "Place Army"; break;
-                case 2 : tempAction = "Move Army by Land"; break;
-                case 3 : tempAction = "Move Army by Sea"; break;
-                case 4 : tempAction = "Build a City"; break;
-                case 5 : tempAction = "Neutralize Army"; break;
-            }
-
-            tempAction += " | " + actions[i][1] + " Unit[s]";
-
-            if(length > 1 && i+1 != length)
-                tempAction += " OR ";
-
-            actionsList += tempAction;
+        String actionsText = new String();
+        Iterator it = actions.entrySet().iterator();
+        int counter = 0;
+        
+        while(it.hasNext())
+        {            
+            Map.Entry pairs = (Map.Entry)it.next();
+            actionsText += getActionString(Integer.parseInt(pairs.getKey().toString()),Integer.parseInt(pairs.getValue().toString()));
+            if(counter > 0)
+                actionsText += " OR ";
+            counter++;
+            it.remove();
         }
-        return actionsList;
+        return actionsText;
+    }
+    
+    private String getActionString(int actionIndex, int actionUnits)
+    {
+        String actionList = new String();
+
+        switch(actionIndex)
+        {
+            case 1 : actionList = "Place Army"; break;
+            case 2 : actionList = "Move Army by Land"; break;
+            case 3 : actionList = "Move Army by Sea"; break;
+            case 4 : actionList = "Build a City"; break;
+            case 5 : actionList = "Neutralize Army"; break;
+        }
+
+        actionList += " | " + actionUnits + " Unit[s]";
+
+        return actionList;
     }
 
     public int getFivePlayersCard() {

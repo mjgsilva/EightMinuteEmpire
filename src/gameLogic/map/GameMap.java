@@ -14,7 +14,7 @@ import java.util.HashMap;
 import org.xml.sax.SAXParseException;
 
 public class GameMap {
-    private ArrayList<Continent> continents = new ArrayList<>();
+    private final ArrayList<Continent> continents = new ArrayList<>();
     
     public GameMap()
     {
@@ -27,6 +27,7 @@ public class GameMap {
         continents.add(c);
     }
     
+    @Override
     public String toString()
     {
         return getContinentsExtended();
