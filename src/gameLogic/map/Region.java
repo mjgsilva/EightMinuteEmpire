@@ -20,6 +20,7 @@ public class Region {
         return adjacent;
     }
     
+    @Override
     public String toString()
     {
         return "\tReg: " + id + "\n" + getAdjacentExtended();
@@ -34,7 +35,6 @@ public class Region {
             Map.Entry pairs = (Map.Entry)it.next();
             adjacentText += ("\t\t" + pairs.getKey() + " / " + pairs.getValue() + "\n");
         }
-        it.remove();
         return adjacentText;
     }
 }

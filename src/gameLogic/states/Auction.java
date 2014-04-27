@@ -29,8 +29,9 @@ public class Auction extends StateAdapter {
                 else
                     index = bets.lastIndexOf(max);
             }
+            
             getGame().setCurrentPlayer(getGame().getPlayers().get(index));
-            getGame().getCurrentPlayer().useCoins(bets.indexOf(index));
+            getGame().getCurrentPlayer().useCoins(bets.get(index));
             return new PickCard(getGame());
         } else
             return this;

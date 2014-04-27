@@ -74,4 +74,8 @@ public class Player {
     public void addCardBought(Card card) {
         cards.add(card);
     }
+
+    public String getLastCard() {
+        return cards.get(cards.size()-1).toString();
+    }
 }

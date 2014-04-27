@@ -66,7 +66,6 @@ public class Card {
             if(counter > 0)
                 actionsText += " OR ";
             counter++;
-            it.remove();
         }
         return actionsText;
     }

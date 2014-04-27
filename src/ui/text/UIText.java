@@ -61,6 +61,7 @@ public class UIText {
         else
             System.out.println("\nPlayer " + game.getCurrentPlayer().getIdAsString() + " won the auction!"
                     + "\nAnd is the first player to play.\n");
+        //System.out.println("Remaining coins: " + game.getCurrentPlayer().getCoins());
     }
 
     private void PickCard() {
@@ -73,13 +74,18 @@ public class UIText {
         
         // Input desired card to buy
         System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
+        System.out.println("Player " + game.getCurrentPlayer().getIdAsString() + " turn" +
+                "\nCoins: " + game.getCurrentPlayer().getCoins());
         System.out.print("Pick card number to buy (According to displayed order): ");
         game.defineCard(sc.nextInt()-1);
         
         if (game.getState() instanceof PickCard) {
-            System.out.println("\nInvalid card number.");
+            System.out.println("\nInvalid card number or not enough coins.");
             return;
         }
+        // Show players information
+        System.out.println("\nBought card: " + game.getCurrentPlayer().getLastCard());
+        System.out.println("Remaining coins: " + game.getCurrentPlayer().getCoins());
     }
 
     private void DefineAction() {
