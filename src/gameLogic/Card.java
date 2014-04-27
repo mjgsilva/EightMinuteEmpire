@@ -16,9 +16,10 @@ public class Card {
         this.actions = actions;
     }
 
+    @Override
     public String toString() {
-        return "ID: " + id + " / " + getTypeOfResource() + " / Qty: " + numberOfResource
-                + " Act: " + getActions() + " / " + getFivePlayersCard();
+        return "ID: " + id + " \t" + getTypeOfResource() + " Qty:" + numberOfResource
+                + "\tAct: " + getActions() + "\t\t" + getFivePlayersCardToString();
     }
 
     private String getTypeOfResource()
@@ -37,7 +38,7 @@ public class Card {
         return type;
     }
 
-    private String getFivePlayersCard()
+    private String getFivePlayersCardToString()
     {
         String fivePlayers;
 
@@ -75,5 +76,9 @@ public class Card {
             actionsList += tempAction;
         }
         return actionsList;
+    }
+
+    public int getFivePlayersCard() {
+        return fivePlayersCard;
     }
 }

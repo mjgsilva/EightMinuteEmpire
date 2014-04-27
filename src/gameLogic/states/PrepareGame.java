@@ -1,5 +1,7 @@
 package gameLogic.states;
 
+import gameLogic.Card;
+import gameLogic.Deck;
 import gameLogic.Game;
 import gameLogic.Player;
 import java.util.ArrayList;
@@ -40,11 +42,18 @@ public class PrepareGame extends StateAdapter {
                 aux.setCoins(value);
             // Update Players list in Game
             getGame().setPlayers(temporaryList);
+            // Update deck according to number of players
+            if (n < 5) {
+                Deck deck = getGame().getDeck();
+                deck.remove5PlayersCard();
+                getGame().setDeck(deck);
+            }
+            // Set 6 random table cards
+            for (int i = 0; i < 6; i++)
+                getGame().addTableCard(getGame().getCardFromDeck());
             
             return new Auction(getGame());
         } else
             return this;
     }
-    
-    
 }

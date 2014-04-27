@@ -25,44 +25,67 @@ public class UIText {
     }
 
     private void PrepareGame() {
-        // Implementar inputs
-        System.out.print("\u001B[32mNumber of players: ");
+        // Input number of players
+        System.out.print("Number of players: ");
         game.defineGame(sc.nextInt());
         System.out.print("\n");
         // If same state is returned, then there's invalid data
-        if (game.getState() instanceof PrepareGame)
+        if (game.getState() instanceof PrepareGame) {
             System.out.println("Invalid number of players.");
+            return;
+        }
+        // Show 6 cards
+        System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
     }
 
     private void Auction() {
-        // Implementar inputs
+        // Input offers to determine first player to play
         ArrayList<Player> list = game.getPlayers();
         ArrayList<Integer> bets = new ArrayList<>();
         for (Player aux : list) {
             // This is supposed to be in secret, but IDE console doesn't support methods to do this....
-            System.out.print("\u001B[32mPlayer " + aux.getId() + ", insert number of coins yout want to bet: ");
+            System.out.print("Player " + aux.getIdAsString() + ", insert number of coins yout want to bet: ");
             bets.add(sc.nextInt());
             System.out.print("\n");
         }
         System.out.println("\n");
         // Show offers made by players
-        System.out.println("\u001B[32m-------- Offers --------");
+        System.out.println("-------- Offers --------");
         for (int i = 0; i < bets.size(); i++)
-            System.out.println("Player " + i + " : " + bets.get(i) + " coins");
+            System.out.println("Player " + game.getPlayerIdAsString(i) + " : " + bets.get(i) + " coins");
         game.defineWinner(bets);
         // If same state is returned, then there's invalid data
         if (game.getState() instanceof Auction)
             System.out.println("Invalid bet made by a player.");
         else
-            System.out.println("Player " + game.getCurrentPlayer().getId() + " won the auction!"
-                    + "\nAnd is the first player to play.");
+            System.out.println("\nPlayer " + game.getCurrentPlayer().getIdAsString() + " won the auction!"
+                    + "\nAnd is the first player to play.\n");
     }
 
     private void PickCard() {
-        // Implementar inputs
+        // This is the beginning of the turn, so we have to check for EndGame condition.
+        game.defineEndGame();
+        if (game.getState() instanceof EndGame) {
+            endGame();
+            return;
+        }
+        
+        // Input desired card to buy
+        System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
+        System.out.print("Pick card number to buy (According to displayed order): ");
+        game.defineCard(sc.nextInt()-1);
+        
+        if (game.getState() instanceof PickCard) {
+            System.out.println("\nInvalid card number.");
+            return;
+        }
     }
 
     private void DefineAction() {
         // Implementar inputs
+    }
+
+    private void endGame() {
+        System.out.println("\nGame Over. Not implemented yet.");
     }
 }

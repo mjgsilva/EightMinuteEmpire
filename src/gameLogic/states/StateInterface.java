@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface StateInterface {
     public StateInterface defineGame(int n);
     public StateInterface defineWinner(ArrayList<Integer> bets);
-    public StateInterface defineCard();
+    public StateInterface defineCard(int n);
     public StateInterface defineArmy();
     public StateInterface defineMoveByLand();
     public StateInterface defineMoveBySea();
@@ -22,6 +22,8 @@ public interface StateInterface {
     
     public StateInterface saveToFile();
     public StateInterface loadFromFile();
+
+    public StateInterface defineEndGame();
     
     
 }

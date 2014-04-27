@@ -1,5 +1,10 @@
 package gameLogic;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -7,17 +12,12 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.util.ArrayList;
-
 public class Deck {
     private final ArrayList<Card> cards = new ArrayList<>();
 
     public Deck()
     {
-        readXML();
+        readDeckXML();
     }
 
     public void addCard(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, int[][] actions)
@@ -39,7 +39,7 @@ public class Deck {
     }
 
     
-    private void readXML() {
+    private void readDeckXML() {
         try {
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -131,5 +131,19 @@ public class Deck {
         } catch (Throwable t) {
             t.printStackTrace ();
         }
+    }
+    
+    
+    public void remove5PlayersCard() {
+        for (int i = 0; i < cards.size(); i++)
+            if (cards.get(i).getFivePlayersCard() == 1)
+                cards.remove(i);
+    }
+
+    Card getRandomCardFromDeck() {
+        int randomNumber = new Random().nextInt(cards.size());
+        Card aux = cards.get(randomNumber);
+        cards.remove(randomNumber);
+        return aux;
     }
 }

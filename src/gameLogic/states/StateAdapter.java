@@ -23,7 +23,7 @@ public abstract class StateAdapter implements StateInterface {
         return this;
     }
     @Override
-    public StateInterface defineCard() {
+    public StateInterface defineCard(int n) {
         return this;
     }
     @Override
@@ -76,4 +76,10 @@ public abstract class StateAdapter implements StateInterface {
     public StateInterface loadFromFile() {
         return this;
     }
+
+    @Override
+    public StateInterface defineEndGame() {
+        return this;
+    }
+    
 }

@@ -9,9 +9,15 @@ public class Game {
     
     private Player currentPlayer;
 
-    // Cards turned up on the table - maximum of 6 cards
-    private final ArrayList <Card> tableCards = new ArrayList<>();
     
+    // Deck of cards
+    private Deck deck = new Deck();
+
+   
+    // Cards turned up in the table - maximum of 6 cards
+    private ArrayList <Card> tableCards = new ArrayList<>();
+    
+    // Contructor
     public Game() {
         state = new PrepareGame(this);
     }
@@ -25,6 +31,10 @@ public class Game {
         return players;
     }
 
+    public String getPlayerIdAsString(int id) {
+        return players.get(id).getIdAsString();
+    }
+    
     public void setPlayers(ArrayList<Player> players) {
         this.players = players;
     }
@@ -36,10 +46,30 @@ public class Game {
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
+    
+    public Deck getDeck() {
+        return deck;
+    }
 
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
+    public ArrayList<Card> getTableCards() {
+        return tableCards;
+    }
     
+    public Card getCardFromDeck() {
+        return deck.getRandomCardFromDeck();
+    }
     
-    
+    public void addTableCard(Card cardFromDeck) {
+        tableCards.add(cardFromDeck);
+    }
+
+    public void setTableCards(ArrayList<Card> tableCards) {
+        this.tableCards = tableCards;
+    }
     
     
     
@@ -55,4 +85,37 @@ public class Game {
     public void defineWinner(ArrayList<Integer> bets) {
         state = state.defineWinner(bets);
     }
+    
+    public void defineCard(int n) {
+        state = state.defineCard(n);
+    }
+
+    public void defineEndGame() {
+        state = state.defineEndGame();
+    }
+
+
+    
+
+    /**
+     * Returns table cards in an organized way
+     * 
+     * @return
+     */
+    public String getTableCardsAsString() {
+        String str = "Card Order (1 2 3 4 5 6)\n";
+        for (int i = 0; i < tableCards.size(); i++) {
+            if (i == 0)
+                str += i+1 + " " + tableCards.get(i).toString() + "\tCost: 0\n";
+            else if (i == 1 || i == 2)
+                str += i+1 + " " + tableCards.get(i).toString() + "\tCost: 1\n";
+            else if (i == 3 || i == 4)
+                str += i+1 + " " + tableCards.get(i).toString() + "\tCost: 2\n";
+            else if (i == 5)
+                str += i+1 + " " + tableCards.get(i).toString() + "\tCost: 3\n";
+        }
+        return str;
+    }
+
+    
 }
