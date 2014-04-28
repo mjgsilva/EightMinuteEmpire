@@ -61,7 +61,87 @@ public class EndGame extends StateAdapter {
             }
         }
         
+        // Add resources scores
+        players = setResourcesScores(players);
+        
         getGame().setPlayers(players);
         return this;
+    }
+
+    private ArrayList<Player> setResourcesScores(ArrayList<Player> players) {
+        // Calculate resource score by player
+        for (Player aux : players) {
+            int scoreToAdd = 0;
+            // Run every type of cards minus Joker cards
+            for (int i = 1; i < 5; i++) {
+                int n = aux.getResourceUnities(i);
+                // Depending on the resource being calculated
+                switch(i) {
+                    // Jewlery
+                    case 1:
+                        if (n == 1)
+                            scoreToAdd += 1;
+                        else if (n == 2)
+                            scoreToAdd += 4;
+                        else if (n == 3)
+                            scoreToAdd += 3;
+                        else if (n>=5)
+                            scoreToAdd += 5;
+                        break;
+                        // Iron
+                    case 2:
+                        if (n == 2 || n == 3)
+                            scoreToAdd += 1;
+                        else if (n == 4)
+                            scoreToAdd += 2;
+                        else if (n == 5)
+                            scoreToAdd += 3;
+                        else if (n>=6)
+                            scoreToAdd += 5;
+                        break;
+                        // Wood
+                    case 3:
+                        if (n == 2 || n == 3)
+                            scoreToAdd += 1;
+                        else if (n == 4)
+                            scoreToAdd += 1;
+                        else if (n == 5)
+                            scoreToAdd += 3;
+                        else if (n>=6)
+                            scoreToAdd += 5;
+                        break;
+                        // Food
+                    case 4:
+                        if (n == 3 || n == 4)
+                            scoreToAdd += 1;
+                        else if (n == 5 || n == 6)
+                            scoreToAdd += 2;
+                        else if (n == 7)
+                            scoreToAdd += 3;
+                        else if (n>=8)
+                            scoreToAdd += 5;
+                        break;
+                        // Tool
+                    case 5:
+                        if (n == 2 || n == 3)
+                            scoreToAdd += 1;
+                        else if (n == 4 || n == 5)
+                            scoreToAdd += 2;
+                        else if (n == 6)
+                            scoreToAdd += 3;
+                        else if (n>=7)
+                            scoreToAdd += 5;
+                        break;
+                    default:
+                        // Do nothing
+                        break;
+                }
+                // Add score to player
+                aux.addScore(scoreToAdd);
+                System.out.println("");
+            }
+        }
+        
+        return players;
     }
 }
