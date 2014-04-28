@@ -69,7 +69,16 @@ public class PrepareGame extends StateAdapter {
                     map.placeArmy(12, aux.getArmy());
             }
         }
+        
+        // For tests - tested and it works!
+        /*map.placeArmy(12, getGame().getPlayers().get(0).getArmy());
+        map.placeArmy(16, getGame().getPlayers().get(0).getArmy());
+        map.placeArmy(21, getGame().getPlayers().get(0).getArmy());
             
+        map.placeArmy(1, getGame().getPlayers().get(1).getArmy());
+        map.placeArmy(22, getGame().getPlayers().get(1).getArmy());
+        map.placeArmy(25, getGame().getPlayers().get(1).getArmy());*/
+        
         return map;
     }
 }

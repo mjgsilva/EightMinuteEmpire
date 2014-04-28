@@ -2,6 +2,7 @@ package gameLogic.map;
 
 import gameLogic.Army;
 import gameLogic.City;
+import gameLogic.Player;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -89,16 +90,22 @@ public class Region {
                 players.add(0);
                 for (Army auxArmy : armies) {
                     if (auxArmy.getIdOfOwner() == i)
-                        players.set(i, players.get(i) + 1);
+                        players.set(i-1, players.get(i-1) + 1);
                 }
                 for (City auxCity : cities) {
                     if (auxCity.getIdOfOwner() == i)
-                        players.set(i, players.get(i) + 1);
+                        players.set(i-1, players.get(i-1) + 1);
                 }
             }
-            
-            // Return player id
-            return players.indexOf(Collections.max(players)) + 1;
+            int flag = 0;
+            for (Integer aux : players)
+                if (aux.equals(Collections.max(players)))
+                    flag++;
+            // minor or equal 0 isn't necessary but you never can't be too carefull
+            if (flag >= 2 || Collections.max(players) <= 0)
+                return -1;
+            else
+                return players.indexOf(Collections.max(players)) + 1;
         }
     }
 }

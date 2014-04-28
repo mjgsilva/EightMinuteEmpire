@@ -117,6 +117,9 @@ public class UIText {
     }
 
     private void endGame() {
+        game.defineEndGame();
         System.out.println("\nGame Over. Not implemented yet.");
+        for (Player aux : game.getPlayers())
+            System.out.println("Score " + aux.getIdAsString() + ": " + aux.getScore());
     }
 }
