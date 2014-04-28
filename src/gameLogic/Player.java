@@ -80,8 +80,8 @@ public class Player {
         cards.add(card);
     }
 
-    public String getLastCard() {
-        return cards.get(cards.size()-1).toString();
+    public Card getLastCard() {
+        return cards.get(cards.size()-1);
     }
 
     public Army getArmy() {

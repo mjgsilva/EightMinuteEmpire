@@ -106,6 +106,11 @@ public class Game {
         state = state.defineCard(n);
     }
 
+    public void defineAction(int n)
+    {
+        state = state.defineSelectedAction(n);
+    }
+    
     public void defineEndGame() {
         state = state.defineEndGame();
     }

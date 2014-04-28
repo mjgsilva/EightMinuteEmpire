@@ -8,6 +8,7 @@ public interface StateInterface {
     public StateInterface defineGame(int n);
     public StateInterface defineWinner(ArrayList<Integer> bets);
     public StateInterface defineCard(int n);
+    public StateInterface defineSelectedAction(int n);
     public StateInterface defineArmy();
     public StateInterface defineMoveByLand();
     public StateInterface defineMoveBySea();

@@ -4,6 +4,8 @@ import gameLogic.*;
 import gameLogic.map.GameMap;
 import gameLogic.states.*;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 
 public class UIText {
@@ -92,7 +94,21 @@ public class UIText {
     }
 
     private void DefineAction() {
-        // Implementar inputs
+        Card c = game.getCurrentPlayer().getLastCard();
+        Map<Integer, Integer> actions = c.getActions();
+        Iterator it = actions.entrySet().iterator();
+        int index = 0;
+        
+        System.out.println("------ Whats your move? ------\n" + game.getTableCardsAsString());
+        System.out.println((index+1) + " - Check");
+        while(it.hasNext())
+        {   
+            index++;
+            String output = new String();         
+            Map.Entry pairs = (Map.Entry)it.next();
+                        System.out.println((index+1) + " - " + c.getActionString(Integer.parseInt(pairs.getKey().toString()), Integer.parseInt(pairs.getValue().toString())));
+        }
+        game.defineAction(sc.nextInt());
     }
 
     private void endGame() {

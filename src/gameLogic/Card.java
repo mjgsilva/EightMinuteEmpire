@@ -64,17 +64,18 @@ public class Card {
         int counter = 0;
         
         while(it.hasNext())
-        {            
-            Map.Entry pairs = (Map.Entry)it.next();
-            actionsText += getActionString(Integer.parseInt(pairs.getKey().toString()),Integer.parseInt(pairs.getValue().toString()));
+        {    
             if(counter > 0)
                 actionsText += " OR ";
+            Map.Entry pairs = (Map.Entry)it.next();
+            actionsText += getActionString(Integer.parseInt(pairs.getKey().toString()),Integer.parseInt(pairs.getValue().toString()));
+
             counter++;
         }
         return actionsText;
     }
     
-    private String getActionString(int actionIndex, int actionUnits)
+    public String getActionString(int actionIndex, int actionUnits)
     {
         String actionList = new String();
 
