@@ -20,7 +20,7 @@ public class PickCard extends StateAdapter {
         for (int i = 0; i < nPlayers; i++)
             flags.add(false);
         
-        switch(n) {
+        switch(nPlayers) {
             case 2:
                 n = 13;
                 break;
@@ -51,7 +51,7 @@ public class PickCard extends StateAdapter {
 
     @Override
     public StateInterface defineCard(int n) {
-        if (n <= 6 && n > 0) {
+        if (n < 6 && n >= 0) {
             int cardCost = 0;
             switch(n+1) {
                 case 1:

@@ -29,7 +29,6 @@ public class EndGame extends StateAdapter {
                 if (index != -1)
                     players.get(index).addScore(1);
             }
-            
         }
         
         getGame().setPlayers(players);

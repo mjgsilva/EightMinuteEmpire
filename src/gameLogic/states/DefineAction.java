@@ -20,9 +20,15 @@ public class DefineAction extends StateAdapter {
         if(n < 1 || n > maximumSize + 1)
             return this;
         else
-            if(n == 1)
+            if(n == 1) {
+                int indexOfCurrentPlayer = getGame().getPlayers().indexOf(getGame().getCurrentPlayer());
+                if (indexOfCurrentPlayer+1 == getGame().getPlayers().size())
+                    indexOfCurrentPlayer = 0;
+                else
+                    indexOfCurrentPlayer++;
+                getGame().setCurrentPlayer(getGame().getPlayers().get(indexOfCurrentPlayer));
                return new PickCard(getGame());
-            else
+            } else
             {
                 Map<Integer, Integer> actions = c.getActions();
                 Iterator it = actions.entrySet().iterator();
