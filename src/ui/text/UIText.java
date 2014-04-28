@@ -22,7 +22,7 @@ public class UIText {
                 Auction();
             else if (state instanceof PickCard)
                 PickCard();
-            else if (state instanceof DefineAction)
+            else if (state instanceof SelectAction)
                 DefineAction();
             }
     }
@@ -110,7 +110,7 @@ public class UIText {
         }
         game.defineAction(sc.nextInt());
         
-        if (game.getState() instanceof DefineAction) {
+        if (game.getState() instanceof SelectAction) {
             System.out.println("\nInvalid move.");
             return;
         }

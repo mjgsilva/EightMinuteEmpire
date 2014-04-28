@@ -27,7 +27,7 @@ public abstract class StateAdapter implements StateInterface {
         return this;
     }
     @Override
-    public StateInterface defineSelectedAction(int n) {
+    public StateInterface defineAction(int n) {
         return this;
     }
     @Override

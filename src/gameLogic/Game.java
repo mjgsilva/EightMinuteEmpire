@@ -108,15 +108,12 @@ public class Game {
 
     public void defineAction(int n)
     {
-        state = state.defineSelectedAction(n);
+        state = state.defineAction(n);
     }
     
     public void defineEndGame() {
         state = state.defineEndGame();
     }
-
-
-    
 
     /**
      * Returns table cards in an organized way

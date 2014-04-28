@@ -86,7 +86,7 @@ public class PickCard extends StateAdapter {
             // Remove coins
             getGame().getCurrentPlayer().useCoins(cardCost);
             
-            return new DefineAction(getGame());
+            return new SelectAction(getGame());
         } else {
             return this;
         }
