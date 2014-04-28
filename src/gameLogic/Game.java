@@ -114,6 +114,10 @@ public class Game {
     public void defineEndGame() {
         state = state.defineEndGame();
     }
+    
+    public void defineMoveByLand(int numberOfMovements) {
+        state = state.defineMoveByLand(numberOfMovements);
+    }
 
     /**
      * Returns table cards in an organized way

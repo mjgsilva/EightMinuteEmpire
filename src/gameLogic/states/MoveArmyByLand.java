@@ -8,4 +8,10 @@ public class MoveArmyByLand extends StateAdapter {
         super(game);
     }
     
+    @Override
+    public StateInterface defineMoveByLand(int numberOfMovements)
+    {
+        
+    }
+    
 }

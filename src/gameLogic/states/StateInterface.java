@@ -10,7 +10,7 @@ public interface StateInterface {
     public StateInterface defineCard(int n);
     public StateInterface defineAction(int n);
     public StateInterface defineArmy();
-    public StateInterface defineMoveByLand();
+    public StateInterface defineMoveByLand(int numberOfMovements);
     public StateInterface defineMoveBySea();
     public StateInterface defineCity();
     public StateInterface defineNeutralize();
