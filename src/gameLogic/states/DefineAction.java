@@ -46,7 +46,7 @@ public class DefineAction extends StateAdapter {
                     case 1 : System.out.println("Place"); break;
                     case 2 : System.out.println("Move Land"); break;
                     case 3 : System.out.println("Move Sea"); break;
-                    case 4 : System.out.println("Build City"); break;
+                    case 4 : System.out.println("Build Cityy"); break;
                 }
             }
         return this;
