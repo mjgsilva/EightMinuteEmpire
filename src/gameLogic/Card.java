@@ -25,8 +25,8 @@ public class Card {
     
     @Override
     public String toString() {
-        return "ID: " + id + " \t" + getTypeOfResource() + " Qty:" + numberOfResource
-                + "\tAct: " + getActionsExtended() + "\t\t" + getFivePlayersCardToString();
+        return "ID: " + id + " \t[NR:" + numberOfResource + "|" + getFivePlayersCardToString() + "] " + getTypeOfResource()
+                + "\tAct: " + getActionsExtended();
     }
 
     private String getTypeOfResource()
@@ -35,11 +35,11 @@ public class Card {
 
         switch(typeOfResource) {
             case 1 : type = "Jewelry"; break;
-            case 2 : type = "Food"; break;
-            case 3 : type = "Wood"; break;
-            case 4 : type = "Iron"; break;
-            case 5 : type = "tools"; break;
-            case 6 : type = "Joker"; break;
+            case 2 : type = "Food   "; break;
+            case 3 : type = "Wood   "; break;
+            case 4 : type = "Iron   "; break;
+            case 5 : type = "Tools  "; break;
+            case 6 : type = "Joker  "; break;
         }
 
         return type;
@@ -50,9 +50,9 @@ public class Card {
         String fivePlayers;
 
         if(fivePlayersCard == 1)
-            fivePlayers = "FP Card";
+            fivePlayers = "5PC";
         else
-            fivePlayers = "Std Card";
+            fivePlayers = "Std";
 
         return fivePlayers;
     }

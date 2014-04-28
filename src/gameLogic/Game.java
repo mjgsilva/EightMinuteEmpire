@@ -124,13 +124,13 @@ public class Game {
         String str = "Card Order (1 2 3 4 5 6)\n";
         for (int i = 0; i < tableCards.size(); i++) {
             if (i == 0)
-                str += i+1 + " " + tableCards.get(i).toString() + "\tCost: 0\n";
+                str += i+1 + " [0$] " + tableCards.get(i).toString() + "\n";
             else if (i == 1 || i == 2)
-                str += i+1 + " " + tableCards.get(i).toString() + "\tCost: 1\n";
+                str += i+1 + " [1$] " + tableCards.get(i).toString() + "\n";
             else if (i == 3 || i == 4)
-                str += i+1 + " " + tableCards.get(i).toString() + "\tCost: 2\n";
+                str += i+1 + " [2$] " + tableCards.get(i).toString() + "\n";
             else if (i == 5)
-                str += i+1 + " " + tableCards.get(i).toString() + "\tCost: 3\n";
+                str += i+1 + " [3$] " + tableCards.get(i).toString() + "\n";
         }
         return str;
     }    
