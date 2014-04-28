@@ -96,4 +96,12 @@ public class Card {
     public int getFivePlayersCard() {
         return fivePlayersCard;
     }
+
+    public int getId() {
+        return id;
+    }
+    
+    public int get2TypeOfResource() {
+        return typeOfResource;
+    }
 }

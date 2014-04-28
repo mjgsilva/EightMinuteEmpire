@@ -97,4 +97,18 @@ public class Player {
     public void addScore(int i) {
         this.score = this.score + i;
     }
+
+    /** Returns number of resources of received ID
+     *
+     * @param i
+     * @return
+     */
+    public int getResourceUnities(int i) {
+        int sum = 0;
+        for (Card aux : cards) {
+            if (aux.get2TypeOfResource() == i)
+                sum++;
+        }
+        return sum;
+    }
 }

@@ -11,7 +11,7 @@ public class MoveArmyByLand extends StateAdapter {
     @Override
     public StateInterface defineMoveByLand(int numberOfMovements)
     {
-        
+        return this;
     }
     
 }
