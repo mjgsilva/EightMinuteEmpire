@@ -109,6 +109,11 @@ public class UIText {
                         System.out.println((index+1) + " - " + c.getActionString(Integer.parseInt(pairs.getKey().toString()), Integer.parseInt(pairs.getValue().toString())));
         }
         game.defineAction(sc.nextInt());
+        
+        if (game.getState() instanceof DefineAction) {
+            System.out.println("\nInvalid move.");
+            return;
+        }
     }
 
     private void endGame() {
