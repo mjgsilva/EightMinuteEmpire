@@ -93,4 +93,8 @@ public class Player {
     public ArrayList<Army> getArmies() {
         return armies;
     }
+
+    public void addScore(int i) {
+        this.score = this.score + i;
+    }
 }

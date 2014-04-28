@@ -123,4 +123,9 @@ public class GameMap {
             t.printStackTrace ();
         }
     }
+
+    public ArrayList<Continent> getContinents() {
+        return continents;
+    }
+    
 }

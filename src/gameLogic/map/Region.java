@@ -3,6 +3,7 @@ package gameLogic.map;
 import gameLogic.Army;
 import gameLogic.City;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -69,5 +70,35 @@ public class Region {
     
     void removeArmy(Army army) {
         armies.remove(army);
+    }
+    
+    /**
+     * Returns owner of this Region, if draw or no army then returns -1
+     * 
+     * @param nPlayers
+     * @return ownerId
+     */
+    public int returnOwner(int nPlayers) {
+        // 0 - No one controls this region
+        // n - Player n controls this region
+        if (armies.isEmpty() && cities.isEmpty())        
+            return 0-1;
+        else {
+            ArrayList <Integer> players = new ArrayList<>();
+            for (int i = 1; i <= nPlayers; i++) {
+                players.add(0);
+                for (Army auxArmy : armies) {
+                    if (auxArmy.getIdOfOwner() == i)
+                        players.set(i, players.get(i) + 1);
+                }
+                for (City auxCity : cities) {
+                    if (auxCity.getIdOfOwner() == i)
+                        players.set(i, players.get(i) + 1);
+                }
+            }
+            
+            // Return player id
+            return players.indexOf(Collections.max(players)) + 1;
+        }
     }
 }
