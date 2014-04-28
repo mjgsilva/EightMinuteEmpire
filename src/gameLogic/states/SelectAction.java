@@ -34,7 +34,6 @@ public class SelectAction extends StateAdapter {
                 Iterator it = actions.entrySet().iterator();
                 int index = 1;
                 int action = 0; /*must be initialized*/
-                int numberOfPlays;
                 
                 while(it.hasNext())
                 {   
@@ -43,16 +42,15 @@ public class SelectAction extends StateAdapter {
                 
                     Map.Entry pairs = (Map.Entry)it.next();
                     action = Integer.parseInt(pairs.getKey().toString());
-                    numberOfPlays = Integer.parseInt(pairs.getValue().toString());
                     index++;
                 }
                 
                 switch(action)
                 {
-                    case 1 : System.out.println("Place"); break;
-                    case 2 : System.out.println("Move Land"); break;
-                    case 3 : System.out.println("Move Sea"); break;
-                    case 4 : System.out.println("Build Cityy"); break;
+                    case 1 : return new PlaceNewArmy(getGame());
+                    case 2 : return new MoveArmyByLand(getGame());
+                    case 3 : return new MoveArmyBySea(getGame());
+                    case 4 : return new BuildCity(getGame());
                 }
             }
         return this;

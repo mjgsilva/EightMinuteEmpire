@@ -35,7 +35,7 @@ public abstract class StateAdapter implements StateInterface {
         return this;
     }
     @Override
-    public StateInterface defineMoveByLand(int numberOfMovements) {
+    public StateInterface defineMoveByLand(int from, int to) {
         return this;
     }
     @Override

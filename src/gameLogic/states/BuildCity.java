@@ -1,5 +1,11 @@
 package gameLogic.states;
 
-public class BuildCity {
-    
+import gameLogic.Game;
+
+public class BuildCity extends StateAdapter{
+
+    public BuildCity(Game game) {
+        super(game);
+    }
+     
 }

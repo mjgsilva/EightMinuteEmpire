@@ -115,8 +115,8 @@ public class Game {
         state = state.defineEndGame();
     }
     
-    public void defineMoveByLand(int numberOfMovements) {
-        state = state.defineMoveByLand(numberOfMovements);
+    public void defineMoveByLand(int from, int to) {
+        state = state.defineMoveByLand(from,to);
     }
 
     /**

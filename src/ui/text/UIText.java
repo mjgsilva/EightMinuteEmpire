@@ -99,7 +99,7 @@ public class UIText {
         Iterator it = actions.entrySet().iterator();
         int index = 0;
         
-        System.out.println("------ Whats your move? ------\n" + game.getTableCardsAsString());
+        System.out.println("------ Whats your move? ------\n");
         System.out.println((index+1) + " - Check");
         while(it.hasNext())
         {   
@@ -116,6 +116,25 @@ public class UIText {
         }
     }
 
+    private void DefineMoveByLand() {
+        int from;
+        int to;
+        
+        Card c = game.getCurrentPlayer().getLastCard();
+        System.out.println(game.getMapAsString());
+        System.out.println(c.toString());
+        System.out.println("------ [Region ID] From: ------\n");
+        from = sc.nextInt();
+        System.out.println("------ [Region ID] To: ------\n");
+        to = sc.nextInt();
+        game.defineMoveByLand(from,to);
+        
+        if (game.getState() instanceof SelectAction) {
+            System.out.println("\nProblems!.");
+            return;
+        }
+    }
+    
     private void endGame() {
         game.defineEndGame();
         System.out.println("\nGame Over. Not implemented yet.");
