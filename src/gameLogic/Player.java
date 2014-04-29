@@ -68,6 +68,10 @@ public class Player {
         return color + id + "\u001B[30m"; // last string is to stop coloring;
     }
 
+    public String getColor() {
+        return color;
+    }
+    
     public void useCoins(int cost) {
         this.coins = this.coins - cost;
     }

@@ -37,13 +37,30 @@ public class Region {
             return "\tRegion " + id + " " + armies.toString() + "\n";
     }
     
+    public boolean checkAdjacencyByLand(int id)
+    {
+        for (Map.Entry pairs : adjacent.entrySet()) {
+            if(Integer.parseInt(pairs.getKey().toString()) == id)
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean checkArmiesOfPlayersByRegion(int playerId)
+    {
+        Army tempArmy = new Army(playerId, "");
+        for(Army armyLoop : armies)
+        {
+            if(armyLoop.equals(tempArmy))
+                return true;
+        }
+        return false;
+    }
+    
     public String getAdjacentExtended()
     {
         String adjacentText = new String();
-        Iterator it = adjacent.entrySet().iterator();
-        while(it.hasNext())
-        {
-            Map.Entry pairs = (Map.Entry)it.next();
+        for (Map.Entry pairs : adjacent.entrySet()) {
             adjacentText += ("\t\t" + pairs.getKey() + " / " + pairs.getValue() + "\n");
         }
         return adjacentText;
@@ -65,11 +82,11 @@ public class Region {
         this.cities = cities;
     }
 
-    void addArmy(Army army) {
+    public void addArmy(Army army) {
         armies.add(army);
     }
     
-    void removeArmy(Army army) {
+    public void removeArmy(Army army) {
         armies.remove(army);
     }
     

@@ -17,6 +17,11 @@ public class Continent {
         return regions;
     }
 
+    public Region getRegion(int id)
+    {
+        return regions.get(id);
+    }
+    
     public int getId() {
         return id;
     }

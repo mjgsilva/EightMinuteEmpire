@@ -8,7 +8,7 @@ public class Card {
     private final int typeOfResource;
     private final int numberOfResource;
     private final int fivePlayersCard;
-    private final Map <Integer, Integer> actions;
+    private Map <Integer, Integer> actions;
 
     Card(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer,Integer>actions)
     {

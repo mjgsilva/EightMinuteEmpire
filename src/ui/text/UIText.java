@@ -23,8 +23,10 @@ public class UIText {
             else if (state instanceof PickCard)
                 PickCard();
             else if (state instanceof SelectAction)
-                DefineAction();
-            }
+                SelectAction();
+            else if (state instanceof MoveArmyByLand)
+                MoveArmyByLand();
+        }
     }
     
     private void PrepareGame() {
@@ -93,7 +95,7 @@ public class UIText {
         System.out.println("Score: " + game.getCurrentPlayer().getScore());
     }
 
-    private void DefineAction() {
+    private void SelectAction() {
         Card c = game.getCurrentPlayer().getLastCard();
         Map<Integer, Integer> actions = c.getActions();
         Iterator it = actions.entrySet().iterator();
@@ -116,7 +118,7 @@ public class UIText {
         }
     }
 
-    private void DefineMoveByLand() {
+    private void MoveArmyByLand() {
         int from;
         int to;
         

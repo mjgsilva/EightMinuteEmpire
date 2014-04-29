@@ -35,6 +35,16 @@ public class GameMap {
         continents.add(c);
     }
     
+    /* Search a region by id using a loop over the continents array list*/
+    public Region getRegionById(int id)
+    {
+        Region r;
+        for(Continent temp : continents)
+            if((r=temp.getRegion(id)) != null)
+                return r;
+        return null;
+    }
+    
     @Override
     public String toString()
     {
