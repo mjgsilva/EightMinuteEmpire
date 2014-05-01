@@ -8,19 +8,19 @@ public class Game {
     private StateInterface state;
     private StateInterface previousState;
 
-    
     private ArrayList<Player> players = new ArrayList<>();
-    
     private Player currentPlayer;
     
+    private GameMap map = new GameMap(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
+    private Deck deck = new Deck(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
+    private ArrayList <Card> tableCards = new ArrayList<>();  // Cards turned up in the table - maximum of 6 cards
+
     // Contructor
     public Game() {
         state = new PrepareGame(this);
     }
 
     // Map
-    private GameMap map = new GameMap(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
-
     public void setMap(GameMap map) {
         this.map = map;
     }
@@ -33,14 +33,6 @@ public class Game {
         return map.toString();
     }
     
-    // Deck of cards
-    private Deck deck = new Deck(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
-
-   
-    // Cards turned up in the table - maximum of 6 cards
-    private ArrayList <Card> tableCards = new ArrayList<>();
-    
-
     public StateInterface getState() {
         return state;
     }
@@ -89,13 +81,6 @@ public class Game {
     public void setTableCards(ArrayList<Card> tableCards) {
         this.tableCards = tableCards;
     }
-    
-    
-    
-    
-    
-    
-    
     
     public void defineGame(int n) {
         state = state.defineGame(n);
