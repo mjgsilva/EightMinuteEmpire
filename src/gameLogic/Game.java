@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Game {
     private StateInterface state;
+    private StateInterface previousState;
     private ArrayList<Player> players = new ArrayList<>();
     
     private Player currentPlayer;

@@ -138,6 +138,10 @@
                         <type>1</type>
                         <howMany>1</howMany>
                 </action>
+                <action>
+                        <type>5</type>
+                        <howMany>1</howMany>
+                </action>
                 <and>1</and>
         </Card>
         <Card id="16">

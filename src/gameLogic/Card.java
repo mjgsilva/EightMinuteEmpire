@@ -60,7 +60,7 @@ public class Card {
         return fivePlayers;
     }
 
-    private String getActionsExtended()
+    protected String getActionsExtended()
     {
         String actionsText = new String();
         Iterator it = actions.entrySet().iterator();
@@ -68,10 +68,8 @@ public class Card {
         
         while(it.hasNext())
         {    
-            if(counter > 0 && andCard == 0)
+            if(counter > 0)
                 actionsText += " OR ";
-            else
-                actionsText += "AND ";
             Map.Entry pairs = (Map.Entry)it.next();
             actionsText += getActionString(Integer.parseInt(pairs.getKey().toString()),Integer.parseInt(pairs.getValue().toString()));
 

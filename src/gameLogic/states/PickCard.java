@@ -22,7 +22,7 @@ public class PickCard extends StateAdapter {
         
         switch(nPlayers) {
             case 2:
-                n = 3;
+                n = 13;
                 break;
             case 3:
                 n = 10;

@@ -1,5 +1,6 @@
 package gameLogic;
 
+import java.util.Iterator;
 import java.util.Map;
 
 public class CardAND extends Card {
@@ -8,4 +9,22 @@ public class CardAND extends Card {
         super(id, typeOfResource, numberOfResource, fivePlayersCard, actions, and);
     }
     
+    @Override
+    protected String getActionsExtended()
+    {
+        String actionsText = new String();
+        Iterator it = getActions().entrySet().iterator();
+        int counter = 0;
+        
+        while(it.hasNext())
+        {    
+            if(counter > 0)
+                actionsText += " AND ";
+            Map.Entry pairs = (Map.Entry)it.next();
+            actionsText += getActionString(Integer.parseInt(pairs.getKey().toString()),Integer.parseInt(pairs.getValue().toString()));
+
+            counter++;
+        }
+        return actionsText;
+    }
 }
