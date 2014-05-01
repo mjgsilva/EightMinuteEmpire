@@ -137,7 +137,7 @@ public class Deck {
                     Element cardAndCard = (Element)cardAndCardList.item(0);
 
                     NodeList textAndCarCard = cardAndCard.getChildNodes();
-                andCard = Integer.parseInt(((Node)textAndCarCard.item(0)).getNodeValue().trim());
+                    andCard = Integer.parseInt(((Node)textAndCarCard.item(0)).getNodeValue().trim());
                 }
                 
                 

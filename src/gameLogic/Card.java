@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Card {
     private final int id;
-    private final int typeOfResource;
+    private int typeOfResource;
     private final int numberOfResource;
     private final int fivePlayersCard;
     private Map <Integer, Integer> actions;
