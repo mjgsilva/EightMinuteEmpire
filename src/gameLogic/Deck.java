@@ -22,12 +22,20 @@ public class Deck {
         readDeckXML();
     }
 
-    public void addCard(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer,Integer> actions)
+    public void addCard(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer,Integer> actions, int andFlag)
     {
-        System.out.println(actions + "Size: " + actions.size()); 
-        Card c = new Card(id, typeOfResource, numberOfResource, fivePlayersCard, actions);
-
-        cards.add(c);
+        //System.out.println(actions + "Size: " + actions.size());
+        if (andFlag == 1) {
+            CardAND c = new CardAND(id, typeOfResource, numberOfResource, fivePlayersCard, actions, andFlag);
+            cards.add(c);
+        }
+        else if (actions.size() > 1 && andFlag < 1) {
+            CardOR c = new CardOR(id, typeOfResource, numberOfResource, fivePlayersCard, actions, andFlag);
+            cards.add(c);
+        } else {
+            CardStd c = new CardStd(id, typeOfResource, numberOfResource, fivePlayersCard, actions, andFlag);
+            cards.add(c);
+        }
     }
 
     public void removeCard(Card tempCard)
@@ -60,6 +68,7 @@ public class Deck {
                 int numberOfResource;
                 int fivePlayersCard;
                 int howManyActions;
+                int andCard;
                 Map<Integer,Integer> actions;
 
 
@@ -120,7 +129,19 @@ public class Deck {
 
                     actions.put(typeActionCard, howManyCard);
                 }
-                addCard(cardId,typeOfResource,numberOfResource,fivePlayersCard,actions);
+                
+                NodeList andCardNode = doc.getElementsByTagName("and");
+                int andFlag = andCardNode.getLength();
+                if (andFlag > 0) {
+                    NodeList cardAndCardList = cardElement.getElementsByTagName("and");
+                    Element cardAndCard = (Element)cardAndCardList.item(0);
+
+                    NodeList textAndCarCard = cardAndCard.getChildNodes();
+                andCard = Integer.parseInt(((Node)textAndCarCard.item(0)).getNodeValue().trim());
+                }
+                
+                
+                addCard(cardId,typeOfResource,numberOfResource,fivePlayersCard,actions, andFlag);
             }
         } catch (SAXParseException err) {
             System.out.println(" " + err.getMessage ());

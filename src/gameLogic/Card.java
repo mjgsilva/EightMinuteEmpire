@@ -9,14 +9,17 @@ public class Card {
     private final int numberOfResource;
     private final int fivePlayersCard;
     private Map <Integer, Integer> actions;
+    private final int andCard;
 
-    Card(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer,Integer>actions)
+    // Constructor for not AND cards
+    Card(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer,Integer>actions, int andCard)
     {
         this.id = id;
         this.typeOfResource = typeOfResource;
         this.numberOfResource = numberOfResource;
         this.fivePlayersCard = fivePlayersCard;
         this.actions = actions;
+        this.andCard = andCard;
     }
 
     public Map<Integer, Integer> getActions() {
@@ -65,8 +68,10 @@ public class Card {
         
         while(it.hasNext())
         {    
-            if(counter > 0)
+            if(counter > 0 && andCard == 0)
                 actionsText += " OR ";
+            else
+                actionsText += "AND ";
             Map.Entry pairs = (Map.Entry)it.next();
             actionsText += getActionString(Integer.parseInt(pairs.getKey().toString()),Integer.parseInt(pairs.getValue().toString()));
 

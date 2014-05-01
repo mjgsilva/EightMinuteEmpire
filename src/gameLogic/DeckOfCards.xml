@@ -134,10 +134,11 @@
                 <typeOfResource>2</typeOfResource>
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
-                <action> 
+                <action>
                         <type>1</type>
                         <howMany>1</howMany>
                 </action>
+                <and>1</and>
         </Card>
         <Card id="16">
                 <typeOfResource>3</typeOfResource>
