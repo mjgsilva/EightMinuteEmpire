@@ -56,6 +56,9 @@ public class PrepareGame extends StateAdapter {
             for (int i = 0; i < 6; i++)
                 getGame().addTableCard(getGame().getCardFromDeck());
             
+            // Set previous state
+            getGame().setPreviousState(getGame().getState());
+            
             return new Auction(getGame());
         } else
             return this;

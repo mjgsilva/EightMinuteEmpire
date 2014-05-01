@@ -32,6 +32,10 @@ public class Auction extends StateAdapter {
             
             getGame().setCurrentPlayer(getGame().getPlayers().get(index));
             getGame().getCurrentPlayer().useCoins(bets.get(index));
+            
+            // Set previous state
+            getGame().setPreviousState(getGame().getState());
+            
             return new PickCard(getGame());
         } else
             return this;

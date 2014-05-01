@@ -7,6 +7,8 @@ import java.util.ArrayList;
 public class Game {
     private StateInterface state;
     private StateInterface previousState;
+
+    
     private ArrayList<Player> players = new ArrayList<>();
     
     private Player currentPlayer;
@@ -138,5 +140,13 @@ public class Game {
                 str += i+1 + " [3$] " + tableCards.get(i).toString() + "\n";
         }
         return str;
-    }    
+    }
+    
+    public StateInterface getPreviousState() {
+        return previousState;
+    }
+
+    public void setPreviousState(StateInterface previousState) {
+        this.previousState = previousState;
+    }
 }

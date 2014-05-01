@@ -43,6 +43,7 @@ public class PickCard extends StateAdapter {
                 flags.set(i, true);
         }
         
+        // MUDAR ISTO NAO ESQUECER
         if (flags.contains(false)) {
             return this;
         } else
@@ -85,6 +86,9 @@ public class PickCard extends StateAdapter {
             
             // Remove coins
             getGame().getCurrentPlayer().useCoins(cardCost);
+            
+            // Set previous state
+            getGame().setPreviousState(getGame().getState());
             
             return new SelectAction(getGame());
         } else {
