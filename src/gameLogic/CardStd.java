@@ -46,7 +46,7 @@ public class CardStd extends Card {
         Iterator it = actions.entrySet().iterator();
         Map.Entry pairs = (Map.Entry)it.next();
         
-        switch(Integer.parseInt(pairs.getValue().toString())){
+        switch(Integer.parseInt(pairs.getKey().toString())){
             case 1:
                 return new PlaceNewArmy(game);
             case 2:
