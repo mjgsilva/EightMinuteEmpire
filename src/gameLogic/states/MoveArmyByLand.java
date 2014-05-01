@@ -20,6 +20,7 @@ public class MoveArmyByLand extends StateAdapter {
         int playerId;
         String playerColor;
         int numberOfMovements;
+        getGame().setErrorFlag(Boolean.FALSE);
 
         Card c = getGame().getCurrentPlayer().getLastCard();
         numberOfMovements = findActionNumberOfPlays(c);
@@ -39,15 +40,24 @@ public class MoveArmyByLand extends StateAdapter {
                     {
                         f.removeArmy(new Army(playerId, playerColor));
                         t.addArmy(new Army(playerId, playerColor));
-                    } else
+                    } else {
+                        getGame().setErrorFlag(Boolean.TRUE);
+                        getGame().setErrorMsg("[ERROR] You don't have any army on region " + from + ".\n");
                         return this;
-                } else
+                    }
+                } else {
+                    getGame().setErrorFlag(Boolean.TRUE);
+                    getGame().setErrorMsg("[ERROR] Region " + to + " is too far away.\nYou can only move to adjacent regions.\n");
                     return this;
-            } else 
+                }
+            } else { // PROVISORY
+                getGame().setErrorFlag(Boolean.TRUE);
+                getGame().setErrorMsg("[ERROR] You don't have any army on region " + from + ".\n");
                 return this;
+            }
         }
         
-        updateActionMovements(c,numberOfMovements);
+        numberOfMovements = updateActionMovements(c,numberOfMovements);
         if(numberOfMovements < 1)
             return new PickCard(getGame());
         else
@@ -59,8 +69,9 @@ public class MoveArmyByLand extends StateAdapter {
         return c.getActions().get(2);        
     }
     
-    private void updateActionMovements(Card c, int numberOfMovements)
+    private int updateActionMovements(Card c, int numberOfMovements)
     {
         c.getActions().put(2, numberOfMovements-1);
+        return --numberOfMovements;
     }
 }

@@ -19,7 +19,12 @@ public class Continent {
 
     public Region getRegion(int id)
     {
-        return regions.get(id);
+        for (Region region : regions) {
+            if (region.getId() == id) {
+                return region;
+            }
+        }
+        return null;
     }
     
     public int getId() {
