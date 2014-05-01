@@ -130,16 +130,16 @@ public class Deck {
                     actions.put(typeActionCard, howManyCard);
                 }
                 
-                NodeList andCardNode = doc.getElementsByTagName("and");
+                NodeList andCardNode =  cardElement.getElementsByTagName("and");
                 int andFlag = andCardNode.getLength();
+                
                 if (andFlag > 0) {
-                    NodeList cardAndCardList = cardElement.getElementsByTagName("and");
-                    Element cardAndCard = (Element)cardAndCardList.item(0);
+                    //NodeList cardAndCardList = cardElement.getElementsByTagName("and");
+                    Element cardAndCard = (Element)andCardNode.item(0);
 
                     NodeList textAndCarCard = cardAndCard.getChildNodes();
                     andCard = Integer.parseInt(((Node)textAndCarCard.item(0)).getNodeValue().trim());
                 }
-                
                 
                 addCard(cardId,typeOfResource,numberOfResource,fivePlayersCard,actions, andFlag);
             }
