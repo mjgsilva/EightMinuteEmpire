@@ -15,19 +15,18 @@ public class MoveArmyByLand extends StateAdapter {
     @Override
     public StateInterface defineMoveByLand(int from, int to)
     {
-        int numberOfPlays;
         Region f;
         Region t;
         int playerId;
         String playerColor;
-        
+        int numberOfMovements;
+
         Card c = getGame().getCurrentPlayer().getLastCard();
-        Map.Entry pairs = (Map.Entry)c.getActions();
-        numberOfPlays = Integer.parseInt(pairs.getValue().toString());
+        numberOfMovements = findActionNumberOfPlays(c);
         playerId = getGame().getCurrentPlayer().getId();
         playerColor = getGame().getCurrentPlayer().getColor();
         
-        if(numberOfPlays > 0)
+        if(numberOfMovements > 0)
         { 
             f = getGame().getMap().getRegionById(from);
             t = getGame().getMap().getRegionById(to);
@@ -48,12 +47,20 @@ public class MoveArmyByLand extends StateAdapter {
                 return this;
         }
         
-        /* Remove -1 movement to the card */
-        c.getActions().put(Integer.parseInt(pairs.getKey().toString()), numberOfPlays-1);
-        if(numberOfPlays < 1)
+        updateActionMovements(c,numberOfMovements);
+        if(numberOfMovements < 1)
             return new PickCard(getGame());
         else
-            return new MoveArmyByLand(getGame());
+            return this;
     }
     
+    private int findActionNumberOfPlays(Card c)
+    {
+        return c.getActions().get(2);        
+    }
+    
+    private void updateActionMovements(Card c, int numberOfMovements)
+    {
+        c.getActions().put(2, numberOfMovements-1);
+    }
 }
