@@ -24,6 +24,7 @@ public class Deck {
 
     public void addCard(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer,Integer> actions)
     {
+        System.out.println(actions + "Size: " + actions.size()); 
         Card c = new Card(id, typeOfResource, numberOfResource, fivePlayersCard, actions);
 
         cards.add(c);
