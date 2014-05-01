@@ -1,5 +1,6 @@
 package gameLogic;
 
+import gameLogic.states.StateInterface;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ public class Card {
     private int typeOfResource;
     private final int numberOfResource;
     private final int fivePlayersCard;
-    private Map <Integer, Integer> actions;
+    protected Map <Integer, Integer> actions;
     private final int andCard;
 
     // Constructor for not AND cards
@@ -106,5 +107,9 @@ public class Card {
     
     public int get2TypeOfResource() {
         return typeOfResource;
+    }
+
+    public StateInterface returnState(Game game) {
+        return null;
     }
 }

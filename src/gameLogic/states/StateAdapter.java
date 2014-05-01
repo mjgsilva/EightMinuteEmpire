@@ -50,6 +50,11 @@ public abstract class StateAdapter implements StateInterface {
     public StateInterface defineNeutralize() {
         return this;
     }
+
+    @Override
+    public StateInterface defineJokers() {
+        return this;
+    }
     
     @Override
     public StateInterface placeArmyOrCity() {

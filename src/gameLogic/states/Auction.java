@@ -12,11 +12,15 @@ public class Auction extends StateAdapter {
 
     @Override
     public StateInterface defineWinner(ArrayList<Integer> bets) {
+        getGame().setErrorFlag(Boolean.FALSE);
+        
         if (bets.size() == getGame().getPlayers().size()) {
-            // In case of invalid bet return same state
             for (int i = 0; i < bets.size(); i++) {
-                if (bets.get(i) < 0 || bets.get(i) > getGame().getPlayers().get(i).getCoins())
+                if (bets.get(i) < 0 || bets.get(i) > getGame().getPlayers().get(i).getCoins()) {
+                    getGame().setErrorFlag(Boolean.TRUE);
+                    getGame().setErrorMsg("[ERROR] Player " + getGame().getPlayerIdAsString(i) + " made an invalid bet.\n");
                     return this;
+                }
             }
             // Get highest bet
             int max = Collections.max(bets);
@@ -37,7 +41,10 @@ public class Auction extends StateAdapter {
             getGame().setPreviousState(getGame().getState());
             
             return new PickCard(getGame());
-        } else
+        } else {
+            getGame().setErrorFlag(Boolean.TRUE);
+            getGame().setErrorMsg("[ERROR] Number of bets isn't the same as number of players.\n");
             return this;
+        }
     }
 }

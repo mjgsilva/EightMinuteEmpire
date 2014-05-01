@@ -14,6 +14,7 @@ public interface StateInterface {
     public StateInterface defineMoveBySea();
     public StateInterface defineCity();
     public StateInterface defineNeutralize();
+    public StateInterface defineJokers();
     
     public StateInterface placeArmyOrCity();
     public StateInterface moveArmy();

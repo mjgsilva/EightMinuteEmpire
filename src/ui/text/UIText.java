@@ -22,26 +22,38 @@ public class UIText {
                 Auction();
             else if (state instanceof PickCard)
                 PickCard();
-            else if (state instanceof SelectAction)
+            else if (state instanceof SelectAction) // ESTE É PARA SAIR
                 SelectAction();
+            else if (state instanceof OR)
+                CardOR();
+            else if (state instanceof AND)
+                CardAND();
             else if (state instanceof MoveArmyByLand)
                 MoveArmyByLand();
         }
     }
     
     private void PrepareGame() {
-        // Input number of players
-        System.out.print("Number of players: ");
-        game.defineGame(sc.nextInt());
-        System.out.print("\n");
-        // If same state is returned, then there's invalid data
         if (game.getState() instanceof PrepareGame) {
-            System.out.println("Invalid number of players.");
-            return;
+            // Input number of players
+            System.out.print("Number of players: ");
+            game.defineGame(sc.nextInt());
+            System.out.print("\n");
+            // Show 6 cards
+            System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
+            System.out.println("-------- World Map --------\n" + game.getMapAsString());
+        } else {
+            // "End Game"
+            // Transform joker cards into resource cards
+            game.defineJokers();
+            // Show endGame scores
+            
         }
-        // Show 6 cards
-        System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
-        System.out.println("-------- World Map --------\n" + game.getMapAsString());
+
+        // Error
+        if (game.isErrorFlag()) {
+            System.out.println(game.getErrorMsg());
+        }
     }
     
     private void Auction() {
@@ -61,8 +73,8 @@ public class UIText {
             System.out.println("Player " + game.getPlayerIdAsString(i) + " : " + bets.get(i) + " coins");
         game.defineWinner(bets);
         // If same state is returned, then there's invalid data
-        if (game.getState() instanceof Auction)
-            System.out.println("Invalid bet made by a player.");
+        if (game.getState() instanceof Auction && game.isErrorFlag())
+            System.out.println(game.getErrorMsg());
         else
             System.out.println("\nPlayer " + game.getCurrentPlayer().getIdAsString() + " won the auction!"
                     + "\nAnd is the first player to play.\n");
@@ -71,6 +83,7 @@ public class UIText {
 
     private void PickCard() {
         // This is the beginning of the turn, so we have to check for EndGame condition.
+        // DO NOT FORGET TO IMPLEMENT SAVE GAME HERE.
         game.defineEndGame();
         if (game.getState() instanceof EndGame) {
             endGame();
@@ -85,8 +98,8 @@ public class UIText {
         System.out.print("Pick card number to buy (According to displayed order): ");
         game.defineCard(sc.nextInt()-1);
         
-        if (game.getState() instanceof PickCard) {
-            System.out.println("\nInvalid card number or not enough coins.");
+        if (game.getState() instanceof PickCard && game.isErrorFlag()) {
+            System.out.println(game.getErrorMsg());
             return;
         }
         // Show players information
@@ -101,7 +114,7 @@ public class UIText {
         Iterator it = actions.entrySet().iterator();
         int index = 0;
         
-        System.out.println("------ Whats your move? ------\n");
+        System.out.println("------ What's your move? ------\n");
         System.out.println((index+1) + " - Check");
         while(it.hasNext())
         {   
@@ -118,6 +131,33 @@ public class UIText {
         }
     }
 
+    private void CardOR() {
+        Card c = game.getCurrentPlayer().getLastCard();
+        Map<Integer, Integer> actions = c.getActions();
+        Iterator it = actions.entrySet().iterator();
+        int index = 0;
+        
+        System.out.println("------ Pick one action ------\n");
+        System.out.println((index+1) + " - Check");
+        while(it.hasNext())
+        {   
+            index++;
+            String output = new String();         
+            Map.Entry pairs = (Map.Entry)it.next();
+                        System.out.println((index+1) + " - " + c.getActionString(Integer.parseInt(pairs.getKey().toString()), Integer.parseInt(pairs.getValue().toString())));
+        }
+        game.defineCard(sc.nextInt());
+        
+        if (game.getState() instanceof SelectAction) {
+            System.out.println("\nInvalid move.");
+            return;
+        }
+    }
+
+    private void CardAND() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     private void MoveArmyByLand() {
         int from;
         int to;

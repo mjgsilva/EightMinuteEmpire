@@ -8,6 +8,11 @@ public class Game {
     private StateInterface state;
     private StateInterface previousState;
 
+    // Specify if state returned with error. Alternative would've been exceptions
+    private Boolean errorFlag = false;
+    // Specify error message
+    private String errorMsg = "";
+    
     private ArrayList<Player> players = new ArrayList<>();
     private Player currentPlayer;
     
@@ -18,6 +23,7 @@ public class Game {
     // Contructor
     public Game() {
         state = new PrepareGame(this);
+        previousState = new PrepareGame(this);
     }
 
     // Map
@@ -133,5 +139,25 @@ public class Game {
 
     public void setPreviousState(StateInterface previousState) {
         this.previousState = previousState;
+    }
+    
+    public Boolean isErrorFlag() {
+        return errorFlag;
+    }
+
+    public void setErrorFlag(Boolean errorFlag) {
+        this.errorFlag = errorFlag;
+    }
+
+    public void defineJokers() {
+        state = state.defineJokers();
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 }

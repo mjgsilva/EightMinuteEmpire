@@ -1,5 +1,7 @@
 package gameLogic;
 
+import gameLogic.states.AND;
+import gameLogic.states.StateInterface;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -26,5 +28,10 @@ public class CardAND extends Card {
             counter++;
         }
         return actionsText;
+    }
+
+    @Override
+    public StateInterface returnState(Game game) {
+        return new AND(game);
     }
 }

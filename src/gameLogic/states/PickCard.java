@@ -17,6 +17,8 @@ public class PickCard extends StateAdapter {
         int n = 0;
         int nPlayers = getGame().getPlayers().size();
         
+        getGame().setErrorFlag(Boolean.FALSE);
+        
         for (int i = 0; i < nPlayers; i++)
             flags.add(false);
         
@@ -46,12 +48,15 @@ public class PickCard extends StateAdapter {
         // MUDAR ISTO NAO ESQUECER
         if (flags.contains(false)) {
             return this;
-        } else
+        } else {
             return new EndGame(getGame());
+        }
     }
 
     @Override
     public StateInterface defineCard(int n) {
+        getGame().setErrorFlag(Boolean.FALSE);
+        
         if (n < 6 && n >= 0) {
             int cardCost = 0;
             switch(n+1) {
@@ -75,8 +80,12 @@ public class PickCard extends StateAdapter {
                     break;
             }
             // If player doesn't have enough money
-            if (getGame().getCurrentPlayer().getCoins() - cardCost < 0)
+            if (getGame().getCurrentPlayer().getCoins() - cardCost < 0) {
+                getGame().setErrorFlag(Boolean.TRUE);
+                getGame().setErrorMsg("[ERROR] Player " + getGame().getCurrentPlayer().getIdAsString() +
+                        " doesn't have enough coins.\n");
                 return this;
+            }
             
             ArrayList <Card> cards = getGame().getTableCards();
             getGame().getCurrentPlayer().addCardBought(cards.get(n));
@@ -90,12 +99,13 @@ public class PickCard extends StateAdapter {
             // Set previous state
             getGame().setPreviousState(getGame().getState());
             
-            return new SelectAction(getGame());
+            //return new SelectAction(getGame());
+            // polymorhic return according to card
+            return getGame().getCurrentPlayer().getLastCard().returnState(getGame());
         } else {
+            getGame().setErrorFlag(Boolean.TRUE);
+            getGame().setErrorMsg("[ERROR] Invalid card number.\n");
             return this;
         }
-        
     }
-    
-    
 }

@@ -1,5 +1,11 @@
 package gameLogic;
 
+import gameLogic.states.BuildCity;
+import gameLogic.states.MoveArmyByLand;
+import gameLogic.states.MoveArmyBySea;
+import gameLogic.states.NeutralizeArmy;
+import gameLogic.states.PlaceNewArmy;
+import gameLogic.states.StateInterface;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -27,4 +33,33 @@ public class CardStd extends Card {
         }
         return actionsText;
     }
+    
+    /*
+    1 - Place Army
+    2 - Move Army By Land
+    3 - Move Army By Sea (Crossover between Sea and Land)
+    4 - Build City
+    5 - Neutralize Army
+     */
+    @Override
+    public StateInterface returnState(Game game) {
+        Iterator it = actions.entrySet().iterator();
+        Map.Entry pairs = (Map.Entry)it.next();
+        
+        switch(Integer.parseInt(pairs.getValue().toString())){
+            case 1:
+                return new PlaceNewArmy(game);
+            case 2:
+                return new MoveArmyByLand(game);
+            case 3:
+                return new MoveArmyBySea(game);
+            case 4:
+                return new BuildCity(game);
+            case 5:
+                return new NeutralizeArmy(game);
+            default:
+                return super.returnState(game);
+        }
+    }
 }
+

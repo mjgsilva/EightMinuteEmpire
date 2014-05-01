@@ -14,6 +14,9 @@ public class PrepareGame extends StateAdapter {
     @Override
     public StateInterface defineGame(int n) {
         int value = 0;
+        
+        getGame().setErrorFlag(Boolean.FALSE);
+        
         // Preparation of map
         // Being made by default on Game class
         
@@ -60,8 +63,11 @@ public class PrepareGame extends StateAdapter {
             getGame().setPreviousState(getGame().getState());
             
             return new Auction(getGame());
-        } else
+        } else {
+            getGame().setErrorFlag(Boolean.TRUE);
+            getGame().setErrorMsg("[ERROR] Number of players has to be between 2 and 5.\n");
             return this;
+        }
     }
 
     private GameMap placeInitialArmies() {
@@ -84,4 +90,11 @@ public class PrepareGame extends StateAdapter {
         
         return map;
     }
+    
+    @Override
+    public StateInterface defineJokers() {
+        // TO DO
+        return this;
+    }
 }
+

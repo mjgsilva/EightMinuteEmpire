@@ -5,21 +5,19 @@ import gameLogic.Game;
 import java.util.Iterator;
 import java.util.Map;
 
-public class SelectAction extends StateAdapter {
+public class OR extends StateAdapter {
 
-    public SelectAction(Game game) {
+    public OR(Game game) {
         super(game);
     }
-    
+
     @Override
-    public StateInterface defineAction(int n)
-    {
+    public StateInterface defineCard(int n) {
+        getGame().setErrorFlag(Boolean.FALSE);
         Card c = getGame().getCurrentPlayer().getLastCard();
         int maximumSize = c.getActions().size();
         
-        if(n < 1 || n > maximumSize + 1)
-            return this;
-        else
+        if (n > 0 && n <= (maximumSize+1)) {
             if(n == 1) {
                 int indexOfCurrentPlayer = getGame().getPlayers().indexOf(getGame().getCurrentPlayer());
                 if (indexOfCurrentPlayer+1 == getGame().getPlayers().size())
@@ -34,8 +32,7 @@ public class SelectAction extends StateAdapter {
                 int index = 1;
                 int action = 0; /*must be initialized*/
                 
-                while(it.hasNext())
-                {   
+                while(it.hasNext()) {   
                     if(index >= n)
                         break;
                 
@@ -51,6 +48,13 @@ public class SelectAction extends StateAdapter {
                     case 4 : return new BuildCity(getGame());
                 }
             }
+        } else {
+            getGame().setErrorFlag(Boolean.TRUE);
+            getGame().setErrorMsg("[ERROR] Invalid option.\n");
+            return this;
+        }
         return this;
     }
+    
+    
 }
