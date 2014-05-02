@@ -34,25 +34,28 @@ public class UIText {
     }
     
     private void PrepareGame() {
-        if (game.getState() instanceof PrepareGame) {
+        if (game.getState() instanceof PrepareGame && game.getPreviousState() instanceof PrepareGame) {
             // Input number of players
             System.out.print("Number of players: ");
             game.defineGame(sc.nextInt());
             System.out.print("\n");
+            
+            // Error
+            if (game.isErrorFlag()) {
+                System.out.println(game.getErrorMsg());
+                return;
+            }
+            
             // Show 6 cards
             System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
             System.out.println("-------- World Map --------\n" + game.getMapAsString());
         } else {
-            // "End Game"
             // Transform joker cards into resource cards
+            
+            // "End Game"
             game.defineJokers();
             // Show endGame scores
             
-        }
-
-        // Error
-        if (game.isErrorFlag()) {
-            System.out.println(game.getErrorMsg());
         }
     }
     
