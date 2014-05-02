@@ -23,8 +23,8 @@ public class UIText {
                 Auction();
             else if (state instanceof PickCard)
                 PickCard();
-            else if (state instanceof SelectAction) // ESTE É PARA SAIR
-                SelectAction();
+            //else if (state instanceof SelectAction) // ESTE É PARA SAIR
+              //  SelectAction();
             else if (state instanceof OR)
                 CardOR();
             else if (state instanceof AND)
@@ -86,14 +86,19 @@ public class UIText {
                     
                     if (!game.getEndGameFlag())
                         return;
-                } else
+                } else {
                     System.out.println("Player " + game.getCurrentPlayer().getIdAsString() + " doesn't have any joker cards.\n");
                     return;
+                }
             }
-            // "End Game"
-            //game.defineJokers();
-            // Show endGame scores
             
+        }
+        // "End Game"
+        // Show endGame scores
+        if (game.getEndGameFlag()) {
+            System.out.println("\nGame Over. Not implemented yet.");
+            for (Player aux : game.getPlayers())
+                System.out.println("Score " + aux.getIdAsString() + ": " + aux.getScore());
         }
     }
     
@@ -123,13 +128,13 @@ public class UIText {
     }
 
     private void PickCard() {
-        // This is the beginning of the turn, so we have to check for EndGame condition.
-        // DO NOT FORGET TO IMPLEMENT SAVE GAME HERE.
-        game.defineEndGame();
-        if (game.getState() instanceof EndGame) {
-            endGame();
-            return;
-        }
+//        // This is the beginning of the turn, so we have to check for EndGame condition.
+//        // DO NOT FORGET TO IMPLEMENT SAVE GAME HERE.
+//        game.defineEndGame();
+//        if (game.getState() instanceof EndGame) {
+//            endGame();
+//            return;
+//        }
         
         // Input desired card to buy
         System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
@@ -228,28 +233,34 @@ public class UIText {
     }
     
     private void MoveArmyByLand() {
-        int from;
-        int to;
+        //int from;
+        //int to;
         
-        Card c = game.getCurrentPlayer().getLastCard();
+        /*Card c = game.getCurrentPlayer().getLastCard();
+        
         System.out.println(game.getMapAsString());
-        System.out.println(c.toString());
-        System.out.println("------ [Region ID] From: ------\n");
-        from = sc.nextInt();
-        System.out.println("------ [Region ID] To: ------\n");
-        to = sc.nextInt();
-        game.defineMoveByLand(from,to);
+        System.out.println(game.getCurrentPlayer().getLastCard().toString());*/
         
-        if (game.getState() instanceof SelectAction) {
-            System.out.println("\nProblems!.");
-            return;
+        if (game.getState() instanceof MoveArmyByLand.InsertDestiny) {
+            System.out.print("To (Region ID): ");
+        } else {
+            System.out.println(game.getMapAsString());
+            System.out.println(game.getCurrentPlayer().getLastCard().toString());
+            System.out.print("First insert From Region, then To Region\n0 to check\n"
+                    + "From (Region ID): ");
         }
-    }
-    
-    private void endGame() {
-        game.defineEndGame();
-        System.out.println("\nGame Over. Not implemented yet.");
-        for (Player aux : game.getPlayers())
-            System.out.println("Score " + aux.getIdAsString() + ": " + aux.getScore());
+        
+        game.defineAction(sc.nextInt());
+        System.out.println("");
+        /*
+        System.out.print("From (Region ID):");
+        from = sc.nextInt();
+        System.out.print("To (Region ID): ");
+        to = sc.nextInt();
+        game.defineMoveByLand(from,to);*/
+        //System.out.println("");
+        if (game.isErrorFlag()) {
+            System.out.println(game.getErrorMsg());
+        }
     }
 }

@@ -12,7 +12,6 @@ public class Card {
     protected Map <Integer, Integer> actions;
     private final int andCard;
 
-    
 
     // Constructor for not AND cards
     Card(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer,Integer>actions, int andCard)
