@@ -15,7 +15,8 @@ public class UIText {
     Scanner sc = new Scanner(System.in);
     
     public void run() {
-        while (!((state = game.getState()) instanceof EndGame)) {
+        while (!game.getEndGameFlag()) {
+            state = game.getState();
             if (state instanceof PrepareGame)
                 PrepareGame();
             else if (state instanceof Auction)
@@ -38,6 +39,9 @@ public class UIText {
     private void PrepareGame() {
         if (game.getState() instanceof PrepareGame && game.getPreviousState() instanceof PrepareGame) {
             // Input number of players
+            System.out.println("Eight Minutes Empire - Computer Game Edition\n"
+                    + "Enter 0 to exit.\n");
+            
             System.out.print("Number of players: ");
             game.defineGame(sc.nextInt());
             System.out.print("\n");
@@ -46,16 +50,48 @@ public class UIText {
             if (game.isErrorFlag()) {
                 System.out.println(game.getErrorMsg());
                 return;
-            }
+            } else if (game.getEndGameFlag())
+                return;
             
             // Show 6 cards
             System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
             System.out.println("-------- World Map --------\n" + game.getMapAsString());
         } else {
-            // Transform joker cards into resource cards
-            
+            // Transform jokers into resource cards
+            /*
+            Type:
+            1 - Jewelry
+            2 - Food
+            3 - Wood
+            4 - Iron
+            5 - Tools
+            6 - Joker
+            */
+            if (!game.isErrorFlag()) {
+                if (game.getCurrentPlayer().getCards().contains(new Card(6))) {
+                    ArrayList <Integer> jokersNewType = new ArrayList<>();
+                    System.out.println("Type of resource:\n"
+                            + "1 - Jewelry\n"
+                            + "2 - Food\n"
+                            + "3 - Wood\n"
+                            + "4 - Iron\n"
+                            + "5 - Tools\n");
+                    for (Card aux : game.getCurrentPlayer().getCards()) {
+                        if (aux.equals(new Card(6))) {
+                            System.out.print("Choose one type of resource: ");
+                            jokersNewType.add(sc.nextInt());
+                        }
+                    }
+                    game.defineJokers(jokersNewType);
+                    
+                    if (!game.getEndGameFlag())
+                        return;
+                } else
+                    System.out.println("Player " + game.getCurrentPlayer().getIdAsString() + " doesn't have any joker cards.\n");
+                    return;
+            }
             // "End Game"
-            game.defineJokers();
+            //game.defineJokers();
             // Show endGame scores
             
         }
@@ -113,6 +149,7 @@ public class UIText {
         System.out.println("Score: " + game.getCurrentPlayer().getScore());
     }
 
+    // Delete this function
     private void SelectAction() {
         Card c = game.getCurrentPlayer().getLastCard();
         Map<Integer, Integer> actions = c.getActions();
@@ -153,14 +190,31 @@ public class UIText {
         }
         game.defineCard(sc.nextInt());
         
-        if (game.getState() instanceof SelectAction) {
-            System.out.println("\nInvalid move.");
-            return;
+        if (game.isErrorFlag()) {
+            System.out.println(game.getErrorMsg());
         }
     }
 
     private void CardAND() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Card c = game.getCurrentPlayer().getLastCard();
+        Map<Integer, Integer> actions = c.getActions();
+        Iterator it = actions.entrySet().iterator();
+        int index = 0;
+        
+        System.out.println("------ Pick one action ------\n");
+        System.out.println((index+1) + " - Check");
+        while(it.hasNext())
+        {   
+            index++;
+            String output = new String();         
+            Map.Entry pairs = (Map.Entry)it.next();
+                        System.out.println((index+1) + " - " + c.getActionString(Integer.parseInt(pairs.getKey().toString()), Integer.parseInt(pairs.getValue().toString())));
+        }
+        game.defineCard(sc.nextInt());
+        
+        if (game.isErrorFlag()) {
+            System.out.println(game.getErrorMsg());
+        }
     }
     
     private void PlaceNewArmy() {

@@ -41,12 +41,15 @@ public class OR extends StateAdapter {
                     index++;
                 }
                 
+                getGame().setPreviousState(this);
+                
                 switch(action) {
                     case 1 : return new PlaceNewArmy(getGame());
                     case 2 : return new MoveArmyByLand(getGame());
                     case 3 : return new MoveArmyBySea(getGame());
                     case 4 : return new BuildCity(getGame());
                 }
+                
             }
         } else {
             getGame().setErrorFlag(Boolean.TRUE);

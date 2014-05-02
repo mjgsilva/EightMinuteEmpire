@@ -12,6 +12,8 @@ public class Card {
     protected Map <Integer, Integer> actions;
     private final int andCard;
 
+    
+
     // Constructor for not AND cards
     Card(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer,Integer>actions, int andCard)
     {
@@ -21,6 +23,15 @@ public class Card {
         this.fivePlayersCard = fivePlayersCard;
         this.actions = actions;
         this.andCard = andCard;
+    }
+
+    public Card(int i) {
+        // To use contains and check for type of resource
+        this.id = 0;
+        this.typeOfResource = i;
+        this.numberOfResource = 0;
+        this.fivePlayersCard = 0;
+        this.andCard = 0;
     }
 
     public Map<Integer, Integer> getActions() {
@@ -122,5 +133,33 @@ public class Card {
     public void updateActionMovements(int id)
     {
         actions.put(id, findActionNumberOfPlays(id)-1);
+    }
+
+    
+    // Equal and Hash code are only taking type of resource into account
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + this.typeOfResource;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Card other = (Card) obj;
+        if (this.typeOfResource != other.typeOfResource) {
+            return false;
+        }
+        return true;
+    }
+    
+    public void setTypeOfResource(int typeOfResource) {
+        this.typeOfResource = typeOfResource;
     }
 }

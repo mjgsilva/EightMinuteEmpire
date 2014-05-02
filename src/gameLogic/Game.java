@@ -19,11 +19,13 @@ public class Game {
     private GameMap map = new GameMap(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
     private Deck deck = new Deck(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
     private ArrayList <Card> tableCards = new ArrayList<>();  // Cards turned up in the table - maximum of 6 cards
+    private boolean endGameFlag;
 
     // Contructor
     public Game() {
         state = new PrepareGame(this);
         previousState = new PrepareGame(this);
+        this.endGameFlag = false;
     }
 
     // Map
@@ -153,8 +155,8 @@ public class Game {
         this.errorFlag = errorFlag;
     }
 
-    public void defineJokers() {
-        state = state.defineJokers();
+    public void defineJokers(ArrayList<Integer> jokers) {
+        state = state.defineJokers(jokers);
     }
 
     public String getErrorMsg() {
@@ -163,5 +165,13 @@ public class Game {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    public boolean getEndGameFlag() {
+        return endGameFlag;
+    }
+
+    public void setEndGameFlag(boolean endGameFlag) {
+        this.endGameFlag = endGameFlag;
     }
 }

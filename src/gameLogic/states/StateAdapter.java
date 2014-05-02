@@ -52,7 +52,7 @@ public abstract class StateAdapter implements StateInterface {
     }
 
     @Override
-    public StateInterface defineJokers() {
+    public StateInterface defineJokers(ArrayList<Integer> jokers) {
         return this;
     }
     
