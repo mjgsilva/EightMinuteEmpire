@@ -31,7 +31,7 @@ public abstract class StateAdapter implements StateInterface {
         return this;
     }
     @Override
-    public StateInterface defineArmy() {
+    public StateInterface definePlaceArmy(int regionId) {
         return this;
     }
     @Override

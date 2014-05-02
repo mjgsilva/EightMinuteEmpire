@@ -4,7 +4,6 @@ import gameLogic.Army;
 import gameLogic.Card;
 import gameLogic.Game;
 import gameLogic.map.Region;
-import java.util.Map;
 
 public class MoveArmyByLand extends StateAdapter {
     
@@ -23,7 +22,8 @@ public class MoveArmyByLand extends StateAdapter {
         getGame().setErrorFlag(Boolean.FALSE);
 
         Card c = getGame().getCurrentPlayer().getLastCard();
-        numberOfMovements = findActionNumberOfPlays(c);
+        numberOfMovements = c.findActionNumberOfPlays(2);
+        
         playerId = getGame().getCurrentPlayer().getId();
         playerColor = getGame().getCurrentPlayer().getColor();
         
@@ -52,26 +52,15 @@ public class MoveArmyByLand extends StateAdapter {
                 }
             } else { // PROVISORY
                 getGame().setErrorFlag(Boolean.TRUE);
-                getGame().setErrorMsg("[ERROR] You don't have any army on region " + from + ".\n");
+                getGame().setErrorMsg("[ERROR] Invalid region(s).\n");
                 return this;
             }
+            c.updateActionMovements(2);
         }
         
-        numberOfMovements = updateActionMovements(c,numberOfMovements);
         if(numberOfMovements < 1)
             return new PickCard(getGame());
         else
             return this;
-    }
-    
-    private int findActionNumberOfPlays(Card c)
-    {
-        return c.getActions().get(2);        
-    }
-    
-    private int updateActionMovements(Card c, int numberOfMovements)
-    {
-        c.getActions().put(2, numberOfMovements-1);
-        return --numberOfMovements;
     }
 }

@@ -30,6 +30,8 @@ public class UIText {
                 CardAND();
             else if (state instanceof MoveArmyByLand)
                 MoveArmyByLand();
+            else if (state instanceof PlaceNewArmy)
+                PlaceNewArmy();            
         }
     }
     
@@ -159,6 +161,16 @@ public class UIText {
 
     private void CardAND() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private void PlaceNewArmy() {
+        int regionId;
+        Card c = game.getCurrentPlayer().getLastCard();
+        System.out.println(game.getMapAsString());
+        System.out.println(c.toString());
+        System.out.println("------ [Region ID] To place the new army: ------\n");
+        regionId = sc.nextInt();
+        game.definePlaceArmy(regionId);
     }
     
     private void MoveArmyByLand() {

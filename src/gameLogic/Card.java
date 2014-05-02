@@ -112,4 +112,15 @@ public class Card {
     public StateInterface returnState(Game game) {
         return null;
     }
+    
+    public int findActionNumberOfPlays(int id)
+    {
+        int value = actions.get(id);  
+        return value;
+    }
+    
+    public void updateActionMovements(int id)
+    {
+        actions.put(id, findActionNumberOfPlays(id)-1);
+    }
 }

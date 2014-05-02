@@ -108,6 +108,10 @@ public class Game {
     public void defineEndGame() {
         state = state.defineEndGame();
     }
+
+    public void definePlaceArmy(int regionId) {
+        state = state.definePlaceArmy(regionId);
+    }
     
     public void defineMoveByLand(int from, int to) {
         state = state.defineMoveByLand(from,to);

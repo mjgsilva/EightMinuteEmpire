@@ -9,7 +9,7 @@ public interface StateInterface {
     public StateInterface defineWinner(ArrayList<Integer> bets);
     public StateInterface defineCard(int n);
     public StateInterface defineAction(int n);
-    public StateInterface defineArmy();
+    public StateInterface definePlaceArmy(int regionId);
     public StateInterface defineMoveByLand(int from,int to);
     public StateInterface defineMoveBySea();
     public StateInterface defineCity();
