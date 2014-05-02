@@ -5,7 +5,6 @@ import gameLogic.City;
 import gameLogic.Player;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Map;
 
 public class Region {

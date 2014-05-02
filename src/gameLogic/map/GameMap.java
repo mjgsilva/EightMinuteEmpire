@@ -103,7 +103,7 @@ public class GameMap {
 
                     regionId = Integer.parseInt(regionElement.getAttribute("id"));
 
-                    NodeList main = continentElement.getElementsByTagName("main");
+                    NodeList main = regionElement.getElementsByTagName("main");
                     if(main.getLength() != 0)
                     {
                         mainRegion = regionId;

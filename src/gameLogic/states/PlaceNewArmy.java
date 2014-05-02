@@ -39,7 +39,12 @@ public class PlaceNewArmy extends StateAdapter {
             {
                 //if(regionId == mainRegion || (regionId.checkCitiesOfPlayerOnRegion(p)))
                 if((t.checkCitiesOfPlayerOnRegion(p)) || regionId == mainRegion)
-                t.addArmy(new Army(playerId, playerColor));
+                    t.addArmy(new Army(playerId, playerColor));
+                else {
+                    getGame().setErrorFlag(Boolean.TRUE);
+                    getGame().setErrorMsg("[ERROR] Not a valid Region.");
+                    return this;
+                }
             } else {
                 getGame().setErrorFlag(Boolean.TRUE);
                 getGame().setErrorMsg("[ERROR] Region " + regionId + " does not exist.\n");
