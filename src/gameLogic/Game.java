@@ -174,4 +174,54 @@ public class Game {
     public void setEndGameFlag(boolean endGameFlag) {
         this.endGameFlag = endGameFlag;
     }
+    
+    public boolean isEndGameConditionMet() {
+        // If all flags are true then it has reached the condition to end game
+        ArrayList <Boolean> flags = new ArrayList<>();
+        int n = 0;
+        int nPlayers = players.size();
+        
+        errorFlag = Boolean.FALSE;
+        
+        for (int i = 0; i < nPlayers; i++)
+            flags.add(false);
+        
+        switch(nPlayers) {
+            case 2:
+                n = 2;
+                break;
+            case 3:
+                n = 10;
+                break;
+            case 4:
+                n = 8;
+                break;
+            case 5:
+                n = 7;
+                break;
+            default:
+                n = 99;
+                break;
+        }
+        
+        for (int i = 0; i < nPlayers; i++) {
+            if (players.get(i).getCards().size() >= n)
+                flags.set(i, true);
+        }
+        
+        if (flags.contains(false)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public void nextPlayer() {
+        int indexOfCurrentPlayer = players.indexOf(currentPlayer);
+        if (indexOfCurrentPlayer+1 == players.size())
+            indexOfCurrentPlayer = 0;
+        else
+            indexOfCurrentPlayer++;
+        currentPlayer = players.get(indexOfCurrentPlayer);
+    }
 }

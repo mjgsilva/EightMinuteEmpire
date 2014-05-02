@@ -37,7 +37,7 @@ public class UIText {
     }
     
     private void PrepareGame() {
-        if (game.getState() instanceof PrepareGame && game.getPreviousState() instanceof PrepareGame) {
+        if (!game.getEndGameFlag()) {
             // Input number of players
             System.out.println("Eight Minutes Empire - Computer Game Edition\n"
                     + "Enter 0 to exit.\n");
@@ -229,7 +229,7 @@ public class UIText {
         System.out.println(c.toString());
         System.out.println("------ [Region ID] To place the new army: ------\n");
         regionId = sc.nextInt();
-        game.definePlaceArmy(regionId);
+        game.defineAction(regionId);
         
         if (game.isErrorFlag()) {
             System.out.println(game.getErrorMsg());

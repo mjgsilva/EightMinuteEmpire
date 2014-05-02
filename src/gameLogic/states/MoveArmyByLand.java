@@ -21,12 +21,7 @@ public class MoveArmyByLand extends StateAdapter {
         
         // Check action
         if (action == 0) {
-            int indexOfCurrentPlayer = getGame().getPlayers().indexOf(getGame().getCurrentPlayer());
-            if (indexOfCurrentPlayer+1 == getGame().getPlayers().size())
-                indexOfCurrentPlayer = 0;
-            else
-                indexOfCurrentPlayer++;
-            getGame().setCurrentPlayer(getGame().getPlayers().get(indexOfCurrentPlayer));
+            getGame().nextPlayer();
             return new PickCard(getGame()); 
         }
         
@@ -79,7 +74,7 @@ public class MoveArmyByLand extends StateAdapter {
                             } else {
                                 getGame().setErrorFlag(Boolean.TRUE);
                                 getGame().setErrorMsg("[ERROR] You don't have any army on region " + from + ".\n");
-                                return new MoveArmyByLand(getGame());
+                                return this;
                             }
                         } else {
                             getGame().setErrorFlag(Boolean.TRUE);
@@ -90,15 +85,22 @@ public class MoveArmyByLand extends StateAdapter {
                 } else { // PROVISORY
                     getGame().setErrorFlag(Boolean.TRUE);
                     getGame().setErrorMsg("[ERROR] Invalid region(s).\n");
-                    return new MoveArmyByLand(getGame());
+                    return this;
                 }
                 c.updateActionMovements(2);
             }
         
-            if(numberOfMovements <= 1)
-                return new PickCard(getGame());
+            if(numberOfMovements <= 1) {
+                if (getGame().isEndGameConditionMet()) {
+                    getGame().setEndGameFlag(true);
+                    return new PrepareGame(getGame());
+                } else {
+                    getGame().nextPlayer();
+                    return new PickCard(getGame());
+                }
+            }
             else
-                return new MoveArmyByLand(getGame());
+                return this;
         }
     }
 }
