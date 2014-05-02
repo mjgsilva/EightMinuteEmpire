@@ -16,8 +16,7 @@ public class MoveArmyByLand extends StateAdapter {
     }
     
     @Override
-    public StateInterface defineAction(int action)
-    {
+    public StateInterface defineAction(int action) {
         getGame().setErrorFlag(Boolean.FALSE);
         
         // Check action
