@@ -3,23 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< Updated upstream
-            <file>file:/Users/mj/NetBeansProjects/EightMinuteEmpire/src/gameLogic/Army.java</file>
-            <file>file:/Users/mj/NetBeansProjects/EightMinuteEmpire/src/gameLogic/map/Map.java</file>
-            <file>file:/Users/mj/NetBeansProjects/EightMinuteEmpire/src/gameLogic/Card.java</file>
-            <file>file:/Users/mj/NetBeansProjects/EightMinuteEmpire/src/gameLogic/map/Continent.java</file>
+            <file>file:/Users/mj/NetBeansProjects/EightMinuteEmpire/src/gameLogic/states/StateInterface.java</file>
+            <file>file:/Users/mj/NetBeansProjects/EightMinuteEmpire/src/gameLogic/states/MoveArmyBySea.java</file>
+            <file>file:/Users/mj/NetBeansProjects/EightMinuteEmpire/src/gameLogic/states/MoveArmyByLand.java</file>
             <file>file:/Users/mj/NetBeansProjects/EightMinuteEmpire/src/ui/text/UIText.java</file>
-=======
-            <file>file:/home/danilo/Documents/ISEC/2oAno/2oSemestre/PA/projecto/EightMinuteEmpire/src/gameLogic/Player.java</file>
-            <file>file:/home/danilo/Documents/ISEC/2oAno/2oSemestre/PA/projecto/EightMinuteEmpire/src/gameLogic/Card.java</file>
-            <file>file:/home/danilo/Documents/ISEC/2oAno/2oSemestre/PA/projecto/EightMinuteEmpire/src/ui/text/UIText.java</file>
-            <file>file:/home/danilo/Documents/ISEC/2oAno/2oSemestre/PA/projecto/EightMinuteEmpire/src/gameLogic/states/StateInterface.java</file>
-            <file>file:/home/danilo/Documents/ISEC/2oAno/2oSemestre/PA/projecto/EightMinuteEmpire/src/ui/text/Run.java</file>
-            <file>file:/home/danilo/Documents/ISEC/2oAno/2oSemestre/PA/projecto/EightMinuteEmpire/src/gameLogic/states/Auction.java</file>
-            <file>file:/home/danilo/Documents/ISEC/2oAno/2oSemestre/PA/projecto/EightMinuteEmpire/src/gameLogic/states/PrepareGame.java</file>
-            <file>file:/home/danilo/Documents/ISEC/2oAno/2oSemestre/PA/projecto/EightMinuteEmpire/src/gameLogic/states/StateAdapter.java</file>
-            <file>file:/home/danilo/Documents/ISEC/2oAno/2oSemestre/PA/projecto/EightMinuteEmpire/src/gameLogic/Game.java</file>
->>>>>>> Stashed changes
+            <file>file:/Users/mj/NetBeansProjects/EightMinuteEmpire/src/gameLogic/states/PlaceNewArmy.java</file>
+            <file>file:/Users/mj/NetBeansProjects/EightMinuteEmpire/src/gameLogic/map/Region.java</file>
         </group>
     </open-files>
 </project-private>

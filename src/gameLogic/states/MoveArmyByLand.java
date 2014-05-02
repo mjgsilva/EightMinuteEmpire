@@ -74,7 +74,7 @@ public class MoveArmyByLand extends StateAdapter {
                             } else {
                                 getGame().setErrorFlag(Boolean.TRUE);
                                 getGame().setErrorMsg("[ERROR] You don't have any army on region " + from + ".\n");
-                                return this;
+                                return new MoveArmyByLand(getGame());
                             }
                         } else {
                             getGame().setErrorFlag(Boolean.TRUE);
@@ -85,12 +85,13 @@ public class MoveArmyByLand extends StateAdapter {
                 } else { // PROVISORY
                     getGame().setErrorFlag(Boolean.TRUE);
                     getGame().setErrorMsg("[ERROR] Invalid region(s).\n");
-                    return this;
+                    return new MoveArmyByLand(getGame());
                 }
                 c.updateActionMovements(2);
+                return new MoveArmyByLand(getGame());
             }
         
-            if(numberOfMovements <= 1) {
+            if(numberOfMovements <=  1) {
                 if (getGame().isEndGameConditionMet()) {
                     getGame().setEndGameFlag(true);
                     return new PrepareGame(getGame());
