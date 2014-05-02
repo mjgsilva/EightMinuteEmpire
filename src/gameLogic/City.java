@@ -17,4 +17,28 @@ public class City {
     public int getIdOfOwner() {
         return idOfOwner;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.idOfOwner;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final City other = (City) obj;
+        if (this.idOfOwner != other.idOfOwner) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

@@ -230,6 +230,10 @@ public class UIText {
         System.out.println("------ [Region ID] To place the new army: ------\n");
         regionId = sc.nextInt();
         game.definePlaceArmy(regionId);
+        
+        if (game.isErrorFlag()) {
+            System.out.println(game.getErrorMsg());
+        }
     }
     
     private void MoveArmyByLand() {

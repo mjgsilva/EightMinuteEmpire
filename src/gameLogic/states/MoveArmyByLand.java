@@ -62,7 +62,7 @@ public class MoveArmyByLand extends StateAdapter {
             playerId = p.getId();
             playerColor = p.getColor();
 
-            if(numberOfMovements > 0)
+            if(numberOfMovements > 1)
             {
                 to = action;
                 f = getGame().getMap().getRegionById(from);
@@ -95,7 +95,7 @@ public class MoveArmyByLand extends StateAdapter {
                 c.updateActionMovements(2);
             }
         
-            if(numberOfMovements < 1)
+            if(numberOfMovements <= 1)
                 return new PickCard(getGame());
             else
                 return new MoveArmyByLand(getGame());
