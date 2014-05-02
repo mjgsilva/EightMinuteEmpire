@@ -1,6 +1,6 @@
 package gameLogic;
 
-public class City implements Comparable {
+public class City {
     int idOfOwner;
     String color;
     
@@ -13,15 +13,7 @@ public class City implements Comparable {
     public String toString() {
         return "{" + color + "C" + idOfOwner + "\u001B[30m" +  "} ";
     }
-
-    @Override
-    public int compareTo(Object o) {
-        // If equals sum 1
-        if (o.equals(this))
-            return 1;
-        return 0;
-    }
-
+    
     public int getIdOfOwner() {
         return idOfOwner;
     }

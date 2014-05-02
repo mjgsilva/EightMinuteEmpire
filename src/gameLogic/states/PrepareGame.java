@@ -84,7 +84,7 @@ public class PrepareGame extends StateAdapter {
         for (Player aux : getGame().getPlayers()){
             for (int i = 0; i < 3; i++) {
                 if(aux.getArmies().size() > 0)
-                    map.placeArmy(12, aux.getArmy());
+                    map.placeArmy(map.getMainRegion(), aux.getArmy());
             }
         }
         
@@ -194,9 +194,9 @@ public class PrepareGame extends StateAdapter {
                         if (n == 1)
                             scoreToAdd += 1;
                         else if (n == 2)
-                            scoreToAdd += 4;
-                        else if (n == 3)
                             scoreToAdd += 3;
+                        else if (n == 3)
+                            scoreToAdd += 4;
                         else if (n>=5)
                             scoreToAdd += 5;
                         break;

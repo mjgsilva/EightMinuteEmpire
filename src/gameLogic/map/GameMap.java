@@ -1,6 +1,7 @@
 package gameLogic.map;
 
 import gameLogic.Army;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import org.xml.sax.SAXParseException;
 
 public class GameMap {
     private final ArrayList<Continent> continents = new ArrayList<>();
+    private int mainRegion;
     
     public GameMap()
     {
@@ -43,6 +45,11 @@ public class GameMap {
             if((r=temp.getRegion(id)) != null)
                 return r;
         return null;
+    }
+    
+    public int getMainRegion()
+    {
+        return mainRegion;
     }
     
     @Override
@@ -96,6 +103,12 @@ public class GameMap {
 
                     regionId = Integer.parseInt(regionElement.getAttribute("id"));
 
+                    NodeList main = continentElement.getElementsByTagName("main");
+                    if(main.getLength() != 0)
+                    {
+                        mainRegion = regionId;
+                    }
+                    
                     NodeList listOfAdjacentsByRegion = regionElement.getElementsByTagName("adjacent");
                     totalAdjacents = listOfAdjacentsByRegion.getLength();
 
@@ -106,15 +119,15 @@ public class GameMap {
                         Node adjacentNode = listOfAdjacentsByRegion.item(k);
                         Element adjacentElement = (Element) adjacentNode;
 
+                        //AdjacentRegion
                         NodeList adjacentRegionList = adjacentElement.getElementsByTagName("reg");
                         Element adjacentRegion = (Element) adjacentRegionList.item(0);
-
                         NodeList textAdjacentRegion = adjacentRegion.getChildNodes();
                         adjacentId = Integer.parseInt(((Node) textAdjacentRegion.item(0)).getNodeValue().trim());
 
+                        //AdjacentConnection
                         NodeList adjacentConnectionList = adjacentElement.getElementsByTagName("connection");
                         Element adjacentConnection = (Element) adjacentConnectionList.item(0);
-
                         NodeList textAdjacentConnection = adjacentConnection.getChildNodes();
                         adjacentConn = Integer.parseInt(((Node) textAdjacentConnection.item(0)).getNodeValue().trim());
 

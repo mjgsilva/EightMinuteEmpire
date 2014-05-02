@@ -154,6 +154,7 @@
                         </adjacent>
                 </Region>
                 <Region id="12">
+                        <main>1</main>
                          <adjacent>
                                 <reg>9</reg>
                                 <connection>0</connection>

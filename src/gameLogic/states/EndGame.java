@@ -82,9 +82,9 @@ public class EndGame extends StateAdapter {
                         if (n == 1)
                             scoreToAdd += 1;
                         else if (n == 2)
-                            scoreToAdd += 4;
-                        else if (n == 3)
                             scoreToAdd += 3;
+                        else if (n == 3)
+                            scoreToAdd += 4;
                         else if (n>=5)
                             scoreToAdd += 5;
                         break;

@@ -176,6 +176,10 @@
                 <numberOfResources>1</numberOfResources>
                 <fivePlayersCard>0</fivePlayersCard>
                 <action> 
+                        <type>1</type>
+                        <howMany>2</howMany>
+                </action>
+                <action> 
                         <type>2</type>
                         <howMany>3</howMany>
                 </action>

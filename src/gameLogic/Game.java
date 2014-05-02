@@ -19,6 +19,7 @@ public class Game {
     private GameMap map = new GameMap(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
     private Deck deck = new Deck(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
     private ArrayList <Card> tableCards = new ArrayList<>();  // Cards turned up in the table - maximum of 6 cards
+    private int mainRegion;
     private boolean endGameFlag;
 
     // Contructor
@@ -166,7 +167,7 @@ public class Game {
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }
-
+    
     public boolean getEndGameFlag() {
         return endGameFlag;
     }

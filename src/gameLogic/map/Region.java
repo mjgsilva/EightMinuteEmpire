@@ -31,10 +31,7 @@ public class Region {
     @Override
     public String toString()
     {
-        if (id == 12)
-            return "\tRegion " + id + " Initial Region " + armies.toString() + "\n";
-        else
-            return "\tRegion " + id + " " + armies.toString() + "\n";
+        return "\tRegion " + id + " " + armies.toString() + "\n";
     }
     
     public boolean checkAdjacencyByLand(int id)
@@ -46,12 +43,34 @@ public class Region {
         return false;
     }
     
-    public boolean checkArmiesOfPlayersByRegion(int playerId)
+    public boolean checkArmiesOfPlayerOnRegion(Player tempPlayer)
     {
-        Army tempArmy = new Army(playerId, "");
+        int playerId;
+        String playerColor;
+        playerId = tempPlayer.getId();
+        playerColor = tempPlayer.getColor();
+        
+        Army tempArmy = new Army(playerId, playerColor);
         for(Army armyLoop : armies)
         {
             if(armyLoop.equals(tempArmy))
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean checkCitiesOfPlayerOnRegion(Player tempPlayer)
+    {
+        int playerId;
+        String playerColor;
+        playerId = tempPlayer.getId();
+        playerColor = tempPlayer.getColor();
+        
+        City tempCity = new City(playerId, playerColor);
+        
+        for (City cityLoop : cities)
+        {
+            if(tempCity.equals(cityLoop))
                 return true;
         }
         return false;
