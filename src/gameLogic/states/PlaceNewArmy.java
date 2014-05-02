@@ -53,7 +53,7 @@ public class PlaceNewArmy extends StateAdapter {
             c.updateActionMovements(1);
         }
             
-        if(numberOfMovements <= 1)
+        if(numberOfMovements < 1)
             return new PlaceNewArmy(getGame());
         else
             return this;
