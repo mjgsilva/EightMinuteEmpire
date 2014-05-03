@@ -49,6 +49,7 @@ public class SelectAction extends StateAdapter {
                     case 2 : return new MoveArmyByLand(getGame());
                     case 3 : return new MoveArmyBySea(getGame());
                     case 4 : return new BuildCity(getGame());
+                    case 5 : return new NeutralizeArmy(getGame());
                 }
             }
         return this;
