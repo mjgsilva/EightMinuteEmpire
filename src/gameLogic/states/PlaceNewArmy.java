@@ -15,6 +15,12 @@ public class PlaceNewArmy extends StateAdapter {
     @Override
     public StateInterface defineAction(int regionId)
     {
+        if (regionId == 0) {
+            getGame().nextPlayer();
+            getGame().setPreviousState(this);
+            return new PickCard(getGame());
+        }
+        
         Region t;
         Player p;
         int playerId;
@@ -51,9 +57,11 @@ public class PlaceNewArmy extends StateAdapter {
                 return this;
             }
             c.updateActionMovements(1);
+            if (numberOfMovements > 1)
+                return new MoveArmyByLand(getGame());
         }
             
-        if(numberOfMovements <= 1) {
+        if(c.findActionNumberOfPlays(2) <= 1) {
                 if (getGame().isEndGameConditionMet()) {
                     getGame().setEndGameFlag(true);
                     return new PrepareGame(getGame());

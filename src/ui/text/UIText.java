@@ -1,7 +1,6 @@
 package ui.text;
 
 import gameLogic.*;
-import gameLogic.map.GameMap;
 import gameLogic.states.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -209,7 +208,7 @@ public class UIText {
         System.out.println("------ Pick one action ------\n");
         System.out.println((index+1) + " - Check");
         while(it.hasNext())
-        {   
+        {
             index++;
             String output = new String();         
             Map.Entry pairs = (Map.Entry)it.next();
@@ -227,8 +226,9 @@ public class UIText {
         Card c = game.getCurrentPlayer().getLastCard();
         System.out.println(game.getMapAsString());
         System.out.println(c.toString());
-        System.out.println("------ [Region ID] To place the new army: ------\n");
+        System.out.print("Insert Region ID\n0to check\nOption: ");
         regionId = sc.nextInt();
+        System.out.println("");
         game.defineAction(regionId);
         
         if (game.isErrorFlag()) {
@@ -246,7 +246,7 @@ public class UIText {
         System.out.println(game.getCurrentPlayer().getLastCard().toString());*/
         
         if (game.getState() instanceof MoveArmyByLand.InsertDestiny) {
-            System.out.print("To (Region ID): ");
+            System.out.print("To (Region ID): ");        
         } else {
             System.out.println(game.getMapAsString());
             System.out.println(game.getCurrentPlayer().getLastCard().toString());

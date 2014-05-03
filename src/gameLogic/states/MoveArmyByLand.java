@@ -57,7 +57,7 @@ public class MoveArmyByLand extends StateAdapter {
             playerId = p.getId();
             playerColor = p.getColor();
 
-            if(numberOfMovements > 1)
+            if(numberOfMovements > 0)
             {
                 to = action;
                 f = getGame().getMap().getRegionById(from);
@@ -74,6 +74,7 @@ public class MoveArmyByLand extends StateAdapter {
                             } else {
                                 getGame().setErrorFlag(Boolean.TRUE);
                                 getGame().setErrorMsg("[ERROR] You don't have any army on region " + from + ".\n");
+                                getGame().setPreviousState(this);
                                 return new MoveArmyByLand(getGame());
                             }
                         } else {
@@ -82,21 +83,26 @@ public class MoveArmyByLand extends StateAdapter {
                             to = 0;
                             return this;
                         }
-                } else { // PROVISORY
+                } else {
                     getGame().setErrorFlag(Boolean.TRUE);
                     getGame().setErrorMsg("[ERROR] Invalid region(s).\n");
                     return new MoveArmyByLand(getGame());
                 }
                 c.updateActionMovements(2);
-                return new MoveArmyByLand(getGame());
+                if (numberOfMovements > 1) {
+                    getGame().setPreviousState(this);
+                    return new MoveArmyByLand(getGame());
+                }
             }
         
-            if(numberOfMovements <=  1) {
+            if(c.findActionNumberOfPlays(2) <=  0) {
                 if (getGame().isEndGameConditionMet()) {
                     getGame().setEndGameFlag(true);
+                    getGame().setPreviousState(this);
                     return new PrepareGame(getGame());
                 } else {
                     getGame().nextPlayer();
+                    getGame().setPreviousState(this);
                     return new PickCard(getGame());
                 }
             }
