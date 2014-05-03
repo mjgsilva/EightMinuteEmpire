@@ -32,8 +32,6 @@ public class UIText {
                 MoveArmyByLand();
             else if (state instanceof PlaceNewArmy)
                 PlaceNewArmy(); 
-            else if (state instanceof NeutralizeArmy)
-                NeutralizeArmy(); 
             
         }
     }
