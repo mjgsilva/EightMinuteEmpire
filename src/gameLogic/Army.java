@@ -11,7 +11,7 @@ public class Army {
 
     @Override
     public String toString() {
-        return "{" + color + idOfOwner + "\u001B[30m" +  "} ";
+        return "{" + color + idOfOwner + "\u001B[30m" +  "}";
     }
 
     public int getIdOfOwner() {

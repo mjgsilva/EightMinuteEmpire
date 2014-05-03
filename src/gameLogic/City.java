@@ -11,7 +11,7 @@ public class City {
 
     @Override
     public String toString() {
-        return "{" + color + "C" + idOfOwner + "\u001B[30m" +  "} ";
+        return "{" + color + "C" + idOfOwner + "\u001B[30m" +  "}";
     }
     
     public int getIdOfOwner() {
