@@ -20,7 +20,6 @@ public interface StateInterface {
     public StateInterface moveArmy();
     public StateInterface neutralize();
     public StateInterface reDo();
-    public StateInterface newArmyThenNeutralize();
     
     public StateInterface saveToFile();
     public StateInterface loadFromFile();

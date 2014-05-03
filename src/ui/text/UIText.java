@@ -31,8 +31,13 @@ public class UIText {
             else if (state instanceof MoveArmyByLand)
                 MoveArmyByLand();
             else if (state instanceof PlaceNewArmy)
-                PlaceNewArmy(); 
-            
+                PlaceNewArmy();
+            else if (state instanceof MoveArmyBySea)
+                MoveArmyBySea();
+            else if (state instanceof BuildCity)
+                BuildCity();
+            else if (state instanceof NeutralizeArmy)
+                NeutralizeArmy();
         }
     }
     
@@ -128,13 +133,7 @@ public class UIText {
     }
 
     private void PickCard() {
-//        // This is the beginning of the turn, so we have to check for EndGame condition.
 //        // DO NOT FORGET TO IMPLEMENT SAVE GAME HERE.
-//        game.defineEndGame();
-//        if (game.getState() instanceof EndGame) {
-//            endGame();
-//            return;
-//        }
         
         // Input desired card to buy
         System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
@@ -152,30 +151,6 @@ public class UIText {
         System.out.println("\nBought card: " + game.getCurrentPlayer().getLastCard());
         System.out.println("Remaining coins: " + game.getCurrentPlayer().getCoins());
         System.out.println("Score: " + game.getCurrentPlayer().getScore());
-    }
-
-    // Delete this function
-    private void SelectAction() {
-        Card c = game.getCurrentPlayer().getLastCard();
-        Map<Integer, Integer> actions = c.getActions();
-        Iterator it = actions.entrySet().iterator();
-        int index = 0;
-        
-        System.out.println("------ What's your move? ------\n");
-        System.out.println((index+1) + " - Check");
-        while(it.hasNext())
-        {   
-            index++;
-            String output = new String();         
-            Map.Entry pairs = (Map.Entry)it.next();
-                        System.out.println((index+1) + " - " + c.getActionString(Integer.parseInt(pairs.getKey().toString()), Integer.parseInt(pairs.getValue().toString())));
-        }
-        game.defineAction(sc.nextInt());
-        
-        if (game.getState() instanceof SelectAction) {
-            System.out.println("\nInvalid move.");
-            return;
-        }
     }
 
     private void CardOR() {
@@ -238,14 +213,6 @@ public class UIText {
     }
     
     private void MoveArmyByLand() {
-        //int from;
-        //int to;
-        
-        /*Card c = game.getCurrentPlayer().getLastCard();
-        
-        System.out.println(game.getMapAsString());
-        System.out.println(game.getCurrentPlayer().getLastCard().toString());*/
-        
         if (game.getState() instanceof MoveArmyByLand.InsertDestiny) {
             System.out.print("To (Region ID): ");        
         } else {
@@ -257,13 +224,58 @@ public class UIText {
         
         game.defineAction(sc.nextInt());
         System.out.println("");
-        /*
-        System.out.print("From (Region ID):");
-        from = sc.nextInt();
-        System.out.print("To (Region ID): ");
-        to = sc.nextInt();
-        game.defineMoveByLand(from,to);*/
-        //System.out.println("");
+        
+        if (game.isErrorFlag()) {
+            System.out.println(game.getErrorMsg());
+        }
+    }
+    
+    private void MoveArmyBySea() {
+        if (game.getState() instanceof MoveArmyBySea.InsertDestiny) {
+            System.out.print("To (Region ID): ");        
+        } else {
+            System.out.println(game.getMapAsString());
+            System.out.println(game.getCurrentPlayer().getLastCard().toString());
+            System.out.print("First insert From Region, then To Region\n0 to check\n"
+                    + "From (Region ID): ");
+        }
+        
+        game.defineAction(sc.nextInt());
+        System.out.println("");
+        
+        if (game.isErrorFlag()) {
+            System.out.println(game.getErrorMsg());
+        }
+    }
+
+    private void BuildCity() {
+        int regionId;
+        Card c = game.getCurrentPlayer().getLastCard();
+        System.out.println(game.getMapAsString());
+        System.out.println(c.toString());
+        System.out.print("Insert Region ID\n0 to check\nOption: ");
+        regionId = sc.nextInt();
+        System.out.println("");
+        game.defineAction(regionId);
+        
+        if (game.isErrorFlag()) {
+            System.out.println(game.getErrorMsg());
+        } else
+            System.out.println(game.getMapAsString());
+    }
+    
+    private void NeutralizeArmy() {
+    if (game.getState() instanceof NeutralizeArmy.InsertPlayer) {
+        System.out.print("Player ID: ");        
+    } else {
+        System.out.println(game.getMapAsString());
+        System.out.println(game.getCurrentPlayer().getLastCard().toString());
+        System.out.print("Insert Region ID:\n0 to check\n");
+    }
+
+    game.defineAction(sc.nextInt());
+    System.out.println("");
+        
         if (game.isErrorFlag()) {
             System.out.println(game.getErrorMsg());
         }

@@ -50,7 +50,7 @@ public class MoveArmyBySea extends StateAdapter {
             getGame().setErrorFlag(Boolean.FALSE);
             
             Card c = getGame().getCurrentPlayer().getLastCard();
-            numberOfMovements = c.findActionNumberOfPlays(2);
+            numberOfMovements = c.findActionNumberOfPlays(3);
 
             p = getGame().getCurrentPlayer();
             playerId = p.getId();
@@ -87,14 +87,14 @@ public class MoveArmyBySea extends StateAdapter {
                     getGame().setErrorMsg("[ERROR] Invalid region(s).\n");
                     return new MoveArmyBySea(getGame());
                 }
-                c.updateActionMovements(2);
+                c.updateActionMovements(3);
                 if (numberOfMovements > 1) {
                     getGame().setPreviousState(this);
                     return new MoveArmyBySea(getGame());
                 }
             }
         
-            if(c.findActionNumberOfPlays(2) <=  0) {
+            if(c.findActionNumberOfPlays(3) <=  0) {
                 if (getGame().isEndGameConditionMet()) {
                     getGame().setEndGameFlag(true);
                     getGame().setPreviousState(this);

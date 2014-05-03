@@ -52,9 +52,9 @@ public class Game {
     
     public Player getPlayerById(int index) {
         if(index < 1 || index > players.size())
-            return players.get(index-1);
-        else
             return null;
+        else
+            return players.get(index-1);
     }
 
     public String getPlayerIdAsString(int id) {
