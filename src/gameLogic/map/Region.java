@@ -30,10 +30,20 @@ public class Region {
     @Override
     public String toString()
     {
-        return "\tRegion " + id + " " + armies.toString() + "\n";
+        return "\tRegion " + id + " " + armies.toString() + cities.toString() + "\n";
     }
     
     public boolean checkAdjacencyByLand(int id)
+    {
+        for (Map.Entry pairs : adjacent.entrySet()) {
+            if(Integer.parseInt(pairs.getKey().toString()) == id &&
+                    Integer.parseInt(pairs.getValue().toString()) == 0)
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean checkAdjacencyBySea(int id)
     {
         for (Map.Entry pairs : adjacent.entrySet()) {
             if(Integer.parseInt(pairs.getKey().toString()) == id)
@@ -106,6 +116,10 @@ public class Region {
     
     public void removeArmy(Army army) {
         armies.remove(army);
+    }
+    
+    public void addCity(City city) {
+        this.cities.add(city);
     }
     
     /**

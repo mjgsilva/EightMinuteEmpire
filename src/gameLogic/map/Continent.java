@@ -42,7 +42,7 @@ public class Continent {
         String textRegions = new String();
         
         for(Region temp : regions)
-            textRegions += temp.toString();
+            textRegions += temp.toString() + " ";
         
         return textRegions;
     }
