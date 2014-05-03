@@ -69,7 +69,7 @@ public class MoveArmyByLand extends StateAdapter {
                         {
                             if(f.checkArmiesOfPlayerOnRegion(p))
                             {
-                                f.removeArmy(new Army(playerId, playerColor));
+                                f.removeArmy(p.getArmy());
                                 t.addArmy(new Army(playerId, playerColor));
                             } else {
                                 getGame().setErrorFlag(Boolean.TRUE);

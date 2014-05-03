@@ -93,7 +93,12 @@ public class Player {
         armies.remove(aux);
         return aux;
     }
-
+    
+    public void addArmy(Army army) {
+        armies.add(army);
+    }
+            
+    
     public ArrayList<Army> getArmies() {
         return armies;
     }

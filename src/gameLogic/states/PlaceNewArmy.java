@@ -43,9 +43,10 @@ public class PlaceNewArmy extends StateAdapter {
         { 
             if(t != null)
             {
-                //if(regionId == mainRegion || (regionId.checkCitiesOfPlayerOnRegion(p)))
                 if((t.checkCitiesOfPlayerOnRegion(p)) || regionId == mainRegion)
-                    t.addArmy(new Army(playerId, playerColor));
+                {
+                    t.addArmy(p.getArmy());
+                }
                 else {
                     getGame().setErrorFlag(Boolean.TRUE);
                     getGame().setErrorMsg("[ERROR] Not a valid Region.");
@@ -58,10 +59,10 @@ public class PlaceNewArmy extends StateAdapter {
             }
             c.updateActionMovements(1);
             if (numberOfMovements > 1)
-                return new MoveArmyByLand(getGame());
+                return new PlaceNewArmy(getGame());
         }
             
-        if(c.findActionNumberOfPlays(2) <= 1) {
+        if(c.findActionNumberOfPlays(1) <= 1) {
                 if (getGame().isEndGameConditionMet()) {
                     getGame().setEndGameFlag(true);
                     return new PrepareGame(getGame());

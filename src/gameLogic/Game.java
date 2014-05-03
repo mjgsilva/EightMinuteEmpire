@@ -49,6 +49,13 @@ public class Game {
     public ArrayList<Player> getPlayers() {
         return players;
     }
+    
+    public Player getPlayerById(int index) {
+        if(index < 1 || index > players.size())
+            return players.get(index-1);
+        else
+            return null;
+    }
 
     public String getPlayerIdAsString(int id) {
         return players.get(id).getIdAsString();
