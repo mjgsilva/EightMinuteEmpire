@@ -71,12 +71,7 @@ public abstract class StateAdapter implements StateInterface {
     @Override
     public StateInterface reDo() {
         return this;
-    }
-    @Override
-    public StateInterface newArmyThenNeutralize() {
-        return this;
     }    
-    
     @Override
     public StateInterface saveToFile() {
         return this;

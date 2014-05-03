@@ -24,11 +24,8 @@ public class BuildCity extends StateAdapter{
         
         Region t;
         Player p;
-        int playerId;
-        String playerColor;
         Card c;
         int numberOfMovements;
-        int mainRegion;
         getGame().setErrorFlag(Boolean.FALSE);
         
         
@@ -36,15 +33,19 @@ public class BuildCity extends StateAdapter{
         numberOfMovements = c.findActionNumberOfPlays(4); // Type of action - Build city -> 4
         t = getGame().getMap().getRegionById(regionId);
         p = getGame().getCurrentPlayer();
-        playerId = p.getId();
-        playerColor = p.getColor();
-        mainRegion = getGame().getMap().getMainRegion();
         
         if(numberOfMovements >= 1)
         {
             if(t != null)
             {
-                t.addCity(new City(playerId, p.getColor()));
+                if(t.checkArmiesOfPlayerOnRegion(p))
+                     t.addCity(new City(p.getId(), p.getColor()));
+                else {
+                    getGame().setErrorFlag(Boolean.TRUE);
+                    getGame().setErrorMsg("[ERROR] You don't have any army on region " + regionId + ".\n");
+                    getGame().setPreviousState(this);
+                    return new BuildCity(getGame());
+                }
             } else {
                 getGame().setErrorFlag(Boolean.TRUE);
                 getGame().setErrorMsg("[ERROR] Region " + regionId + " does not exist.\n");

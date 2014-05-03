@@ -1,6 +1,5 @@
 package gameLogic.states;
 
-import gameLogic.Army;
 import gameLogic.Card;
 import gameLogic.Game;
 import gameLogic.Player;
@@ -39,7 +38,7 @@ public class PlaceNewArmy extends StateAdapter {
         playerColor = p.getColor();
         mainRegion = getGame().getMap().getMainRegion();
         
-        if(numberOfMovements > 1)
+        if(numberOfMovements > 0)
         { 
             if(t != null)
             {
@@ -62,7 +61,7 @@ public class PlaceNewArmy extends StateAdapter {
                 return new PlaceNewArmy(getGame());
         }
             
-        if(c.findActionNumberOfPlays(1) <= 1) {
+        if(c.findActionNumberOfPlays(1) <= 0) {
                 if (getGame().isEndGameConditionMet()) {
                     getGame().setEndGameFlag(true);
                     return new PrepareGame(getGame());
