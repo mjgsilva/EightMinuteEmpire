@@ -19,7 +19,9 @@ public class Game {
     private GameMap map = new GameMap(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
     private Deck deck = new Deck(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
     private ArrayList <Card> tableCards = new ArrayList<>();  // Cards turned up in the table - maximum of 6 cards
+    
     private boolean endGameFlag;
+    private boolean exitFlag = false;
 
     // Contructor
     public Game() {
@@ -232,5 +234,13 @@ public class Game {
         else
             indexOfCurrentPlayer++;
         currentPlayer = players.get(indexOfCurrentPlayer);
+    }
+
+    public boolean getExitFlag() {
+        return exitFlag;
+    }
+
+    public void setExitFlag(boolean exitFlag) {
+        this.exitFlag = exitFlag;
     }
 }

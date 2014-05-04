@@ -9,6 +9,7 @@ import gameLogic.map.GameMap;
 import gameLogic.map.Region;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 public class PrepareGame extends StateAdapter {
     public PrepareGame(Game game) {
@@ -18,11 +19,14 @@ public class PrepareGame extends StateAdapter {
     @Override
     public StateInterface defineGame(int n) {
         int value = 0;
-        
+        //getGame().setEndGameFlag(false);
         getGame().setErrorFlag(Boolean.FALSE);
         
+        if (getGame().getEndGameFlag())
+            return endGame();
+        
         if (n == 0) {
-            getGame().setEndGameFlag(true);
+            getGame().setExitFlag(true);
             return this;
         }
             
@@ -95,6 +99,11 @@ public class PrepareGame extends StateAdapter {
     public StateInterface defineJokers(ArrayList<Integer> jokers) {
         getGame().setErrorFlag(Boolean.FALSE);
         
+        if (jokers.size() <= 0) {
+            getGame().nextPlayer();
+        }
+            
+        
         boolean noMoreJokers = true;
         for (Player aux : getGame().getPlayers()) {
             if (aux.getCards().contains(new Card(6)))
@@ -118,18 +127,28 @@ public class PrepareGame extends StateAdapter {
             
         }
         // End Game
-        endGame();
-        
-        return this;
+        return endGame();
     }
     
-    private void endGame() {
+    private StateInterface endGame() {
+        // if players have jokers then initiate joker substate
+        for (Player aux : getGame().getPlayers())
+            for (Card auxCard : aux.getCards())
+                if (auxCard.get2TypeOfResource() == 6) {
+                    getGame().setCurrentPlayer(aux);
+                    return new DefineJokers(getGame());
+                }
+        
         ArrayList <Player> players = getGame().getPlayers();
         ArrayList <Integer> playersTempScore = new ArrayList<>();
+        
+        ArrayList <Integer> playersTotalRegions = new ArrayList<>(); // For unties
         
         // Initialize playersTempScore with 0's
         for (Player player : players) {
             playersTempScore.add(0);
+            
+            playersTotalRegions.add(0);
         }
         
         // Calculate owners of Continentes and sum points to respective owner
@@ -140,7 +159,9 @@ public class PrepareGame extends StateAdapter {
                 // If owned
                 if (index > -1) {
                     players.get(index).addScore(1);
-                    playersTempScore.set(index, 1);
+                    playersTempScore.set(index, playersTempScore.get(index)+1);
+                    
+                    playersTotalRegions.set(index, playersTotalRegions.get(index)+1);
                 }
             }
             
@@ -152,14 +173,14 @@ public class PrepareGame extends StateAdapter {
             }
             // Minor or equal 0 isn't necessary but you never can't be too carefull
             if (Collections.max(playersTempScore) <= 0 || flag >= 2) {
-                // Do nothing
+                // Do nothing.
             } else {
                 // Add point to owner
                 players.get(playersTempScore.indexOf(Collections.max(playersTempScore))).addScore(1);
             }
             // Reset playersTempScore to 0's
-            for (Player player : players) {
-                playersTempScore.add(0);
+            for (int i = 0; i < playersTempScore.size(); i++) {
+                playersTempScore.set(i, 0);
             }
         }
         
@@ -167,8 +188,16 @@ public class PrepareGame extends StateAdapter {
         players = setResourcesScores(players);
         
         getGame().setPlayers(players);
+        
+        //Place winner at current player
+        getGame().setCurrentPlayer(getWinner(playersTotalRegions));
+        
         // Restart game
         getGame().setPreviousState(new PrepareGame(getGame()));
+        
+        getGame().setEndGameFlag(false);
+        
+        return this;
     }
 
     private ArrayList<Player> setResourcesScores(ArrayList<Player> players) {
@@ -236,14 +265,57 @@ public class PrepareGame extends StateAdapter {
                             scoreToAdd += 5;
                         break;
                     default:
-                        // Do nothing
+                        scoreToAdd += 0;
                         break;
                 }
                 // Add score to player
                 aux.addScore(scoreToAdd);
+                // Reset variable
+                scoreToAdd = 0;
             }
         }
         
         return players;
+    }
+
+    private Player getWinner(ArrayList<Integer> playersTotalRegions) {
+        Player max = getGame().getPlayers().get(0);
+        
+        // Get maximum score
+        for (Player aux : getGame().getPlayers()) {
+            if (aux.getScore() > max.getScore())
+                max = aux;
+        }
+        
+        // Untie if possible
+        for (Player aux : getGame().getPlayers().subList(1, getGame().getPlayers().size())) {
+            if (aux.getScore() == max.getScore())
+                if (aux.getCoins() > max.getCoins()) {
+                    max = aux;
+                } else if (aux.getCoins() == max.getCoins())
+                    if (playersTotalRegions.get(aux.getId()-1) > playersTotalRegions.get(max.getId()-1)) {
+                        max = aux;
+                    } else if (Objects.equals(playersTotalRegions.get(max.getId()-1), playersTotalRegions.get(aux.getId()-1)))
+                        return null; // ends in tie
+        }
+        return max;
+    }
+
+    public class DefineJokers extends PrepareGame {
+
+        public DefineJokers(Game game) {
+            super(game);
+        }
+
+        @Override
+        public StateInterface defineGame(int n) {
+            if (n > 0 && n < 6) {
+                for (Card aux : getGame().getCurrentPlayer().getCards())
+                    if (aux.get2TypeOfResource() == 6)
+                        aux.setTypeOfResource(n);
+                //getGame().getCurrentPlayer().getCards().get(getGame().getCurrentPlayer().getCards().indexOf(new Card(6))).setTypeOfResource(n);
+            }
+            return new PrepareGame(getGame());
+        }
     }
 }

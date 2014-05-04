@@ -161,4 +161,8 @@ public class Card {
     public void setTypeOfResource(int typeOfResource) {
         this.typeOfResource = typeOfResource;
     }
+
+    public int getNumberOfResource() {
+        return numberOfResource;
+    }
 }

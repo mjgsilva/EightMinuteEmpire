@@ -22,9 +22,10 @@ public class MoveArmyByLand extends StateAdapter {
         if (action == 0) {
             getGame().nextPlayer();
             getGame().setPreviousState(this);
-            if (getGame().isEndGameConditionMet())
+            if (getGame().isEndGameConditionMet()) {
+                getGame().setEndGameFlag(true);
                 return new PrepareGame(getGame());
-            else
+            } else
                 return new PickCard(getGame());
         }
         
@@ -44,8 +45,6 @@ public class MoveArmyByLand extends StateAdapter {
 
         @Override
         public StateInterface defineAction(int action) {
-            if (getGame().isEndGameConditionMet())
-                return new PrepareGame(getGame());
             Region f;
             Region t;
             int playerId;
@@ -101,20 +100,12 @@ public class MoveArmyByLand extends StateAdapter {
             }
         
             if(c.findActionNumberOfPlays(2) <=  0) {
-//                if (getGame().isEndGameConditionMet()) {
-//                    getGame().setEndGameFlag(true);
-//                    getGame().setPreviousState(this);
-//                    return new PrepareGame(getGame());
-//                } else {
-//                    getGame().nextPlayer();
-//                    getGame().setPreviousState(this);
-//                    return new PickCard(getGame());
-//                }
                 getGame().nextPlayer();
                 getGame().setPreviousState(this);
-                if (getGame().isEndGameConditionMet())
+                if (getGame().isEndGameConditionMet()) {
+                    getGame().setEndGameFlag(true);
                     return new PrepareGame(getGame());
-                else
+                } else
                     return new PickCard(getGame());
             }
             else

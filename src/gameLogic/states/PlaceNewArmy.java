@@ -71,6 +71,7 @@ public class PlaceNewArmy extends StateAdapter {
                 if (getGame().isEndGameConditionMet()) {
                     getGame().nextPlayer();
                     getGame().setPreviousState(this);
+                    getGame().setEndGameFlag(true);
                     return new PrepareGame(getGame());
                 }else if(getGame().getPreviousState() instanceof AND) {
                     // In case of a And card do:
@@ -103,9 +104,10 @@ public class PlaceNewArmy extends StateAdapter {
                     getGame().nextPlayer();
                     // Sets himself as previous state on game
                     getGame().setPreviousState(this);
-                    if (getGame().isEndGameConditionMet())
+                    if (getGame().isEndGameConditionMet()) {
+                        getGame().setEndGameFlag(true);
                         return new PrepareGame(getGame());
-                    else
+                    } else
                         return new PickCard(getGame());
                 }
             }

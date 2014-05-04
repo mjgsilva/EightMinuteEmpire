@@ -25,10 +25,13 @@ public class NeutralizeArmy extends StateAdapter {
         if (action == 0) {
             getGame().nextPlayer();
             getGame().setPreviousState(this);
-            if (getGame().isEndGameConditionMet())
+            if (getGame().isEndGameConditionMet()) {
+                getGame().setEndGameFlag(true);
                 return new PrepareGame(getGame());
-            else
+            } else {
+                
                 return new PickCard(getGame());
+            }
         }
         
         // Inserted only from Region
@@ -47,8 +50,10 @@ public class NeutralizeArmy extends StateAdapter {
 
         @Override
         public StateInterface defineAction(int action) {
-            if (getGame().isEndGameConditionMet() && !(getGame().getPreviousState() instanceof AND))
+            if (getGame().isEndGameConditionMet() && !(getGame().getPreviousState() instanceof AND)) {
+                getGame().setEndGameFlag(true);
                 return new PrepareGame(getGame());
+            }
             
             Region target;
             Player p;
@@ -104,6 +109,7 @@ public class NeutralizeArmy extends StateAdapter {
                 if (getGame().isEndGameConditionMet() && !(getGame().getPreviousState() instanceof AND)) {
                     getGame().nextPlayer();
                     getGame().setPreviousState(this);
+                    getGame().setEndGameFlag(true);
                     return new PrepareGame(getGame());
                 } else if(getGame().getPreviousState() instanceof AND) {
                     // In case of a And card do:
@@ -134,8 +140,10 @@ public class NeutralizeArmy extends StateAdapter {
                 } else {
                     getGame().nextPlayer();
                     getGame().setPreviousState(this);
-                    if (getGame().isEndGameConditionMet())
+                    if (getGame().isEndGameConditionMet()) {
+                        getGame().setEndGameFlag(true);
                         return new PrepareGame(getGame());
+                    }
                     else
                         return new PickCard(getGame());
                 }

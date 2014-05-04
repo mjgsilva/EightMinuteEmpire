@@ -15,15 +15,13 @@ public class BuildCity extends StateAdapter{
     @Override
     public StateInterface defineAction(int regionId)
     {
-        if (getGame().isEndGameConditionMet())
-            return new PrepareGame(getGame());
-        
         if (regionId == 0) {
             getGame().nextPlayer();
             getGame().setPreviousState(this);
-            if (getGame().isEndGameConditionMet())
+            if (getGame().isEndGameConditionMet()) {
+                getGame().setEndGameFlag(true);
                 return new PrepareGame(getGame());
-            else
+            } else
                 return new PickCard(getGame());
         }
         
@@ -71,9 +69,10 @@ public class BuildCity extends StateAdapter{
 //                }
                 getGame().nextPlayer();
                 getGame().setPreviousState(this);
-                if (getGame().isEndGameConditionMet())
+                if (getGame().isEndGameConditionMet()) {
+                    getGame().setEndGameFlag(true);
                     return new PrepareGame(getGame());
-                else
+                } else
                     return new PickCard(getGame());
             }
             else

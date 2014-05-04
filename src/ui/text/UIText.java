@@ -15,7 +15,7 @@ public class UIText {
 //    private boolean exit = false;
     
     public void run() {
-        while (!game.getEndGameFlag()) {
+        while (!game.getExitFlag()) {
             state = game.getState();
             if (state instanceof PrepareGame)
                 PrepareGame();
@@ -60,40 +60,33 @@ public class UIText {
             // Show 6 cards
             System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
             System.out.println("-------- World Map --------\n" + game.getMapAsString());
-        } else {
-            if (!game.isErrorFlag()) {
-                ArrayList <Integer> jokersNewType = new ArrayList<>();
-                if (game.getCurrentPlayer().getCards().contains(new Card(6))) {
-                    System.out.println("Type of resource:\n"
+        }
+        // "End Game"
+        // Show endGame scores
+        if (game.getEndGameFlag()) {
+            game.defineGame(0);
+            if (game.getState() instanceof PrepareGame.DefineJokers) {
+                System.out.println("Player " + game.getCurrentPlayer().getIdAsString());
+                System.out.println("Type of resource:\n"
                             + "1 - Jewelry\n"
                             + "2 - Food\n"
                             + "3 - Wood\n"
                             + "4 - Iron\n"
                             + "5 - Tools\n");
-                    for (Card aux : game.getCurrentPlayer().getCards()) {
-                        if (aux.equals(new Card(6))) {
-                            System.out.print("Choose one type of resource: ");
-                            jokersNewType.add(sc.nextInt());
-                        }
-                    }
-                    game.defineJokers(jokersNewType);
-                    
-                    if (!game.getEndGameFlag())
-                        return;
-                } else {
-                    System.out.println("Player " + game.getCurrentPlayer().getIdAsString() + " doesn't have any joker cards.\n");
-                    game.defineJokers(jokersNewType);
-                    return;
+                game.defineGame(sc.nextInt());
+                return;
+            } else {
+                if (game.getCurrentPlayer() != null)
+                    System.out.println("\nGame Over. "
+                        + "\nWinner is Player " + game.getCurrentPlayer().getIdAsString() + "!");
+                else {
+                    System.out.println("\nGame Over\nGame tied! No one wins!");
+                }
+                for (Player aux : game.getPlayers()) {
+                    System.out.println("Score " + aux.getIdAsString() + ": " + aux.getScore());
                 }
             }
-            
-        }
-        // "End Game"
-        // Show endGame scores
-        if (game.getEndGameFlag()) {
-            System.out.println("\nGame Over. Not implemented yet.");
-            for (Player aux : game.getPlayers())
-                System.out.println("Score " + aux.getIdAsString() + ": " + aux.getScore());
+            //game.defineGame(0);
         }
     }
     

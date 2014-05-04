@@ -116,7 +116,7 @@ public class Player {
         int sum = 0;
         for (Card aux : cards) {
             if (aux.get2TypeOfResource() == i)
-                sum++;
+                sum += 1 * aux.getNumberOfResource();
         }
         return sum;
     }
