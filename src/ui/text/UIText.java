@@ -47,7 +47,10 @@ public class UIText {
             System.out.println("Eight Minutes Empire - Computer Game Edition\n"
                     + "Enter 0 to exit.\n");
             System.out.print("To load previous game enter 1.\nNumber of players: ");
-            int op = sc.nextInt();
+            int op = 0;
+            while(!sc.hasNextInt())
+                sc.next();
+            op = sc.nextInt();
             if (op == 1) {
                 FileInputStream fis = null;
                 ObjectInputStream in = null;
@@ -90,7 +93,11 @@ public class UIText {
                             + "3 - Wood\n"
                             + "4 - Iron\n"
                             + "5 - Tools\n");
-                game.defineGame(sc.nextInt());
+                int op = 0;
+                while(!sc.hasNextInt())
+                    sc.next();
+                op = sc.nextInt();
+                game.defineGame(op);
                 return;
             } else {
                 if (game.getCurrentPlayer() != null)
@@ -113,7 +120,11 @@ public class UIText {
         for (Player aux : list) {
             // This is supposed to be in secret, but IDE console doesn't support methods to do this....
             System.out.print("Player " + aux.getIdAsString() + ", insert number of coins yout want to bet: ");
-            bets.add(sc.nextInt());
+            int op = 0;
+            while(!sc.hasNextInt())
+                sc.next();
+            op = sc.nextInt();
+            bets.add(op);
             System.out.print("\n");
         }
         // Show offers made by players
@@ -137,7 +148,10 @@ public class UIText {
         System.out.println("Player " + game.getCurrentPlayer().getIdAsString()+
                 " [Coins: " + game.getCurrentPlayer().getCoins() +"]");
         System.out.print("Pick card number to buy (According to displayed order - '7' to save):\n");
-        int op = sc.nextInt()-1;
+        int op = 0;
+            while(!sc.hasNextInt())
+                sc.next();
+            op = sc.nextInt()-1;
         game.defineCard(op);
         
         if (game.getState() instanceof PickCard && game.isErrorFlag()) {
@@ -168,7 +182,11 @@ public class UIText {
             Map.Entry pairs = (Map.Entry)it.next();
                         System.out.println((index) + " - " + c.getActionString(Integer.parseInt(pairs.getKey().toString()), Integer.parseInt(pairs.getValue().toString())));
         }
-        game.defineCard(sc.nextInt()+1);
+        int op = 0;
+        while(!sc.hasNextInt())
+            sc.next();
+        op = sc.nextInt()+1;
+        game.defineCard(op);
         
         if (game.isErrorFlag()) {
             System.out.println(game.getErrorMsg());
@@ -189,7 +207,11 @@ public class UIText {
             Map.Entry pairs = (Map.Entry)it.next();
                         System.out.println((index) + " - " + c.getActionString(Integer.parseInt(pairs.getKey().toString()), Integer.parseInt(pairs.getValue().toString())));
         }
-        game.defineCard(sc.nextInt()+1);
+        int op = 0;
+        while(!sc.hasNextInt())
+            sc.next();
+        op = sc.nextInt();
+        game.defineCard(op);
         
         if (game.isErrorFlag()) {
             System.out.println(game.getErrorMsg());
@@ -203,6 +225,8 @@ public class UIText {
         System.out.println("------ Place New Army ------\n");
         System.out.println(c.toString());
         System.out.print("ID (Region) - [0: Check]:\n");
+        while(!sc.hasNextInt())
+            sc.next();
         regionId = sc.nextInt();
         System.out.println("");
         game.defineAction(regionId);
@@ -222,8 +246,11 @@ public class UIText {
             System.out.println(c.toString());
             System.out.print("From (Region ID) - [0: Check]:\n");
         }
-        
-        game.defineAction(sc.nextInt());
+        int op = 0;
+        while(!sc.hasNextInt())
+            sc.next();
+        op = sc.nextInt();
+        game.defineAction(op);
         System.out.println("");
         
         if (game.isErrorFlag()) {
@@ -241,8 +268,11 @@ public class UIText {
             System.out.println(c.toString());
             System.out.print("From (Region ID) - [0: Check]:\n");
         }
-        
-        game.defineAction(sc.nextInt());
+        int op = 0;
+        while(!sc.hasNextInt())
+            sc.next();
+        op = sc.nextInt();
+        game.defineAction(op);
         System.out.println("");
         
         if (game.isErrorFlag()) {
@@ -257,6 +287,8 @@ public class UIText {
         System.out.println("------ Build City ------\n");
         System.out.println(c.toString());
         System.out.print("ID (Region) - [0: Check]:\n");
+        while(!sc.hasNextInt())
+            sc.next();
         regionId = sc.nextInt();
         System.out.println("");
         game.defineAction(regionId);
@@ -276,8 +308,11 @@ public class UIText {
             System.out.println(c.toString());
             System.out.print("ID (Region) - [0: Check]:\n");
         }
-
-        game.defineAction(sc.nextInt());
+        int op = 0;
+        while(!sc.hasNextInt())
+            sc.next();
+        op = sc.nextInt();
+        game.defineAction(op);
         System.out.println("");
         
         if (game.isErrorFlag())
