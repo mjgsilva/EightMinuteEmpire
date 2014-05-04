@@ -46,7 +46,6 @@ public class UIText {
             // Input number of players
             System.out.println("Eight Minutes Empire - Computer Game Edition\n"
                     + "Enter 0 to exit.\n");
-            
             System.out.print("To load previous game enter 1.\nNumber of players: ");
             int op = sc.nextInt();
             if (op == 1) {
@@ -73,7 +72,7 @@ public class UIText {
             } else if (game.getEndGameFlag())
                 return;
             
-            if (op !=1) {
+            if (op != 1 && op != 0) {
                 // Show 6 cards
                 System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
                 System.out.println("-------- World Map --------\n" + game.getMapAsString());
@@ -132,6 +131,7 @@ public class UIText {
 
     private void PickCard() {
         // Input desired card to buy
+        System.out.println(game.getMapAsString());
         System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
         System.out.println("-------- Info --------\n");
         System.out.println("Player " + game.getCurrentPlayer().getIdAsString()+
@@ -237,7 +237,6 @@ public class UIText {
         } else {
             Card c = game.getCurrentPlayer().getLastCard();
             System.out.println(game.getMapAsString());
-            System.out.println(c.toString());
             System.out.println("------ Move Army By Sea ------\n");
             System.out.println(c.toString());
             System.out.print("From (Region ID) - [0: Check]:\n");
@@ -262,10 +261,8 @@ public class UIText {
         System.out.println("");
         game.defineAction(regionId);
         
-        if (game.isErrorFlag()) {
+        if (game.isErrorFlag())
             System.out.println(game.getErrorMsg());
-        } else
-            System.out.println(game.getMapAsString());
     }
     
     private void NeutralizeArmy() {
@@ -283,8 +280,7 @@ public class UIText {
         game.defineAction(sc.nextInt());
         System.out.println("");
         
-        if (game.isErrorFlag()) {
+        if (game.isErrorFlag())
             System.out.println(game.getErrorMsg());
-        }
     }
 }
