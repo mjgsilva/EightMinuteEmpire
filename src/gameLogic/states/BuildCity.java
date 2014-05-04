@@ -61,13 +61,6 @@ public class BuildCity extends StateAdapter implements Serializable {
         }
             
         if(c.findActionNumberOfPlays(4) <= 0) {
-//                if (getGame().isEndGameConditionMet()) {
-//                    getGame().setEndGameFlag(true);
-//                    return new PrepareGame(getGame());
-//                } else {
-//                    getGame().nextPlayer();
-//                    return new PickCard(getGame());
-//                }
                 getGame().nextPlayer();
                 getGame().setPreviousState(this);
                 if (getGame().isEndGameConditionMet()) {

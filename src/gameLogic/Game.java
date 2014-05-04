@@ -17,8 +17,8 @@ public class Game implements Serializable {
     private ArrayList<Player> players = new ArrayList<>();
     private Player currentPlayer;
     
-    private GameMap map = new GameMap(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
-    private Deck deck = new Deck(); // DONT FORGET TO CHANGE AFTER READ GAME FROM FILE
+    private GameMap map = new GameMap();
+    private Deck deck = new Deck(); 
     private ArrayList <Card> tableCards = new ArrayList<>();  // Cards turned up in the table - maximum of 6 cards
     
     private boolean endGameFlag;
@@ -227,9 +227,5 @@ public class Game implements Serializable {
 
     public void setExitFlag(boolean exitFlag) {
         this.exitFlag = exitFlag;
-    }
-
-    public void saveToFile(Game game) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

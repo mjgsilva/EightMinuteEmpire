@@ -21,6 +21,7 @@ public class PlaceNewArmy extends StateAdapter implements Serializable {
             getGame().nextPlayer();
             getGame().setPreviousState(this);
             if (getGame().isEndGameConditionMet()) {
+                getGame().setEndGameFlag(true);
                 return new PrepareGame(getGame());
             } else {
                 return new PickCard(getGame());
