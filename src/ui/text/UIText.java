@@ -12,6 +12,7 @@ public class UIText {
     StateInterface state;
     Deck d = new Deck();        
     Scanner sc = new Scanner(System.in);
+//    private boolean exit = false;
     
     public void run() {
         while (!game.getEndGameFlag()) {
@@ -22,8 +23,6 @@ public class UIText {
                 Auction();
             else if (state instanceof PickCard)
                 PickCard();
-            //else if (state instanceof SelectAction) // ESTE É PARA SAIR
-              //  SelectAction();
             else if (state instanceof OR)
                 CardOR();
             else if (state instanceof AND)
@@ -62,19 +61,9 @@ public class UIText {
             System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
             System.out.println("-------- World Map --------\n" + game.getMapAsString());
         } else {
-            // Transform jokers into resource cards
-            /*
-            Type:
-            1 - Jewelry
-            2 - Food
-            3 - Wood
-            4 - Iron
-            5 - Tools
-            6 - Joker
-            */
             if (!game.isErrorFlag()) {
+                ArrayList <Integer> jokersNewType = new ArrayList<>();
                 if (game.getCurrentPlayer().getCards().contains(new Card(6))) {
-                    ArrayList <Integer> jokersNewType = new ArrayList<>();
                     System.out.println("Type of resource:\n"
                             + "1 - Jewelry\n"
                             + "2 - Food\n"
@@ -93,6 +82,7 @@ public class UIText {
                         return;
                 } else {
                     System.out.println("Player " + game.getCurrentPlayer().getIdAsString() + " doesn't have any joker cards.\n");
+                    game.defineJokers(jokersNewType);
                     return;
                 }
             }
@@ -202,7 +192,7 @@ public class UIText {
         Card c = game.getCurrentPlayer().getLastCard();
         System.out.println(game.getMapAsString());
         System.out.println(c.toString());
-        System.out.print("Insert Region ID\n0to check\nOption: ");
+        System.out.print("Insert Region ID\n0 to check\nOption: ");
         regionId = sc.nextInt();
         System.out.println("");
         game.defineAction(regionId);
@@ -265,16 +255,16 @@ public class UIText {
     }
     
     private void NeutralizeArmy() {
-    if (game.getState() instanceof NeutralizeArmy.InsertPlayer) {
-        System.out.print("Player ID: ");        
-    } else {
-        System.out.println(game.getMapAsString());
-        System.out.println(game.getCurrentPlayer().getLastCard().toString());
-        System.out.print("Insert Region ID:\n0 to check\n");
-    }
+        if (game.getState() instanceof NeutralizeArmy.InsertPlayer) {
+            System.out.print("Player ID: ");        
+        } else {
+            System.out.println(game.getMapAsString());
+            System.out.println(game.getCurrentPlayer().getLastCard().toString());
+            System.out.print("Insert Region ID:\n0 to check\n");
+        }
 
-    game.defineAction(sc.nextInt());
-    System.out.println("");
+        game.defineAction(sc.nextInt());
+        System.out.println("");
         
         if (game.isErrorFlag()) {
             System.out.println(game.getErrorMsg());

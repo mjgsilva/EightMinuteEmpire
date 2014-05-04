@@ -5,6 +5,8 @@ import gameLogic.Card;
 import gameLogic.Game;
 import gameLogic.Player;
 import gameLogic.map.Region;
+import java.util.Iterator;
+import java.util.Map;
 
 public class NeutralizeArmy extends StateAdapter {
 
@@ -22,7 +24,11 @@ public class NeutralizeArmy extends StateAdapter {
         // Check action
         if (action == 0) {
             getGame().nextPlayer();
-            return new PickCard(getGame()); 
+            getGame().setPreviousState(this);
+            if (getGame().isEndGameConditionMet())
+                return new PrepareGame(getGame());
+            else
+                return new PickCard(getGame());
         }
         
         // Inserted only from Region
@@ -41,6 +47,9 @@ public class NeutralizeArmy extends StateAdapter {
 
         @Override
         public StateInterface defineAction(int action) {
+            if (getGame().isEndGameConditionMet() && !(getGame().getPreviousState() instanceof AND))
+                return new PrepareGame(getGame());
+            
             Region target;
             Player p;
             Army a;
@@ -92,17 +101,47 @@ public class NeutralizeArmy extends StateAdapter {
             }
             
             if(c.findActionNumberOfPlays(5) <=  0) {
-                if (getGame().isEndGameConditionMet()) {
-                    getGame().setEndGameFlag(true);
+                if (getGame().isEndGameConditionMet() && !(getGame().getPreviousState() instanceof AND)) {
+                    getGame().nextPlayer();
                     getGame().setPreviousState(this);
                     return new PrepareGame(getGame());
+                } else if(getGame().getPreviousState() instanceof AND) {
+                    // In case of a And card do:
+                    Map<Integer, Integer> actions = c.getActions();
+                    Iterator it = actions.entrySet().iterator();
+                    int index = 1;
+                    action = 0;
+
+                    // Breaks out if number of moves is bigger than 0
+                    while(it.hasNext()) {
+                        Map.Entry pairs = (Map.Entry)it.next();
+                        action = Integer.parseInt(pairs.getKey().toString());
+                        if (Integer.parseInt(pairs.getValue().toString()) > 0)
+                            break;
+                    }
+
+                    // Sets himself as previous state on game
+                    getGame().setPreviousState(this);
+
+                    // Returns the remainig action
+                    switch(action) {
+                        case 1 : return new PlaceNewArmy(getGame());
+                        case 2 : return new MoveArmyByLand(getGame());
+                        case 3 : return new MoveArmyBySea(getGame());
+                        case 4 : return new BuildCity(getGame());
+                        case 5 : return new NeutralizeArmy(getGame());
+                    }
                 } else {
                     getGame().nextPlayer();
                     getGame().setPreviousState(this);
-                    return new PickCard(getGame());
+                    if (getGame().isEndGameConditionMet())
+                        return new PrepareGame(getGame());
+                    else
+                        return new PickCard(getGame());
                 }
             } else
                 return this;
+            return this;
         }
     }
 }

@@ -1,6 +1,5 @@
 package gameLogic.states;
 
-import gameLogic.Army;
 import gameLogic.Card;
 import gameLogic.City;
 import gameLogic.Game;
@@ -16,10 +15,16 @@ public class BuildCity extends StateAdapter{
     @Override
     public StateInterface defineAction(int regionId)
     {
+        if (getGame().isEndGameConditionMet())
+            return new PrepareGame(getGame());
+        
         if (regionId == 0) {
             getGame().nextPlayer();
             getGame().setPreviousState(this);
-            return new PickCard(getGame());
+            if (getGame().isEndGameConditionMet())
+                return new PrepareGame(getGame());
+            else
+                return new PickCard(getGame());
         }
         
         Region t;
@@ -57,13 +62,19 @@ public class BuildCity extends StateAdapter{
         }
             
         if(c.findActionNumberOfPlays(4) <= 0) {
-                if (getGame().isEndGameConditionMet()) {
-                    getGame().setEndGameFlag(true);
+//                if (getGame().isEndGameConditionMet()) {
+//                    getGame().setEndGameFlag(true);
+//                    return new PrepareGame(getGame());
+//                } else {
+//                    getGame().nextPlayer();
+//                    return new PickCard(getGame());
+//                }
+                getGame().nextPlayer();
+                getGame().setPreviousState(this);
+                if (getGame().isEndGameConditionMet())
                     return new PrepareGame(getGame());
-                } else {
-                    getGame().nextPlayer();
+                else
                     return new PickCard(getGame());
-                }
             }
             else
                 return this;

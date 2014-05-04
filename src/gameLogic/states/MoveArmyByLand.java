@@ -18,11 +18,14 @@ public class MoveArmyByLand extends StateAdapter {
     @Override
     public StateInterface defineAction(int action) {
         getGame().setErrorFlag(Boolean.FALSE);
-        
         // Check action
         if (action == 0) {
             getGame().nextPlayer();
-            return new PickCard(getGame()); 
+            getGame().setPreviousState(this);
+            if (getGame().isEndGameConditionMet())
+                return new PrepareGame(getGame());
+            else
+                return new PickCard(getGame());
         }
         
         // Inserted only from Region
@@ -41,6 +44,8 @@ public class MoveArmyByLand extends StateAdapter {
 
         @Override
         public StateInterface defineAction(int action) {
+            if (getGame().isEndGameConditionMet())
+                return new PrepareGame(getGame());
             Region f;
             Region t;
             int playerId;
@@ -96,15 +101,21 @@ public class MoveArmyByLand extends StateAdapter {
             }
         
             if(c.findActionNumberOfPlays(2) <=  0) {
-                if (getGame().isEndGameConditionMet()) {
-                    getGame().setEndGameFlag(true);
-                    getGame().setPreviousState(this);
+//                if (getGame().isEndGameConditionMet()) {
+//                    getGame().setEndGameFlag(true);
+//                    getGame().setPreviousState(this);
+//                    return new PrepareGame(getGame());
+//                } else {
+//                    getGame().nextPlayer();
+//                    getGame().setPreviousState(this);
+//                    return new PickCard(getGame());
+//                }
+                getGame().nextPlayer();
+                getGame().setPreviousState(this);
+                if (getGame().isEndGameConditionMet())
                     return new PrepareGame(getGame());
-                } else {
-                    getGame().nextPlayer();
-                    getGame().setPreviousState(this);
+                else
                     return new PickCard(getGame());
-                }
             }
             else
                 return this;

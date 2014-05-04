@@ -4,6 +4,8 @@ import gameLogic.Card;
 import gameLogic.Game;
 import gameLogic.Player;
 import gameLogic.map.Region;
+import java.util.Iterator;
+import java.util.Map;
 
 public class PlaceNewArmy extends StateAdapter {
 
@@ -13,11 +15,15 @@ public class PlaceNewArmy extends StateAdapter {
     
     @Override
     public StateInterface defineAction(int regionId)
-    {
+    {       
         if (regionId == 0) {
             getGame().nextPlayer();
             getGame().setPreviousState(this);
-            return new PickCard(getGame());
+            if (getGame().isEndGameConditionMet()) {
+                return new PrepareGame(getGame());
+            } else {
+                return new PickCard(getGame());
+            }
         }
         
         Region t;
@@ -63,11 +69,44 @@ public class PlaceNewArmy extends StateAdapter {
             
         if(c.findActionNumberOfPlays(1) <= 0) {
                 if (getGame().isEndGameConditionMet()) {
-                    getGame().setEndGameFlag(true);
+                    getGame().nextPlayer();
+                    getGame().setPreviousState(this);
                     return new PrepareGame(getGame());
+                }else if(getGame().getPreviousState() instanceof AND) {
+                    // In case of a And card do:
+                    Map<Integer, Integer> actions = c.getActions();
+                    Iterator it = actions.entrySet().iterator();
+                    int index = 1;
+                    int action = 0;
+
+                    // Breaks out if number of moves is bigger than 0
+                    while(it.hasNext()) {
+                        Map.Entry pairs = (Map.Entry)it.next();
+                        action = Integer.parseInt(pairs.getKey().toString());
+                        if (Integer.parseInt(pairs.getValue().toString()) > 0)
+                            break;
+                    }
+
+                    // Sets himself as previous state on game
+                    getGame().setPreviousState(this);
+
+                    // Returns the remainig action
+                    switch(action) {
+                        case 1 : return new PlaceNewArmy(getGame());
+                        case 2 : return new MoveArmyByLand(getGame());
+                        case 3 : return new MoveArmyBySea(getGame());
+                        case 4 : return new BuildCity(getGame());
+                        case 5 : return new NeutralizeArmy(getGame());
+                        default: return this;
+                    }
                 } else {
                     getGame().nextPlayer();
-                    return new PickCard(getGame());
+                    // Sets himself as previous state on game
+                    getGame().setPreviousState(this);
+                    if (getGame().isEndGameConditionMet())
+                        return new PrepareGame(getGame());
+                    else
+                        return new PickCard(getGame());
                 }
             }
             else

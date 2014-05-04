@@ -195,7 +195,7 @@ public class Game {
         
         switch(nPlayers) {
             case 2:
-                n = 2;
+                n = 1; // PROVISORY
                 break;
             case 3:
                 n = 10;
@@ -217,8 +217,10 @@ public class Game {
         }
         
         if (flags.contains(false)) {
+            //endGameFlag = false;
             return false;
         } else {
+            //endGameFlag = true;
             return true;
         }
     }
