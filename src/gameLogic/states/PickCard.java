@@ -2,9 +2,12 @@ package gameLogic.states;
 
 import gameLogic.Card;
 import gameLogic.Game;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PickCard extends StateAdapter {
+public class PickCard extends StateAdapter implements Serializable {
     // Contructor
     public PickCard(Game game) {
         super(game);
@@ -14,7 +17,7 @@ public class PickCard extends StateAdapter {
     public StateInterface defineCard(int n) {
         getGame().setErrorFlag(Boolean.FALSE);
         
-        if (n < 6 && n >= 0) {
+        if (n < 7 && n >= 0) {
             int cardCost = 0;
             switch(n+1) {
                 case 1:
@@ -35,6 +38,9 @@ public class PickCard extends StateAdapter {
                 case 6:
                     cardCost = 3;
                     break;
+                case 7:
+                    saveToFile(getGame());
+                    return this;
             }
             // If player doesn't have enough money
             if (getGame().getCurrentPlayer().getCoins() - cardCost < 0) {
@@ -65,4 +71,25 @@ public class PickCard extends StateAdapter {
             return this;
         }
     }
+
+
+    public void saveToFile(Game gameToSave) {
+        String filename = "eme.bin";
+
+        // Save game object to file
+        FileOutputStream fos = null;
+        ObjectOutputStream out = null;
+        try {
+          fos = new FileOutputStream(filename);
+          out = new ObjectOutputStream(fos);
+          out.writeObject(gameToSave);
+          out.close();
+        } catch (Exception ex) {
+            getGame().setErrorFlag(Boolean.TRUE);
+            getGame().setErrorMsg("Error saving game. Game was not save.");
+            ex.printStackTrace();
+        }
+    }
+
+    
 }

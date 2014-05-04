@@ -5,8 +5,9 @@ import gameLogic.City;
 import gameLogic.Game;
 import gameLogic.Player;
 import gameLogic.map.Region;
+import java.io.Serializable;
 
-public class BuildCity extends StateAdapter{
+public class BuildCity extends StateAdapter implements Serializable {
 
     public BuildCity(Game game) {
         super(game);

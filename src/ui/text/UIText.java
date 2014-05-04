@@ -2,15 +2,17 @@ package ui.text;
 
 import gameLogic.*;
 import gameLogic.states.*;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
 public class UIText {
-    Game game = new Game(); // Provisório. Não esquecer que depois é preciso ter opção de carregar de um ficheiro
+    Game game = new Game();
     StateInterface state;
-    Deck d = new Deck();        
+    //Deck d = new Deck();        
     Scanner sc = new Scanner(System.in);
 //    private boolean exit = false;
     
@@ -46,8 +48,23 @@ public class UIText {
             System.out.println("Eight Minutes Empire - Computer Game Edition\n"
                     + "Enter 0 to exit.\n");
             
-            System.out.print("Number of players: ");
-            game.defineGame(sc.nextInt());
+            System.out.print("To load previous game enter 1.\nNumber of players: ");
+            int op = sc.nextInt();
+            if (op == 1) {
+                FileInputStream fis = null;
+                ObjectInputStream in = null;
+                try {
+                  fis = new FileInputStream("eme.bin");
+                  in = new ObjectInputStream(fis);
+                  game = (Game) in.readObject();
+                  in.close();
+                } catch (Exception ex) {
+                  //ex.printStackTrace();
+                    System.out.println("Error loading file.");
+                    return;
+                }
+            } else 
+                game.defineGame(op);
             System.out.print("\n");
             
             // Error
@@ -57,9 +74,11 @@ public class UIText {
             } else if (game.getEndGameFlag())
                 return;
             
-            // Show 6 cards
-            System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
-            System.out.println("-------- World Map --------\n" + game.getMapAsString());
+            if (op !=1) {
+                // Show 6 cards
+                System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
+                System.out.println("-------- World Map --------\n" + game.getMapAsString());
+            }
         }
         // "End Game"
         // Show endGame scores
@@ -112,28 +131,28 @@ public class UIText {
         else
             System.out.println("\nPlayer " + game.getCurrentPlayer().getIdAsString() + " won the auction!"
                     + "\nAnd is the first player to play.\n");
-        //System.out.println("Remaining coins: " + game.getCurrentPlayer().getCoins());
     }
 
     private void PickCard() {
-//        // DO NOT FORGET TO IMPLEMENT SAVE GAME HERE.
-        
         // Input desired card to buy
         System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
         System.out.println("Player " + game.getCurrentPlayer().getIdAsString() + " turn" +
                 "\nCoins: " + game.getCurrentPlayer().getCoins());
-        System.out.println("Score: " + game.getCurrentPlayer().getScore());
-        System.out.print("Pick card number to buy (According to displayed order): ");
-        game.defineCard(sc.nextInt()-1);
+        System.out.print("\nOption 7 to save.\nPick card number to buy (According to displayed order): ");
+        int op = sc.nextInt()-1;
+        game.defineCard(op);
         
         if (game.getState() instanceof PickCard && game.isErrorFlag()) {
             System.out.println(game.getErrorMsg());
             return;
         }
         // Show players information
-        System.out.println("\nBought card: " + game.getCurrentPlayer().getLastCard());
-        System.out.println("Remaining coins: " + game.getCurrentPlayer().getCoins());
-        System.out.println("Score: " + game.getCurrentPlayer().getScore());
+        if (op != 6) {
+            System.out.println("\nBought card: " + game.getCurrentPlayer().getLastCard());
+            System.out.println("Remaining coins: " + game.getCurrentPlayer().getCoins());
+            System.out.println("Score: " + game.getCurrentPlayer().getScore());
+        } else
+            System.out.println("Game saved.");
     }
 
     private void CardOR() {

@@ -3,6 +3,7 @@ package gameLogic.map;
 import gameLogic.Army;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +16,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-public class GameMap {
+public class GameMap implements Serializable  {
     private final ArrayList<Continent> continents = new ArrayList<>();
     private int mainRegion;
     

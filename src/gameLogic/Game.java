@@ -2,9 +2,10 @@ package gameLogic;
 
 import gameLogic.map.*;
 import gameLogic.states.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Game {
+public class Game implements Serializable {
     private StateInterface state;
     private StateInterface previousState;
 
@@ -115,18 +116,6 @@ public class Game {
     {
         state = state.defineAction(n);
     }
-    
-    public void defineEndGame() {
-        state = state.defineEndGame();
-    }
-
-    public void definePlaceArmy(int regionId) {
-        state = state.definePlaceArmy(regionId);
-    }
-    
-    public void defineMoveByLand(int from, int to) {
-        state = state.defineMoveByLand(from,to);
-    }
 
     /**
      * Returns table cards in an organized way
@@ -164,10 +153,6 @@ public class Game {
         this.errorFlag = errorFlag;
     }
 
-    public void defineJokers(ArrayList<Integer> jokers) {
-        state = state.defineJokers(jokers);
-    }
-
     public String getErrorMsg() {
         return errorMsg;
     }
@@ -197,7 +182,7 @@ public class Game {
         
         switch(nPlayers) {
             case 2:
-                n = 1; // PROVISORY
+                n = 2;
                 break;
             case 3:
                 n = 10;
@@ -242,5 +227,9 @@ public class Game {
 
     public void setExitFlag(boolean exitFlag) {
         this.exitFlag = exitFlag;
+    }
+
+    public void saveToFile(Game game) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

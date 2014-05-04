@@ -1,10 +1,11 @@
 package gameLogic;
 
 import gameLogic.states.StateInterface;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Card {
+public class Card implements Serializable  {
     private final int id;
     private int typeOfResource;
     private final int numberOfResource;

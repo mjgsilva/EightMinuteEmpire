@@ -2,10 +2,11 @@ package gameLogic.states;
 
 import gameLogic.Card;
 import gameLogic.Game;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 
-public class OR extends StateAdapter {
+public class OR extends StateAdapter implements Serializable {
 
     public OR(Game game) {
         super(game);

@@ -3,11 +3,12 @@ package gameLogic.map;
 import gameLogic.Army;
 import gameLogic.City;
 import gameLogic.Player;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
-public class Region {
+public class Region implements Serializable  {
     private final int id;
     private final Map <Integer, Integer> adjacent;
     private ArrayList<Army> armies = new ArrayList<>();

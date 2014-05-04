@@ -4,10 +4,11 @@ import gameLogic.Card;
 import gameLogic.Game;
 import gameLogic.Player;
 import gameLogic.map.Region;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 
-public class PlaceNewArmy extends StateAdapter {
+public class PlaceNewArmy extends StateAdapter implements Serializable {
 
     public PlaceNewArmy(Game game) {
         super(game);

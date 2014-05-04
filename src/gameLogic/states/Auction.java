@@ -1,10 +1,11 @@
 package gameLogic.states;
 
 import gameLogic.Game;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Auction extends StateAdapter {
+public class Auction extends StateAdapter implements Serializable  {
 
     public Auction(Game game) {
         super(game);

@@ -1,6 +1,8 @@
 package gameLogic;
 
-public class Army {
+import java.io.Serializable;
+
+public class Army implements Serializable {
     int idOfOwner;
     String color;
     

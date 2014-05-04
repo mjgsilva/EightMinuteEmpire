@@ -2,10 +2,11 @@ package gameLogic;
 
 import gameLogic.states.AND;
 import gameLogic.states.StateInterface;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 
-public class CardAND extends Card {
+public class CardAND extends Card implements Serializable  {
 
     public CardAND(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer, Integer> actions, int and) {
         super(id, typeOfResource, numberOfResource, fivePlayersCard, actions, and);

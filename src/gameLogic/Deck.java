@@ -1,6 +1,7 @@
 package gameLogic;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.xml.parsers.DocumentBuilder;
@@ -14,7 +15,7 @@ import org.xml.sax.SAXParseException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Deck {
+public class Deck implements Serializable  {
     private final ArrayList<Card> cards = new ArrayList<>();
 
     public Deck()

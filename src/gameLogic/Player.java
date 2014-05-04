@@ -1,8 +1,9 @@
 package gameLogic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements Serializable  {
     // Player id
     private final int id;
     // Player color - Only works on IDE console (NetBeans tested) or Unix console (jdk)

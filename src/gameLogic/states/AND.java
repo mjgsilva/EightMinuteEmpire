@@ -2,10 +2,11 @@ package gameLogic.states;
 
 import gameLogic.Card;
 import gameLogic.Game;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 
-public class AND extends StateAdapter {
+public class AND extends StateAdapter implements Serializable  {
 
     public AND(Game game) {
         super(game);

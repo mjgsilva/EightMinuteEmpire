@@ -1,9 +1,10 @@
 package gameLogic.states;
 
 import gameLogic.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class StateAdapter implements StateInterface {
+public abstract class StateAdapter implements StateInterface, Serializable {
     private Game game;
     
     public StateAdapter (Game game) {
@@ -29,61 +30,5 @@ public abstract class StateAdapter implements StateInterface {
     @Override
     public StateInterface defineAction(int n) {
         return this;
-    }
-    @Override
-    public StateInterface definePlaceArmy(int regionId) {
-        return this;
-    }
-    @Override
-    public StateInterface defineMoveByLand(int from, int to) {
-        return this;
-    }
-    @Override
-    public StateInterface defineMoveBySea() {
-        return this;
-    }
-    @Override
-    public StateInterface defineCity() {
-        return this;
-    }
-    @Override
-    public StateInterface defineNeutralize() {
-        return this;
-    }
-
-    @Override
-    public StateInterface defineJokers(ArrayList<Integer> jokers) {
-        return this;
-    }
-    
-    @Override
-    public StateInterface placeArmyOrCity() {
-        return this;
-    }
-    @Override
-    public StateInterface moveArmy() {
-        return this;
-    }
-    @Override
-    public StateInterface neutralize() {
-        return this;
-    }
-    @Override
-    public StateInterface reDo() {
-        return this;
     }    
-    @Override
-    public StateInterface saveToFile() {
-        return this;
-    }
-    @Override
-    public StateInterface loadFromFile() {
-        return this;
-    }
-
-    @Override
-    public StateInterface defineEndGame() {
-        return this;
-    }
-    
 }

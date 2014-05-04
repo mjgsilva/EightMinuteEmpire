@@ -1,9 +1,10 @@
 package gameLogic.map;
 
 import gameLogic.Army;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Continent {
+public class Continent implements Serializable  {
     private final int id;
     private final ArrayList<Region> regions;
 

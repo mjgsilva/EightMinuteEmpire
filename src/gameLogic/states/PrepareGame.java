@@ -7,11 +7,14 @@ import gameLogic.Player;
 import gameLogic.map.Continent;
 import gameLogic.map.GameMap;
 import gameLogic.map.Region;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
-public class PrepareGame extends StateAdapter {
+public class PrepareGame extends StateAdapter implements Serializable {
     public PrepareGame(Game game) {
         super(game);
     }
@@ -29,7 +32,7 @@ public class PrepareGame extends StateAdapter {
             getGame().setExitFlag(true);
             return this;
         }
-            
+        
         // Preparation of map
         // Being made by default on Game class
         
@@ -93,41 +96,6 @@ public class PrepareGame extends StateAdapter {
         }
 
         return map;
-    }
-    
-    @Override
-    public StateInterface defineJokers(ArrayList<Integer> jokers) {
-        getGame().setErrorFlag(Boolean.FALSE);
-        
-        if (jokers.size() <= 0) {
-            getGame().nextPlayer();
-        }
-            
-        
-        boolean noMoreJokers = true;
-        for (Player aux : getGame().getPlayers()) {
-            if (aux.getCards().contains(new Card(6)))
-                noMoreJokers = false;
-        }
-        if (noMoreJokers)
-            getGame().setEndGameFlag(noMoreJokers);
-        
-        
-        if (!getGame().getEndGameFlag()) {
-            for (Integer aux : jokers) {
-                if (aux > 0 && aux < 6) {
-                    getGame().getCurrentPlayer().getCards().get(getGame().getCurrentPlayer().getCards().indexOf(new Card(6))).setTypeOfResource(aux);
-                } else {
-                    getGame().setErrorFlag(Boolean.TRUE);
-                    getGame().setErrorMsg("Inputed invalid type of resource.\n");
-                    return this;
-                }
-            }
-            
-            
-        }
-        // End Game
-        return endGame();
     }
     
     private StateInterface endGame() {

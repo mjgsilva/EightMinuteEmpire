@@ -5,10 +5,11 @@ import gameLogic.Card;
 import gameLogic.Game;
 import gameLogic.Player;
 import gameLogic.map.Region;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 
-public class NeutralizeArmy extends StateAdapter {
+public class NeutralizeArmy extends StateAdapter implements Serializable  {
 
     private int regionId = 0;
     private int playerId = 0;
@@ -29,7 +30,6 @@ public class NeutralizeArmy extends StateAdapter {
                 getGame().setEndGameFlag(true);
                 return new PrepareGame(getGame());
             } else {
-                
                 return new PickCard(getGame());
             }
         }

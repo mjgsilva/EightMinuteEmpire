@@ -5,8 +5,9 @@ import gameLogic.Card;
 import gameLogic.Game;
 import gameLogic.Player;
 import gameLogic.map.Region;
+import java.io.Serializable;
 
-public class MoveArmyBySea extends StateAdapter {
+public class MoveArmyBySea extends StateAdapter implements Serializable {
     private int from = 0;
     private int to = 0;
     

@@ -6,10 +6,11 @@ import gameLogic.states.MoveArmyBySea;
 import gameLogic.states.NeutralizeArmy;
 import gameLogic.states.PlaceNewArmy;
 import gameLogic.states.StateInterface;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Map;
 
-public class CardStd extends Card {
+public class CardStd extends Card implements Serializable  {
 
     public CardStd(int id, int typeOfResource, int numberOfResource, int fivePlayersCard, Map<Integer, Integer> actions, int and) {
         super(id, typeOfResource, numberOfResource, fivePlayersCard, actions, and);

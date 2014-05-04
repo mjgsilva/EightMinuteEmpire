@@ -1,6 +1,8 @@
 package gameLogic;
 
-public class City {
+import java.io.Serializable;
+
+public class City implements Serializable  {
     int idOfOwner;
     String color;
     
