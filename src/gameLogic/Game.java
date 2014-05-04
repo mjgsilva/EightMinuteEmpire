@@ -182,7 +182,7 @@ public class Game implements Serializable {
         
         switch(nPlayers) {
             case 2:
-                n = 2;
+                n = 13;
                 break;
             case 3:
                 n = 10;
