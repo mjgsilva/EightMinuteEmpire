@@ -1,6 +1,7 @@
 package gameLogic;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,6 +15,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.DOMException;
 
 public class Deck implements Serializable  {
     private final ArrayList<Card> cards = new ArrayList<>();
@@ -145,12 +148,11 @@ public class Deck implements Serializable  {
                 addCard(cardId,typeOfResource,numberOfResource,fivePlayersCard,actions, andFlag);
             }
         } catch (SAXParseException err) {
-            System.out.println(" " + err.getMessage ());
+            System.exit(1);
         } catch (SAXException e) {
-            Exception x = e.getException ();
-                ((x == null) ? e : x).printStackTrace ();
-        } catch (Throwable t) {
-            t.printStackTrace ();
+            System.exit(1);
+        } catch (IOException | NumberFormatException | ParserConfigurationException | DOMException t) {
+            System.exit(1);
         }
     }
     

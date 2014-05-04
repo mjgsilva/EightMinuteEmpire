@@ -3,12 +3,15 @@ package gameLogic.map;
 import gameLogic.Army;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -139,12 +142,11 @@ public class GameMap implements Serializable  {
                 addContinent(continentId, regions);
              }
         } catch (SAXParseException err) {
-            System.out.println(" " + err.getMessage ());
+            System.exit(1);
         } catch (SAXException e) {
-            Exception x = e.getException ();
-                ((x == null) ? e : x).printStackTrace ();
-        } catch (Throwable t) {
-            t.printStackTrace ();
+            System.exit(1);
+        } catch (IOException | NumberFormatException | ParserConfigurationException | DOMException t) {
+            System.exit(1);
         }
     }
 

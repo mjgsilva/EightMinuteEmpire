@@ -3,6 +3,7 @@ package ui.text;
 import gameLogic.*;
 import gameLogic.states.*;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,9 +13,7 @@ import java.util.Scanner;
 public class UIText {
     Game game = new Game();
     StateInterface state;
-    //Deck d = new Deck();        
     Scanner sc = new Scanner(System.in);
-//    private boolean exit = false;
     
     public void run() {
         while (!game.getExitFlag()) {
@@ -47,7 +46,6 @@ public class UIText {
             // Input number of players
             System.out.println("Eight Minutes Empire - Computer Game Edition\n"
                     + "Enter 0 to exit.\n");
-            
             System.out.print("To load previous game enter 1.\nNumber of players: ");
             int op = sc.nextInt();
             if (op == 1) {
@@ -58,9 +56,9 @@ public class UIText {
                   in = new ObjectInputStream(fis);
                   game = (Game) in.readObject();
                   in.close();
-                } catch (Exception ex) {
+                } catch (IOException | ClassNotFoundException ex) {
                   //ex.printStackTrace();
-                    System.out.println("Error loading file.");
+                    System.out.println("Error loading file." + ex);
                     return;
                 }
             } else 
@@ -74,7 +72,7 @@ public class UIText {
             } else if (game.getEndGameFlag())
                 return;
             
-            if (op !=1) {
+            if (op != 1 && op != 0) {
                 // Show 6 cards
                 System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
                 System.out.println("-------- World Map --------\n" + game.getMapAsString());
@@ -105,7 +103,6 @@ public class UIText {
                     System.out.println("Score " + aux.getIdAsString() + ": " + aux.getScore());
                 }
             }
-            //game.defineGame(0);
         }
     }
     
@@ -119,7 +116,6 @@ public class UIText {
             bets.add(sc.nextInt());
             System.out.print("\n");
         }
-        System.out.println("\n");
         // Show offers made by players
         System.out.println("-------- Offers --------");
         for (int i = 0; i < bets.size(); i++)
@@ -135,10 +131,12 @@ public class UIText {
 
     private void PickCard() {
         // Input desired card to buy
+        System.out.println(game.getMapAsString());
         System.out.println("-------- Cards --------\n" + game.getTableCardsAsString());
-        System.out.println("Player " + game.getCurrentPlayer().getIdAsString() + " turn" +
-                "\nCoins: " + game.getCurrentPlayer().getCoins());
-        System.out.print("\nOption 7 to save.\nPick card number to buy (According to displayed order): ");
+        System.out.println("-------- Info --------\n");
+        System.out.println("Player " + game.getCurrentPlayer().getIdAsString()+
+                " [Coins: " + game.getCurrentPlayer().getCoins() +"]");
+        System.out.print("Pick card number to buy (According to displayed order - '7' to save):\n");
         int op = sc.nextInt()-1;
         game.defineCard(op);
         
@@ -161,16 +159,16 @@ public class UIText {
         Iterator it = actions.entrySet().iterator();
         int index = 0;
         
-        System.out.println("------ Pick one action ------\n");
-        System.out.println((index+1) + " - Check");
+        System.out.println(game.getMapAsString());
+        System.out.println("------ [OR]Pick one action ------\n");
+        System.out.println((index) + " - Check");
         while(it.hasNext())
         {   
             index++;
-            String output = new String();         
             Map.Entry pairs = (Map.Entry)it.next();
-                        System.out.println((index+1) + " - " + c.getActionString(Integer.parseInt(pairs.getKey().toString()), Integer.parseInt(pairs.getValue().toString())));
+                        System.out.println((index) + " - " + c.getActionString(Integer.parseInt(pairs.getKey().toString()), Integer.parseInt(pairs.getValue().toString())));
         }
-        game.defineCard(sc.nextInt());
+        game.defineCard(sc.nextInt()+1);
         
         if (game.isErrorFlag()) {
             System.out.println(game.getErrorMsg());
@@ -183,16 +181,15 @@ public class UIText {
         Iterator it = actions.entrySet().iterator();
         int index = 0;
         
-        System.out.println("------ Pick one action ------\n");
-        System.out.println((index+1) + " - Check");
+        System.out.println("------ [AND]Pick one action ------\n");
+        System.out.println((index) + " - Check");
         while(it.hasNext())
         {
             index++;
-            String output = new String();         
             Map.Entry pairs = (Map.Entry)it.next();
-                        System.out.println((index+1) + " - " + c.getActionString(Integer.parseInt(pairs.getKey().toString()), Integer.parseInt(pairs.getValue().toString())));
+                        System.out.println((index) + " - " + c.getActionString(Integer.parseInt(pairs.getKey().toString()), Integer.parseInt(pairs.getValue().toString())));
         }
-        game.defineCard(sc.nextInt());
+        game.defineCard(sc.nextInt()+1);
         
         if (game.isErrorFlag()) {
             System.out.println(game.getErrorMsg());
@@ -203,8 +200,9 @@ public class UIText {
         int regionId;
         Card c = game.getCurrentPlayer().getLastCard();
         System.out.println(game.getMapAsString());
+        System.out.println("------ Place New Army ------\n");
         System.out.println(c.toString());
-        System.out.print("Insert Region ID\n0 to check\nOption: ");
+        System.out.print("ID (Region) - [0: Check]:\n");
         regionId = sc.nextInt();
         System.out.println("");
         game.defineAction(regionId);
@@ -218,10 +216,11 @@ public class UIText {
         if (game.getState() instanceof MoveArmyByLand.InsertDestiny) {
             System.out.print("To (Region ID): ");        
         } else {
+            Card c = game.getCurrentPlayer().getLastCard();
             System.out.println(game.getMapAsString());
-            System.out.println(game.getCurrentPlayer().getLastCard().toString());
-            System.out.print("First insert From Region, then To Region\n0 to check\n"
-                    + "From (Region ID): ");
+            System.out.println("------ Move Army By Land ------\n");
+            System.out.println(c.toString());
+            System.out.print("From (Region ID) - [0: Check]:\n");
         }
         
         game.defineAction(sc.nextInt());
@@ -236,10 +235,11 @@ public class UIText {
         if (game.getState() instanceof MoveArmyBySea.InsertDestiny) {
             System.out.print("To (Region ID): ");        
         } else {
+            Card c = game.getCurrentPlayer().getLastCard();
             System.out.println(game.getMapAsString());
-            System.out.println(game.getCurrentPlayer().getLastCard().toString());
-            System.out.print("First insert From Region, then To Region\n0 to check\n"
-                    + "From (Region ID): ");
+            System.out.println("------ Move Army By Sea ------\n");
+            System.out.println(c.toString());
+            System.out.print("From (Region ID) - [0: Check]:\n");
         }
         
         game.defineAction(sc.nextInt());
@@ -254,32 +254,33 @@ public class UIText {
         int regionId;
         Card c = game.getCurrentPlayer().getLastCard();
         System.out.println(game.getMapAsString());
+        System.out.println("------ Build City ------\n");
         System.out.println(c.toString());
-        System.out.print("Insert Region ID\n0 to check\nOption: ");
+        System.out.print("ID (Region) - [0: Check]:\n");
         regionId = sc.nextInt();
         System.out.println("");
         game.defineAction(regionId);
         
-        if (game.isErrorFlag()) {
+        if (game.isErrorFlag())
             System.out.println(game.getErrorMsg());
-        } else
-            System.out.println(game.getMapAsString());
     }
     
     private void NeutralizeArmy() {
         if (game.getState() instanceof NeutralizeArmy.InsertPlayer) {
             System.out.print("Player ID: ");        
         } else {
+            Card c = game.getCurrentPlayer().getLastCard();
             System.out.println(game.getMapAsString());
-            System.out.println(game.getCurrentPlayer().getLastCard().toString());
-            System.out.print("Insert Region ID:\n0 to check\n");
+            System.out.println(c.toString());
+            System.out.println("------ Neutralize Army ------\n");
+            System.out.println(c.toString());
+            System.out.print("ID (Region) - [0: Check]:\n");
         }
 
         game.defineAction(sc.nextInt());
         System.out.println("");
         
-        if (game.isErrorFlag()) {
+        if (game.isErrorFlag())
             System.out.println(game.getErrorMsg());
-        }
     }
 }
